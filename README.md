@@ -81,9 +81,11 @@ python manage.py check --deploy --settings=config.settings.prod
   `OWNER_EMAIL` and the `EMAIL_*` SMTP values.
 - After each upload: `pip install -r requirements.txt`, `python manage.py migrate`,
   `python manage.py collectstatic --noinput`.
-- Start command (see `Procfile`): `gunicorn config.wsgi:application --timeout 120 --workers 2`.
+- Start command (see `Procfile`): `gunicorn config.wsgi:application --timeout 120 --workers 1 --threads 4`.
   The long timeout is needed because Hero's AI can take 25–40 seconds.
-- Disk: the installed packages need about 160 MB (pandas and numpy are most of it).
+- Size: the installed packages need about 160 MB of disk. Memory is about 100 MB for the site plus about 70 MB
+  while InsightDesk runs a calculation, so one worker with threads fits in 256 MB; a second worker does not.
+- Step-by-step for AlwaysData: `docs/DEPLOY_ALWAYSDATA.md`.
 
 ---
 
