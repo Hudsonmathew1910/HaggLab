@@ -1,0 +1,13 @@
+date,region,category,product,units_sold,unit_price,revenue
+2026-01-05,North,Hardware,Widget A,120,25.00,3000.00
+2026-01-12,South,Software,App Basic,45,150.00,6750.00
+2026-01-18,East,Hardware,Widget B,80,40.00,3200.00
+2026-01-25,West,Services,Consulting,15,500.00,7500.00
+2026-02-02,North,Software,App Pro,30,300.00,9000.00
+2026-02-09,South,Hardware,Widget A,95,25.00,2375.00
+2026-02-15,East,Services,Maintenance,20,200.00,4000.00
+2026-02-22,West,Software,App Basic,60,150.00,9000.00
+2026-03-01,North,Services,Consulting,10,500.00,5000.00
+2026-03-08,South,Software,App Pro,40,300.00,12000.00
+2026-03-15,East,Hardware,Widget B,110,40.00,4400.00
+2026-03-22,West,Hardware,Widget A,130,25.00,3250.00

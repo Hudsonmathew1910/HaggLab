@@ -1,0 +1,108 @@
+@import url('/static/css/fonts.css');
+
+/*
+ * HaggLab design tokens (v2).
+ * Every color, font, size and space used in site.css comes from here.
+ * Contrast ratios are against --bg (#FFFFFF) unless noted.
+ */
+:root {
+  /* Surfaces */
+  --bg: #FFFFFF;              /* page canvas */
+  --panel: #F4F5F2;           /* alternate sections, quiet fills */
+  --panel-2: #ECEEEA;         /* deeper fill: chips, table heads */
+  --ink-bg: #0C1517;          /* dark sections and footer */
+  --ink-bg-2: #142023;        /* raised surface on dark */
+
+  /* Text */
+  --ink: #0E1A1C;             /* 17.6:1 */
+  --muted: #4E5A5C;           /* 7.2:1 */
+  --subtle: #69757A;          /* 4.7:1, small meta only */
+  --on-ink: #EEF2F1;          /* on --ink-bg, 16:1 */
+  --on-ink-muted: #A4B1AF;    /* on --ink-bg, 8.3:1 */
+
+  /* Lines */
+  --line: #E2E5E1;
+  --line-strong: #C9CFCB;
+  --line-ink: rgba(238, 242, 241, 0.12);
+
+  /* Brand accent: HaggLab green */
+  --accent: #0E7568;          /* 5.5:1, links and primary buttons */
+  --accent-hover: #0A5A50;
+  --accent-tint: #E5F1EE;
+  --accent-on-ink: #6AD6C3;   /* accent on dark, 10:1 */
+  --accent-on-ink-hover: #8FE3D4;
+  --accent-on-ink-tint: rgba(106, 214, 195, 0.12);
+  --accent-soft: #CFE8E2;     /* highlights in previews and charts */
+  --on-accent: #FFFFFF;       /* text on --accent buttons */
+  --ink-hover: #24302F;
+  --thumb-alt: #D9E8E4;
+
+  /* Status (always paired with a text label) */
+  --status-concept: #56606B;
+  --status-prototype: #A14A07;
+  --status-prototype-tint: #FBF0E4;
+  --status-live: #1C7146;
+  --status-live-tint: #E6F3EB;
+  --status-delivered: #0E7568;
+
+  /* Feedback */
+  --error: #B42318;
+  --error-tint: #FDECEA;
+
+  /* Typography */
+  --font-sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --fs-display: clamp(2.5rem, 1.6rem + 4vw, 4.6rem);
+  --fs-h1: clamp(2.25rem, 1.6rem + 2.8vw, 3.6rem);
+  --fs-h2: clamp(1.75rem, 1.35rem + 1.7vw, 2.75rem);
+  --fs-h3: 1.25rem;
+  --fs-lead: clamp(1.125rem, 1.05rem + 0.35vw, 1.3rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9375rem;
+  --fs-micro: 0.75rem;
+
+  --lh-tight: 1.04;
+  --lh-heading: 1.15;
+  --lh-body: 1.6;
+
+  --track-display: -0.035em;
+  --track-heading: -0.025em;
+  --track-mono: 0.08em;
+
+  /* Layout */
+  --wrap: 1200px;
+  --wrap-narrow: 760px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --header-h: 72px;
+
+  /* Spacing (8px grid) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 40px;
+  --s-8: 48px;
+  --s-9: 64px;
+  --s-10: 80px;
+  --s-section: clamp(64px, 4rem + 4vw, 120px);
+
+  /* Shape */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-pill: 999px;
+
+  /* Depth: product previews only */
+  --shadow-ui: 0 1px 2px rgba(12, 21, 23, 0.06), 0 12px 32px -8px rgba(12, 21, 23, 0.14);
+  --shadow-menu: 0 2px 4px rgba(12, 21, 23, 0.04), 0 24px 48px -12px rgba(12, 21, 23, 0.22);
+  --shadow-lift: 0 1px 2px rgba(12, 21, 23, 0.05), 0 16px 32px -16px rgba(12, 21, 23, 0.25);
+
+  /* Motion: state changes only */
+  --t-fast: 150ms ease;
+  --t-med: 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-slow: 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}

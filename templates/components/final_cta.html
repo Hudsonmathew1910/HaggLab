@@ -1,0 +1,20 @@
+{% load site_tags %}
+<section class="section section--ink" aria-labelledby="final-cta-title">
+  <div class="wrap final-cta">
+    <h2 id="final-cta-title">{{ title|default:"Tell us the problem. We’ll tell you if we can fix it." }}</h2>
+    <div class="final-cta__side">
+      <p>{{ text|default:"One short message and one starting number is enough to begin. We reply with what is possible and what is not." }}</p>
+      <div class="btn-row">
+        {% if IS_FIVERR %}
+          <a href="{{ FIVERR_URL|utm:'final-cta' }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Message us on Fiverr</a>
+        {% else %}
+          <a href="{% url 'start_project' %}" class="btn btn-primary">Start a project</a>
+          {% if FIVERR_ON %}<a href="{% url 'hire_fiverr' %}" class="btn btn-secondary">Hire on Fiverr</a>{% endif %}
+        {% endif %}
+      </div>
+      {% if FIVERR_ON and show_fiverr and not IS_FIVERR %}
+        <p class="final-cta__fiverr">Prefer buyer protection? <a href="{% url 'hire_fiverr' %}">Order through Fiverr</a>. Chat, orders and payment stay on Fiverr.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>

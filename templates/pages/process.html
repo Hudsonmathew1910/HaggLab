@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}How a project works | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}Four steps: tell us the problem, agree the scope, see it grow, take it over.{% endblock %}
+{% block og_title %}How a project works | {{ STUDIO_NAME }}{% endblock %}
+
+{% block breadcrumbs %}{% include "components/breadcrumbs.html" with title="How it works" %}{% endblock %}
+
+{% block content %}
+<header class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Process</p>
+    <h1>How a project works</h1>
+    <p class="lead">Four steps: tell us the problem, agree the scope, see it grow, take it over.</p>
+    <ol class="rail rail--light mt-8">
+      <li class="rail__step"><span class="rail__n">01</span><h3>Tell us the problem</h3></li>
+      <li class="rail__step"><span class="rail__n">02</span><h3>Agree the scope</h3></li>
+      <li class="rail__step"><span class="rail__n">03</span><h3>See it grow</h3></li>
+      <li class="rail__step"><span class="rail__n">04</span><h3>Take it over</h3></li>
+    </ol>
+  </div>
+</header>
+
+<section class="section" aria-label="The four steps">
+  <div class="wrap">
+    <article class="phase">
+      <span class="phase__n">01</span>
+      <div class="phase__body">
+        <h2>Tell us the problem</h2>
+        <p class="muted">Send one short message and one starting number. We reply with what is possible and what is not.</p>
+      </div>
+    </article>
+    <article class="phase">
+      <span class="phase__n">02</span>
+      <div class="phase__body">
+        <h2>Agree the scope</h2>
+        <p class="muted">You get a one-page scope: what is included, what is not, and what we need from you.</p>
+      </div>
+    </article>
+    <article class="phase">
+      <span class="phase__n">03</span>
+      <div class="phase__body">
+        <h2>See it grow</h2>
+        <p class="muted">A working demo every week, so you can correct course early.</p>
+      </div>
+    </article>
+    <article class="phase">
+      <span class="phase__n">04</span>
+      <div class="phase__body">
+        <h2>Take it over</h2>
+        <p class="muted">You get the working tool, plain-language documents and a short walkthrough.{% if SITE.support_window %} Support after handover: {{ SITE.support_window }}{% endif %}</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section section--panel" aria-labelledby="why-title">
+  <div class="wrap split">
+    <div class="split__sticky">
+      <p class="eyebrow">Principles</p>
+      <h2 id="why-title">Why choose us</h2>
+      <p class="lead mt-4">You deal directly with the studio that builds your project, and you see it working before you decide.</p>
+    </div>
+    <div class="principles">
+      <div class="principle"><h3>{% include "components/icon.html" with name="alert" %}Problem first</h3><p>We start with what hurts, not with technology.</p></div>
+      <div class="principle"><h3>{% include "components/icon.html" with name="eye" %}Try before you hire</h3><p>Every project can be tried on sample data before you decide.</p></div>
+      <div class="principle"><h3>{% include "components/icon.html" with name="key" %}Secure by default</h3><p>Keys stay on the server and the Try it pages are rate limited.</p></div>
+      <div class="principle"><h3>{% include "components/icon.html" with name="file" %}Plain language</h3><p>No jargon walls. You always know what you are getting.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="expect-title">
+  <div class="wrap split">
+    <div class="split__sticky">
+      <p class="eyebrow">Proof</p>
+      <h2 id="expect-title">What to expect</h2>
+    </div>
+    <div>
+      <div class="layers">
+        <div class="layer">
+          <div class="layer__k">Measured in testing</div>
+          <p class="layer__v">What we tested, on what data, and what failed.</p>
+        </div>
+        <div class="layer">
+          <div class="layer__k">Expected outcome <span class="note-expected">Expected, not guaranteed</span></div>
+          <p class="layer__v">What the tool is designed to change, and the number that will show it.</p>
+        </div>
+        <div class="layer">
+          <div class="layer__k">Your result</div>
+          <p class="layer__v">Before we start we ask for one starting number, for example hours a week on the task. We check it again 2 and 4 weeks after handover.</p>
+        </div>
+      </div>
+      <div class="not-yet">
+        <strong>What we don’t do yet</strong>
+        <p>Mobile apps, phone-call bots and payment systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--panel" aria-labelledby="need-title">
+  <div class="wrap split">
+    <div class="split__sticky">
+      <p class="eyebrow">Before we start</p>
+      <h2 id="need-title">What we need from you</h2>
+    </div>
+    <div>
+      <ul class="check-list">
+        <li>{% include "components/icon.html" with name="check" %}<span>The problem, in a few plain sentences.</span></li>
+        <li>{% include "components/icon.html" with name="check" %}<span>The data or documents the tool will use.</span></li>
+        <li>{% include "components/icon.html" with name="check" %}<span>Someone who can answer questions during the build.</span></li>
+      </ul>
+
+      {% if SITE.revisions_per_tier or SITE.code_ownership_terms or SITE.support_window %}
+        <dl class="spec mt-8">
+          {% if SITE.revisions_per_tier %}<div class="spec__row"><dt>Revisions</dt><dd>{{ SITE.revisions_per_tier }}</dd></div>{% endif %}
+          {% if SITE.code_ownership_terms %}<div class="spec__row"><dt>Ownership</dt><dd>{{ SITE.code_ownership_terms }}</dd></div>{% endif %}
+          {% if SITE.support_window %}<div class="spec__row"><dt>Support</dt><dd>{{ SITE.support_window }}</dd></div>{% endif %}
+        </dl>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% include "components/final_cta.html" %}
+{% endblock %}

@@ -1,0 +1,6 @@
+<div class="field">
+  <label for="try-message">The task</label>
+  <textarea id="try-message" name="message" rows="3" maxlength="600" placeholder="{{ spec.placeholder }}" required></textarea>
+</div>
+<div class="try-actions"><button type="submit" class="btn btn-primary">Plan the steps {% include "components/icon.html" with name="arrow" %}</button></div>
+{% include "tryit/_examples.html" %}

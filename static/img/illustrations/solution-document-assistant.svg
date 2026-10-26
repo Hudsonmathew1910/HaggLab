@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="100%" height="100%" fill="none">
+  <!-- Stack of Source Documents -->
+  <rect x="24" y="44" width="76" height="96" rx="4" fill="#ECE6D8" stroke="#0E1B2A" stroke-width="2"/>
+  <line x1="36" y1="64" x2="84" y2="64" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="36" y1="80" x2="74" y2="80" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="36" y1="96" x2="80" y2="96" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <rect x="36" y="32" width="76" height="96" rx="4" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <line x1="48" y1="52" x2="96" y2="52" stroke="#0B6E6E" stroke-width="2" stroke-linecap="round"/>
+  <line x1="48" y1="68" x2="86" y2="68" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="48" y1="84" x2="92" y2="84" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="48" y1="100" x2="70" y2="100" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Connecting Processing Pipeline -->
+  <path d="M120 80 H 156" stroke="#0E1B2A" stroke-width="2" stroke-dasharray="4 3"/>
+  <polygon points="154,76 162,80 154,84" fill="#0E1B2A"/>
+
+  <!-- AI / Vector Embedding Engine Node -->
+  <circle cx="184" cy="80" r="22" fill="#0E1B2A" stroke="#0E1B2A" stroke-width="2"/>
+  <circle cx="184" cy="80" r="14" fill="#0B6E6E"/>
+  <polygon points="184,72 191,80 184,88 177,80" fill="#FCFBF8"/>
+
+  <!-- Connecting Output Arrow -->
+  <path d="M214 80 H 244" stroke="#0E1B2A" stroke-width="2" stroke-dasharray="4 3"/>
+  <polygon points="242,76 250,80 242,84" fill="#0E1B2A"/>
+
+  <!-- Answer Panel with Source Reference Badge -->
+  <rect x="246" y="36" width="60" height="88" rx="4" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <rect x="254" y="46" width="44" height="8" rx="2" fill="#0B6E6E"/>
+  <line x1="254" y1="66" x2="298" y2="66" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="254" y1="78" x2="290" y2="78" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="254" y1="90" x2="294" y2="90" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <rect x="254" y="104" width="28" height="12" rx="2" fill="#C4572A"/>
+
+  <!-- Baseline Shelf -->
+  <line x1="16" y1="168" x2="304" y2="168" stroke="#0E1B2A" stroke-width="2"/>
+  <circle cx="64" cy="168" r="4" fill="#0B6E6E"/>
+  <circle cx="184" cy="168" r="4" fill="#C4572A"/>
+  <circle cx="276" cy="168" r="4" fill="#0B6E6E"/>
+</svg>

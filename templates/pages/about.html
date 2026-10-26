@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}About {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}A software and AI studio that shows its work. Working tools for small businesses and startups, one problem at a time.{% endblock %}
+{% block og_title %}About {{ STUDIO_NAME }}{% endblock %}
+
+{% block breadcrumbs %}{% include "components/breadcrumbs.html" with title="About" %}{% endblock %}
+
+{% block content %}
+<header class="page-head">
+  <div class="wrap page-head__grid">
+    <div>
+      <p class="eyebrow">About</p>
+      <h1>A small studio that shows its work</h1>
+      <p class="lead">{{ STUDIO_NAME }} builds working AI and data tools for small businesses and startups. We fix one business problem at a time, show a working demo before you hire, and hand over a tool you can run.</p>
+    </div>
+    <div class="page-head__aside">
+      <strong>No middlemen</strong>
+      You deal directly with the studio that builds your project, from the first message to handover.
+    </div>
+  </div>
+</header>
+
+<!-- What we do -->
+<section class="section" aria-labelledby="do-title">
+  <div class="wrap">
+    <div class="section-head section-head--row">
+      <div>
+        <p class="eyebrow">What we do</p>
+        <h2 id="do-title">Five business problems we fix</h2>
+      </div>
+      <a href="{% url 'solutions_hub' %}" class="link-arrow">All solutions {% include "components/icon.html" with name="arrow" %}</a>
+    </div>
+    <div class="index-list">
+      {% for s in NAV_SOLUTIONS %}
+        <a class="index-row" href="{% url 'solution_detail' s.slug %}">
+          <span class="index-row__num">0{{ forloop.counter }}</span>
+          <span class="index-row__title">{{ s.title }}</span>
+          <span class="index-row__body">{{ s.problem }}</span>
+          <span class="index-row__go">{% include "components/icon.html" with name="arrow" %}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- What we build with -->
+<section class="section section--panel" aria-labelledby="stack-title">
+  <div class="wrap split">
+    <div class="split__sticky">
+      <p class="eyebrow">Capabilities</p>
+      <h2 id="stack-title">What we build with</h2>
+      <p class="lead mt-4">Proven tools, chosen so you can keep running what we hand over.</p>
+    </div>
+    <dl class="spec">
+      <div class="spec__row"><dt>Web applications</dt><dd>Python, Django and PostgreSQL. Fast pages that work well with search engines.</dd></div>
+      <div class="spec__row"><dt>AI assistants</dt><dd>Answers from your own documents with the source shown, document search, and a fallback between AI models (Gemini, Groq, OpenRouter).</dd></div>
+      <div class="spec__row"><dt>Data and forecasting</dt><dd>pandas, scikit-learn and XGBoost, with charts and the calculation shown.</dd></div>
+      <div class="spec__row"><dt>Browser and desktop</dt><dd>Chrome and Edge extensions, and Windows desktop tools.</dd></div>
+      <div class="spec__row"><dt>Security</dt><dd>API keys stay on the server, and the Try it pages are rate limited. <a href="{% url 'security_data' %}">Security and data</a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- Already built and deployed -->
+<section class="section" aria-labelledby="built-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Facts only</p>
+      <h2 id="built-title">Already built and deployed</h2>
+    </div>
+    <div class="grid-2">
+      {% for item in built %}
+        {% if item.link %}<a class="card" href="{{ item.link }}" target="_blank" rel="noopener noreferrer">{% else %}<div class="card">{% endif %}
+          <span class="proof__kind">{{ item.kind }}</span>
+          <h3 class="proof__name">{{ item.name }}{% if item.link %} {% include "components/icon.html" with name="external" %}{% endif %}</h3>
+          <p>{{ item.desc }}</p>
+        {% if item.link %}</a>{% else %}</div>{% endif %}
+      {% endfor %}
+    </div>
+    {% if SITE.github_url %}
+      <p class="mt-6"><a class="link-arrow" href="{{ SITE.github_url }}" target="_blank" rel="noopener noreferrer">See our code on GitHub {% include "components/icon.html" with name="external" %}</a></p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- How we work / what we don't do -->
+<section class="section section--panel" aria-label="How we work">
+  <div class="wrap grid-2">
+    <div>
+      <p class="eyebrow">How we work</p>
+      <h2>One problem at a time</h2>
+      <ul class="check-list mt-6">
+        <li>{% include "components/icon.html" with name="check" %}<span>One problem at a time.</span></li>
+        <li>{% include "components/icon.html" with name="check" %}<span>Try the tool before you hire.</span></li>
+        <li>{% include "components/icon.html" with name="check" %}<span>A working demo every week during a build.</span></li>
+        <li>{% include "components/icon.html" with name="check" %}<span>Plain-language documents at handover.</span></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Honest scope</p>
+      <h2>What we don’t do yet</h2>
+      <ul class="cross-list mt-6">
+        <li>{% include "components/icon.html" with name="cross" %}<span>Mobile apps</span></li>
+        <li>{% include "components/icon.html" with name="cross" %}<span>Phone-call bots</span></li>
+        <li>{% include "components/icon.html" with name="cross" %}<span>Online payment systems</span></li>
+        <li>{% include "components/icon.html" with name="cross" %}<span>WordPress and Shopify work</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% include "components/final_cta.html" %}
+{% endblock %}

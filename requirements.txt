@@ -1,0 +1,22 @@
+# Django & Server
+Django>=6.1.2,<6.2  # the version the site is built and tested on
+django-jazzmin>=3.0.5
+gunicorn>=23.0.0
+whitenoise>=6.8.2
+
+# Database
+psycopg2-binary>=2.9.10
+django-environ>=0.12.0
+
+# Security, 2FA & Rate Limiting
+django-ratelimit>=4.1.0
+django-otp>=1.5.4
+
+# HTTP & Utilities
+httpx>=0.28.1
+
+# Try it calculations (InsightDesk, ReportBot, ForecastBoard); openpyxl reads the sample .xlsx
+pandas>=2.2.3
+numpy>=2.2.3
+openpyxl>=3.1.5
+asteval>=1.0.6

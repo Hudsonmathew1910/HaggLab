@@ -1,0 +1,9 @@
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="wrap">
+    <ol>
+      <li><a href="{% url 'home' %}">Home</a></li>
+      {% if parent_title %}<li><a href="{{ parent_url }}">{{ parent_title }}</a></li>{% endif %}
+      <li aria-current="page">{{ title }}</li>
+    </ol>
+  </div>
+</nav>

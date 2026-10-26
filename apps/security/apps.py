@@ -1,0 +1,10 @@
+from django.apps import AppConfig
+
+class SecurityConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'apps.security'
+    label = 'security_app'
+
+    def ready(self):
+        import apps.security.signals
+

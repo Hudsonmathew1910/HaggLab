@@ -1,0 +1,4 @@
+# Local tools only, not installed on the server
+-r requirements.txt
+pip-audit>=2.8.0
+playwright  # scripts/capture_screens.py

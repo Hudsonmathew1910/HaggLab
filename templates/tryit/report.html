@@ -1,0 +1,11 @@
+<div class="field-grid field-grid--try">
+  <div class="field">
+    <label for="try-dataset">Business</label>
+    <select id="try-dataset" name="dataset">{% for key, name in spec.fields.dataset.1 %}<option value="{{ key }}">{{ name }}</option>{% endfor %}</select>
+  </div>
+  <div class="field">
+    <label for="try-period">Period</label>
+    <select id="try-period" name="period">{% for key, name in spec.fields.period.1 %}<option value="{{ key }}">{{ name }}</option>{% endfor %}</select>
+  </div>
+</div>
+<div class="try-actions"><button type="submit" class="btn btn-primary">Make the report {% include "components/icon.html" with name="arrow" %}</button></div>

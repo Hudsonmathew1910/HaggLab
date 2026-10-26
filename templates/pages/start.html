@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Start a project | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}Tell us the problem. We’ll say whether we can fix it.{% endblock %}
+{% block og_title %}Start a project | {{ STUDIO_NAME }}{% endblock %}
+
+{% block breadcrumbs %}{% include "components/breadcrumbs.html" with title="Start a project" %}{% endblock %}
+
+{% block content %}
+<section class="section section--tight">
+  <div class="wrap form-shell">
+    <aside>
+      <p class="eyebrow">Start a project</p>
+      <h1>Tell us the problem</h1>
+      <p class="lead mt-4">It takes two minutes. We read every message{% if SITE.reply_time %} and reply {{ SITE.reply_time }}{% endif %}.</p>
+
+      <div class="aside-card mt-8">
+        <h2>What happens next</h2>
+        <ol class="next-steps">
+          <li><div><strong>We read your message</strong><span>and reply with what is possible and what is not.</span></div></li>
+          <li><div><strong>You get a one-page scope</strong><span>What is included, what is not, and what we need from you.</span></div></li>
+          <li><div><strong>You see it grow</strong><span>A working demo every week.</span></div></li>
+        </ol>
+      </div>
+
+      {% if FIVERR_ON %}
+      <div class="aside-card">
+        <h2>Found us on Fiverr?</h2>
+        <p>Please message us there so your order stays protected.</p>
+        <a href="{% url 'start_project' %}?origin=fiverr" class="link-arrow">I found you on Fiverr {% include "components/icon.html" with name="arrow" %}</a>
+      </div>
+      {% endif %}
+    </aside>
+
+    <div class="form-card">
+      <form method="post" action="{% url 'start_project' %}" novalidate>
+        {% csrf_token %}
+        <div class="hidden-field" aria-hidden="true">
+          <label for="{{ form.website_url.id_for_label }}">Leave this field empty</label>
+          {{ form.website_url }}
+        </div>
+
+        {% if form.errors %}
+          <div class="alert alert--error" role="alert">
+            Please check the highlighted fields.
+            {% if form.website_url.errors %}<br>{{ form.website_url.errors.0 }}{% endif %}
+            {% for e in form.non_field_errors %}<br>{{ e }}{% endfor %}
+          </div>
+        {% endif %}
+
+        <fieldset class="fieldset">
+          <legend>About you</legend>
+          <div class="field-grid field-grid--2">
+            <div class="field{% if form.name.errors %} has-error{% endif %}">
+              <label for="{{ form.name.id_for_label }}">Your name</label>
+              {{ form.name }}
+              {% if form.name.errors %}<span class="err">{{ form.name.errors.0 }}</span>{% endif %}
+            </div>
+            <div class="field{% if form.email.errors %} has-error{% endif %}">
+              <label for="{{ form.email.id_for_label }}">Work email</label>
+              {{ form.email }}
+              {% if form.email.errors %}<span class="err">{{ form.email.errors.0 }}</span>{% endif %}
+            </div>
+          </div>
+          <div class="field mt-5">
+            <label for="{{ form.business.id_for_label }}">Business name or website <span class="opt">(optional)</span></label>
+            {{ form.business }}
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>The project</legend>
+          <div class="field-grid">
+            <div class="field{% if form.service.errors %} has-error{% endif %}">
+              <label for="{{ form.service.id_for_label }}">What do you want built?</label>
+              {{ form.service }}
+              {% if form.service.errors %}<span class="err">{{ form.service.errors.0 }}</span>{% endif %}
+            </div>
+            <div class="field{% if form.problem.errors %} has-error{% endif %}">
+              <label for="{{ form.problem.id_for_label }}">Describe the problem</label>
+              <span class="hint" id="problem-hint">Describe the problem in 2 or 3 sentences. Add one starting number, for example “we spend about 6 hours a week on this”.</span>
+              {{ form.problem }}
+              {% if form.problem.errors %}<span class="err">{{ form.problem.errors.0 }}</span>{% endif %}
+            </div>
+            <div class="field-grid field-grid--2">
+              <div class="field{% if form.data_available.errors %} has-error{% endif %}">
+                <label for="{{ form.data_available.id_for_label }}">Do you have documents or data for it?</label>
+                {{ form.data_available }}
+                {% if form.data_available.errors %}<span class="err">{{ form.data_available.errors.0 }}</span>{% endif %}
+              </div>
+              <div class="field{% if form.timeline.errors %} has-error{% endif %}">
+                <label for="{{ form.timeline.id_for_label }}">When do you need it?</label>
+                {{ form.timeline }}
+                {% if form.timeline.errors %}<span class="err">{{ form.timeline.errors.0 }}</span>{% endif %}
+              </div>
+            </div>
+            <div class="field-grid field-grid--2">
+              <div class="field">
+                <label for="{{ form.budget_band.id_for_label }}">Budget <span class="opt">(optional)</span></label>
+                {{ form.budget_band }}
+              </div>
+              <div class="field">
+                <label for="{{ form.source.id_for_label }}">How did you find us? <span class="opt">(optional)</span></label>
+                {{ form.source }}
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Consent</legend>
+          <div class="consent{% if form.consent.errors %} has-error{% endif %}">
+            {{ form.consent }}
+            <label for="{{ form.consent.id_for_label }}">I agree to be contacted about this project. <a href="{% url 'privacy_policy' %}">Privacy policy</a></label>
+          </div>
+          {% if form.consent.errors %}<p class="err mt-2">{{ form.consent.errors.0 }}</p>{% endif %}
+
+          {% if TURNSTILE_SITE_KEY %}
+            <div class="turnstile-slot"><div class="cf-turnstile" data-sitekey="{{ TURNSTILE_SITE_KEY }}" data-theme="light"></div></div>
+          {% endif %}
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Send project details {% include "components/icon.html" with name="arrow" %}</button>
+          <span class="small">All fields are required unless marked optional.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}{% if TURNSTILE_SITE_KEY %}<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>{% endif %}{% endblock %}

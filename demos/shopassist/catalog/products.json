@@ -1,0 +1,542 @@
+[
+  {
+    "id": 1,
+    "name": "Ergonomic Keyboard",
+    "category": "Hardware",
+    "price": 89.0,
+    "vendor": "ApexTech",
+    "in_stock": true,
+    "url": "/catalog/1/"
+  },
+  {
+    "id": 2,
+    "name": "Precision Wireless Mouse",
+    "category": "Hardware",
+    "price": 49.0,
+    "vendor": "ApexTech",
+    "in_stock": true,
+    "url": "/catalog/2/"
+  },
+  {
+    "id": 3,
+    "name": "USB-C 7-in-1 Hub",
+    "category": "Hardware",
+    "price": 39.0,
+    "vendor": "ConnectPro",
+    "in_stock": true,
+    "url": "/catalog/3/"
+  },
+  {
+    "id": 4,
+    "name": "Laptop Cooling Pad",
+    "category": "Hardware",
+    "price": 29.0,
+    "vendor": "ConnectPro",
+    "in_stock": true,
+    "url": "/catalog/4/"
+  },
+  {
+    "id": 5,
+    "name": "4K Ultra HD Webcam",
+    "category": "Hardware",
+    "price": 119.0,
+    "vendor": "Visionary",
+    "in_stock": true,
+    "url": "/catalog/5/"
+  },
+  {
+    "id": 6,
+    "name": "Mechanical Macropad",
+    "category": "Hardware",
+    "price": 59.0,
+    "vendor": "CustomKey",
+    "in_stock": true,
+    "url": "/catalog/6/"
+  },
+  {
+    "id": 7,
+    "name": "Braided DisplayPort Cable",
+    "category": "Hardware",
+    "price": 19.0,
+    "vendor": "CableCraft",
+    "in_stock": true,
+    "url": "/catalog/7/"
+  },
+  {
+    "id": 8,
+    "name": "Fast Wireless Charger Stand",
+    "category": "Hardware",
+    "price": 35.0,
+    "vendor": "PowerGrid",
+    "in_stock": true,
+    "url": "/catalog/8/"
+  },
+  {
+    "id": 9,
+    "name": "External SSD Enclosure",
+    "category": "Hardware",
+    "price": 45.0,
+    "vendor": "DriveFast",
+    "in_stock": true,
+    "url": "/catalog/9/"
+  },
+  {
+    "id": 10,
+    "name": "Monitor Light Bar",
+    "category": "Hardware",
+    "price": 65.0,
+    "vendor": "GlowDesk",
+    "in_stock": true,
+    "url": "/catalog/10/"
+  },
+  {
+    "id": 11,
+    "name": "Noise-Cancelling USB Mic",
+    "category": "Hardware",
+    "price": 99.0,
+    "vendor": "AudioLab",
+    "in_stock": true,
+    "url": "/catalog/11/"
+  },
+  {
+    "id": 12,
+    "name": "Microphone Boom Arm",
+    "category": "Hardware",
+    "price": 45.0,
+    "vendor": "AudioLab",
+    "in_stock": true,
+    "url": "/catalog/12/"
+  },
+  {
+    "id": 13,
+    "name": "Cable Management Tray",
+    "category": "Hardware",
+    "price": 25.0,
+    "vendor": "CleanDesk",
+    "in_stock": true,
+    "url": "/catalog/13/"
+  },
+  {
+    "id": 14,
+    "name": "Under-Desk Headphone Hook",
+    "category": "Hardware",
+    "price": 15.0,
+    "vendor": "CleanDesk",
+    "in_stock": true,
+    "url": "/catalog/14/"
+  },
+  {
+    "id": 15,
+    "name": "Dual Monitor Arm",
+    "category": "Hardware",
+    "price": 85.0,
+    "vendor": "Visionary",
+    "in_stock": true,
+    "url": "/catalog/15/"
+  },
+  {
+    "id": 16,
+    "name": "Studio Reference Headphones",
+    "category": "Audio",
+    "price": 149.0,
+    "vendor": "SoundCraft",
+    "in_stock": true,
+    "url": "/catalog/16/"
+  },
+  {
+    "id": 17,
+    "name": "Active Noise Cancelling Earbuds",
+    "category": "Audio",
+    "price": 129.0,
+    "vendor": "SoundCraft",
+    "in_stock": true,
+    "url": "/catalog/17/"
+  },
+  {
+    "id": 18,
+    "name": "Desktop Bluetooth Speakers",
+    "category": "Audio",
+    "price": 110.0,
+    "vendor": "WaveForm",
+    "in_stock": true,
+    "url": "/catalog/18/"
+  },
+  {
+    "id": 19,
+    "name": "Portable Waterproof Speaker",
+    "category": "Audio",
+    "price": 55.0,
+    "vendor": "WaveForm",
+    "in_stock": true,
+    "url": "/catalog/19/"
+  },
+  {
+    "id": 20,
+    "name": "Hi-Fi Headphone Amplifier",
+    "category": "Audio",
+    "price": 89.0,
+    "vendor": "AmpStudio",
+    "in_stock": true,
+    "url": "/catalog/20/"
+  },
+  {
+    "id": 21,
+    "name": "Dynamic Podcast Microphone",
+    "category": "Audio",
+    "price": 119.0,
+    "vendor": "AudioLab",
+    "in_stock": true,
+    "url": "/catalog/21/"
+  },
+  {
+    "id": 22,
+    "name": "Wireless Lavalier Mic Set",
+    "category": "Audio",
+    "price": 95.0,
+    "vendor": "AudioLab",
+    "in_stock": true,
+    "url": "/catalog/22/"
+  },
+  {
+    "id": 23,
+    "name": "Foam Acoustic Isolation Pads",
+    "category": "Audio",
+    "price": 22.0,
+    "vendor": "SoundCraft",
+    "in_stock": true,
+    "url": "/catalog/23/"
+  },
+  {
+    "id": 24,
+    "name": "Pop Filter & Shockmount Kit",
+    "category": "Audio",
+    "price": 34.0,
+    "vendor": "AudioLab",
+    "in_stock": true,
+    "url": "/catalog/24/"
+  },
+  {
+    "id": 25,
+    "name": "Over-Ear Wireless Headset",
+    "category": "Audio",
+    "price": 79.0,
+    "vendor": "WaveForm",
+    "in_stock": true,
+    "url": "/catalog/25/"
+  },
+  {
+    "id": 26,
+    "name": "Noise Isolation IEMs",
+    "category": "Audio",
+    "price": 49.0,
+    "vendor": "SoundCraft",
+    "in_stock": true,
+    "url": "/catalog/26/"
+  },
+  {
+    "id": 27,
+    "name": "Mini Desktop Subwoofer",
+    "category": "Audio",
+    "price": 139.0,
+    "vendor": "WaveForm",
+    "in_stock": true,
+    "url": "/catalog/27/"
+  },
+  {
+    "id": 28,
+    "name": "Gold-Plated Audio Cable",
+    "category": "Audio",
+    "price": 18.0,
+    "vendor": "CableCraft",
+    "in_stock": true,
+    "url": "/catalog/28/"
+  },
+  {
+    "id": 29,
+    "name": "Studio Monitor Desk Stands",
+    "category": "Audio",
+    "price": 42.0,
+    "vendor": "SoundCraft",
+    "in_stock": true,
+    "url": "/catalog/29/"
+  },
+  {
+    "id": 30,
+    "name": "Compact USB Audio Interface",
+    "category": "Audio",
+    "price": 109.0,
+    "vendor": "AmpStudio",
+    "in_stock": true,
+    "url": "/catalog/30/"
+  },
+  {
+    "id": 31,
+    "name": "Height Adjustable Standing Desk",
+    "category": "Office",
+    "price": 320.0,
+    "vendor": "WorkWell",
+    "in_stock": true,
+    "url": "/catalog/31/"
+  },
+  {
+    "id": 32,
+    "name": "High-Back Mesh Desk Chair",
+    "category": "Office",
+    "price": 240.0,
+    "vendor": "WorkWell",
+    "in_stock": true,
+    "url": "/catalog/32/"
+  },
+  {
+    "id": 33,
+    "name": "Faux Leather Desk Mat",
+    "category": "Office",
+    "price": 28.0,
+    "vendor": "CleanDesk",
+    "in_stock": true,
+    "url": "/catalog/33/"
+  },
+  {
+    "id": 34,
+    "name": "Memory Foam Footrest",
+    "category": "Office",
+    "price": 38.0,
+    "vendor": "ComfortPlus",
+    "in_stock": true,
+    "url": "/catalog/34/"
+  },
+  {
+    "id": 35,
+    "name": "Ergonomic Lumbar Support Pillow",
+    "category": "Office",
+    "price": 32.0,
+    "vendor": "ComfortPlus",
+    "in_stock": true,
+    "url": "/catalog/35/"
+  },
+  {
+    "id": 36,
+    "name": "Bamboo Monitor Riser",
+    "category": "Office",
+    "price": 39.0,
+    "vendor": "CleanDesk",
+    "in_stock": true,
+    "url": "/catalog/36/"
+  },
+  {
+    "id": 37,
+    "name": "Desktop Whiteboard with Storage",
+    "category": "Office",
+    "price": 45.0,
+    "vendor": "DeskPilot",
+    "in_stock": true,
+    "url": "/catalog/37/"
+  },
+  {
+    "id": 38,
+    "name": "Aluminum Laptop Stand",
+    "category": "Office",
+    "price": 36.0,
+    "vendor": "ApexTech",
+    "in_stock": true,
+    "url": "/catalog/38/"
+  },
+  {
+    "id": 39,
+    "name": "Vertical Document Organizer",
+    "category": "Office",
+    "price": 24.0,
+    "vendor": "DeskPilot",
+    "in_stock": true,
+    "url": "/catalog/39/"
+  },
+  {
+    "id": 40,
+    "name": "Under-Desk Foot Hammock",
+    "category": "Office",
+    "price": 20.0,
+    "vendor": "ComfortPlus",
+    "in_stock": true,
+    "url": "/catalog/40/"
+  },
+  {
+    "id": 41,
+    "name": "LED Desk Lamp with Qi Charging",
+    "category": "Office",
+    "price": 58.0,
+    "vendor": "GlowDesk",
+    "in_stock": true,
+    "url": "/catalog/41/"
+  },
+  {
+    "id": 42,
+    "name": "Cable Clip Pack (6-Pack)",
+    "category": "Office",
+    "price": 12.0,
+    "vendor": "CleanDesk",
+    "in_stock": true,
+    "url": "/catalog/42/"
+  },
+  {
+    "id": 43,
+    "name": "Silent Wall Clock for Focus",
+    "category": "Office",
+    "price": 26.0,
+    "vendor": "DeskPilot",
+    "in_stock": true,
+    "url": "/catalog/43/"
+  },
+  {
+    "id": 44,
+    "name": "Spill-Proof Insulated Mug",
+    "category": "Office",
+    "price": 29.0,
+    "vendor": "WorkWell",
+    "in_stock": true,
+    "url": "/catalog/44/"
+  },
+  {
+    "id": 45,
+    "name": "Mini Air Purifier for Desk",
+    "category": "Office",
+    "price": 68.0,
+    "vendor": "WorkWell",
+    "in_stock": true,
+    "url": "/catalog/45/"
+  },
+  {
+    "id": 46,
+    "name": "Heavyweight Cotton Studio Hoodie",
+    "category": "Apparel",
+    "price": 65.0,
+    "vendor": "MonoWear",
+    "in_stock": true,
+    "url": "/catalog/46/"
+  },
+  {
+    "id": 47,
+    "name": "Minimalist Logo T-Shirt",
+    "category": "Apparel",
+    "price": 32.0,
+    "vendor": "MonoWear",
+    "in_stock": true,
+    "url": "/catalog/47/"
+  },
+  {
+    "id": 48,
+    "name": "Merino Wool Crewneck Sweater",
+    "category": "Apparel",
+    "price": 88.0,
+    "vendor": "NordicCraft",
+    "in_stock": true,
+    "url": "/catalog/48/"
+  },
+  {
+    "id": 49,
+    "name": "Technical Water-Resistant Jacket",
+    "category": "Apparel",
+    "price": 145.0,
+    "vendor": "NordicCraft",
+    "in_stock": true,
+    "url": "/catalog/49/"
+  },
+  {
+    "id": 50,
+    "name": "Relaxed Fit Work Chinos",
+    "category": "Apparel",
+    "price": 74.0,
+    "vendor": "MonoWear",
+    "in_stock": true,
+    "url": "/catalog/50/"
+  },
+  {
+    "id": 51,
+    "name": "Structured Cotton Baseball Cap",
+    "category": "Apparel",
+    "price": 28.0,
+    "vendor": "MonoWear",
+    "in_stock": true,
+    "url": "/catalog/51/"
+  },
+  {
+    "id": 52,
+    "name": "Everyday Canvas Tote Bag",
+    "category": "Apparel",
+    "price": 24.0,
+    "vendor": "MonoWear",
+    "in_stock": true,
+    "url": "/catalog/52/"
+  },
+  {
+    "id": 53,
+    "name": "Wool Knit Beanie",
+    "category": "Apparel",
+    "price": 26.0,
+    "vendor": "NordicCraft",
+    "in_stock": true,
+    "url": "/catalog/53/"
+  },
+  {
+    "id": 54,
+    "name": "Breathable Studio Joggers",
+    "category": "Apparel",
+    "price": 58.0,
+    "vendor": "MonoWear",
+    "in_stock": true,
+    "url": "/catalog/54/"
+  },
+  {
+    "id": 55,
+    "name": "Cushioned Bamboo Crew Socks (3-Pack)",
+    "category": "Apparel",
+    "price": 18.0,
+    "vendor": "ComfortPlus",
+    "in_stock": true,
+    "url": "/catalog/55/"
+  },
+  {
+    "id": 56,
+    "name": "Insulated Thermal Vest",
+    "category": "Apparel",
+    "price": 92.0,
+    "vendor": "NordicCraft",
+    "in_stock": true,
+    "url": "/catalog/56/"
+  },
+  {
+    "id": 57,
+    "name": "Weatherproof Roll-Top Backpack",
+    "category": "Apparel",
+    "price": 110.0,
+    "vendor": "NordicCraft",
+    "in_stock": true,
+    "url": "/catalog/57/"
+  },
+  {
+    "id": 58,
+    "name": "Linen Button-Down Overshirt",
+    "category": "Apparel",
+    "price": 68.0,
+    "vendor": "MonoWear",
+    "in_stock": true,
+    "url": "/catalog/58/"
+  },
+  {
+    "id": 59,
+    "name": "Fleece-Lined Winter Gloves",
+    "category": "Apparel",
+    "price": 34.0,
+    "vendor": "NordicCraft",
+    "in_stock": true,
+    "url": "/catalog/59/"
+  },
+  {
+    "id": 60,
+    "name": "Leather Minimalist Bifold Wallet",
+    "category": "Apparel",
+    "price": 45.0,
+    "vendor": "MonoWear",
+    "in_stock": true,
+    "url": "/catalog/60/"
+  }
+]

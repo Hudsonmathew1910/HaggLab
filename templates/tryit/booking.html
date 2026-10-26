@@ -1,0 +1,17 @@
+<input type="hidden" name="action" value="slots" data-action>
+<input type="hidden" name="slot" value="" data-slot>
+<div class="field mb-4">
+  <label for="try-resource">Court</label>
+  <select id="try-resource" name="resource">{% for key, name in spec.fields.resource.1 %}<option value="{{ key }}">{{ name }}</option>{% endfor %}</select>
+</div>
+<div class="field-grid field-grid--try mt-4">
+  <div class="field">
+    <label for="try-date">Date</label>
+    <input id="try-date" name="date" type="date" required>
+  </div>
+  <div class="field">
+    <label for="try-name">Your name <span class="opt">(to book)</span></label>
+    <input id="try-name" name="name" type="text" maxlength="80" autocomplete="name">
+  </div>
+</div>
+<div class="try-actions"><button type="submit" class="btn btn-primary" data-step="slots">Show free slots {% include "components/icon.html" with name="arrow" %}</button></div>

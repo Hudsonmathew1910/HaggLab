@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InsightDesk Demo: Spreadsheet Analytics</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0; }
+    body { background-color: #F4F1EA; color: #15191E; font-family: 'Public Sans', sans-serif; font-size: 16px; line-height: 1.6; padding: 24px; }
+    .demo-container { max-width: 800px; margin: 0 auto; }
+    .header-bar { border-bottom: 1px solid #CFC9BA; padding-bottom: 16px; margin-bottom: 24px; }
+    .header-title { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; }
+    .badge { display: inline-block; padding: 4px 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; border: 1px solid #0B6E6E; background-color: #0B6E6E; color: #F4F1EA; }
+    .search-form { display: flex; gap: 8px; margin-bottom: 24px; }
+    .search-input { flex: 1; padding: 10px 14px; background-color: #EBE7DD; border: 1px solid #CFC9BA; color: #15191E; font-size: 16px; outline: none; }
+    .search-btn { padding: 10px 20px; background-color: #0B6E6E; color: #F4F1EA; border: 1px solid #0B6E6E; font-weight: 600; cursor: pointer; }
+    .search-btn:hover { background-color: #15191E; }
+    .answer-box { border: 1px solid #CFC9BA; background-color: #EBE7DD; padding: 20px; margin-bottom: 24px; }
+    .code-panel { margin-top: 12px; padding: 12px; background-color: #F4F1EA; border: 1px solid #CFC9BA; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 14px; }
+    th, td { border: 1px solid #CFC9BA; padding: 8px 12px; text-align: left; }
+    th { background-color: #EBE7DD; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <div class="header-bar">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="header-title">InsightDesk: Ask Your Spreadsheet</span>
+        <span class="badge">Live Demo</span>
+      </div>
+      <p style="font-size: 13px; color: #4A5260; margin-top: 6px;">Demo data. Not real customer information.</p>
+    </div>
+
+    <form method="get" action="" class="search-form">
+      <input type="text" name="q" value="{{ question }}" placeholder="Ask a question (e.g. what is the total revenue?)" class="search-input" required>
+      <button type="submit" class="search-btn">Run Analysis</button>
+    </form>
+
+    {% if question %}
+      <div class="answer-box">
+        <h3 style="font-family: 'Fraunces', serif; font-size: 18px; margin-bottom: 8px;">Calculated Result</h3>
+        <p style="font-size: 20px; font-weight: 700; color: #0B6E6E;">{{ result.answer }}</p>
+        {% if result.code %}
+          <div class="code-panel">
+            <strong>Executed Python Code:</strong>
+            <p style="margin-top: 4px; color: #15191E;">{{ result.code }}</p>
+            <p style="margin-top: 4px; color: #4A5260;">{{ result.explanation }}</p>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div style="margin-top: 32px;">
+      <h3 style="font-family: 'Fraunces', serif; font-size: 18px; margin-bottom: 8px;">Sample Sales Data Table (First 6 Rows)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th><th>Region</th><th>Category</th><th>Product</th><th>Units</th><th>Price</th><th>Revenue</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in sample_records %}
+            <tr>
+              <td>{{ row.date }}</td>
+              <td>{{ row.region }}</td>
+              <td>{{ row.category }}</td>
+              <td>{{ row.product }}</td>
+              <td>{{ row.units_sold }}</td>
+              <td>${{ row.unit_price }}</td>
+              <td>${{ row.revenue }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

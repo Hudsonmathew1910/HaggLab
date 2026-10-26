@@ -1,0 +1,23 @@
+service,category,duration_minutes,fee,preparation,how_to_book
+General consultation,Consultations,15,500,None,Walk-in or appointment
+Follow-up consultation (within 7 days),Consultations,10,0,Bring previous reports,Appointment
+Child health check,Child health,20,600,Bring vaccination card,Appointment
+Childhood vaccination,Vaccinations,10,300,Bring vaccination card,Appointment
+Adult flu vaccine,Vaccinations,10,900,None,Walk-in or appointment
+Travel vaccination advice,Vaccinations,20,700,Bring travel dates,Appointment
+Complete blood count,Lab tests,5,350,No fasting needed,Walk-in 8:00-11:00
+Blood sugar (fasting),Lab tests,5,150,Fast for 10 hours,Walk-in 8:00-11:00
+Cholesterol (lipid profile),Lab tests,5,650,Fast for 10 hours,Walk-in 8:00-11:00
+Thyroid profile,Lab tests,5,550,No fasting needed,Walk-in 8:00-11:00
+Vitamin D test,Lab tests,5,1200,No fasting needed,Walk-in 8:00-11:00
+Annual health check package,Packages,60,2900,Fast for 10 hours,Appointment
+Women's health check,Packages,45,2400,Fast for 10 hours,Appointment
+Wound dressing,Minor procedures,15,250,None,Walk-in
+Stitch removal,Minor procedures,10,300,None,Walk-in
+Ear cleaning,Minor procedures,15,400,Use ear drops for 3 days before,Appointment
+ECG,Diagnostics,15,450,None,Appointment
+Blood pressure check,Diagnostics,5,0,None,Walk-in
+Diet consultation,Wellness,30,800,Bring a 3-day food diary,Appointment
+Physiotherapy session,Wellness,45,900,Wear comfortable clothes,Appointment
+Home sample collection,Lab tests,20,200,Book by 18:00 the day before,Appointment
+Medical certificate,Documents,10,300,Needs a consultation first,Appointment

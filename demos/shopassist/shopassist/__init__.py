@@ -1,0 +1,1 @@
+# shopassist package

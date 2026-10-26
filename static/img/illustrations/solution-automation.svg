@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="100%" height="100%" fill="none">
+  <!-- Trigger Event Node -->
+  <rect x="32" y="64" width="60" height="52" rx="4" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <rect x="42" y="74" width="40" height="8" rx="2" fill="#C4572A"/>
+  <circle cx="62" cy="98" r="6" fill="#ECE6D8" stroke="#0E1B2A" stroke-width="1.5"/>
+
+  <!-- Flow Connector -->
+  <path d="M100 90 H 132" stroke="#0E1B2A" stroke-width="2"/>
+  <polygon points="130,86 138,90 130,94" fill="#0E1B2A"/>
+
+  <!-- Logic & Branching Node -->
+  <polygon points="172,60 204,90 172,120 140,90" fill="#0B6E6E" stroke="#0E1B2A" stroke-width="2"/>
+  <circle cx="172" cy="90" r="5" fill="#FCFBF8"/>
+
+  <!-- Dual Action Branch Out -->
+  <path d="M204 80 L 236 56" stroke="#0E1B2A" stroke-width="2"/>
+  <path d="M204 100 L 236 124" stroke="#0E1B2A" stroke-width="2"/>
+
+  <!-- Target Action 1 -->
+  <rect x="236" y="38" width="56" height="40" rx="4" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <line x1="246" y1="52" x2="282" y2="52" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="246" y1="64" x2="272" y2="64" stroke="#0B6E6E" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Target Action 2 -->
+  <rect x="236" y="104" width="56" height="40" rx="4" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <line x1="246" y1="118" x2="282" y2="118" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="246" y1="130" x2="268" y2="130" stroke="#C4572A" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Baseline -->
+  <line x1="16" y1="168" x2="304" y2="168" stroke="#0E1B2A" stroke-width="2"/>
+</svg>

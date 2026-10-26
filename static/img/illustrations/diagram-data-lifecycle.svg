@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 140" width="100%" height="100%" fill="none">
+  <!-- Step 1: Upload (Restricted & Ephemeral) -->
+  <rect x="24" y="32" width="96" height="76" rx="4" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <polyline points="56,70 72,54 88,70" stroke="#0B6E6E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="72" y1="56" x2="72" y2="86" stroke="#0B6E6E" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Arrow 1 -->
+  <path d="M130 70 H 164" stroke="#0E1B2A" stroke-width="2" stroke-dasharray="4 3"/>
+  <polygon points="162,66 170,70 162,74" fill="#0E1B2A"/>
+
+  <!-- Step 2: Isolated In-Memory Processing -->
+  <rect x="180" y="32" width="100" height="76" rx="4" fill="#0E1B2A" stroke="#0E1B2A" stroke-width="2"/>
+  <circle cx="230" cy="70" r="18" fill="#084F50" stroke="#FCFBF8" stroke-width="1.5"/>
+  <polygon points="230,62 237,70 230,78 223,70" fill="#FCFBF8"/>
+
+  <!-- Arrow 2 -->
+  <path d="M290 70 H 324" stroke="#0E1B2A" stroke-width="2" stroke-dasharray="4 3"/>
+  <polygon points="322,66 330,70 322,74" fill="#0E1B2A"/>
+
+  <!-- Step 3: Automated Purge after 24 Hours -->
+  <rect x="340" y="32" width="96" height="76" rx="4" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <circle cx="388" cy="70" r="18" fill="#ECE6D8" stroke="#C4572A" stroke-width="2"/>
+  <line x1="380" y1="62" x2="396" y2="78" stroke="#C4572A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="396" y1="62" x2="380" y2="78" stroke="#C4572A" stroke-width="2" stroke-linecap="round"/>
+</svg>

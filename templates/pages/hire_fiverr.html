@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load site_tags %}
+
+{% block title %}Hire us on Fiverr | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}Order with buyer protection. Find the gig closest to your problem.{% endblock %}
+{% block og_title %}Hire us on Fiverr | {{ STUDIO_NAME }}{% endblock %}
+
+{% block breadcrumbs %}{% include "components/breadcrumbs.html" with title="Hire on Fiverr" %}{% endblock %}
+
+{% block content %}
+<header class="page-head">
+  <div class="wrap page-head__grid">
+    <div>
+      <p class="eyebrow">Fiverr</p>
+      <h1>Hire us on Fiverr</h1>
+      <p class="lead">Fiverr gives you buyer protection, order tracking and secure payment. We keep chat, orders and payment there.</p>
+    </div>
+    <div class="btn-row">
+      <a href="{{ FIVERR_URL|utm:'hire-page' }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">{% if IS_FIVERR or not SITE.fiverr_profile_url %}Message us on Fiverr{% else %}Open our Fiverr profile{% endif %} {% include "components/icon.html" with name="external" %}</a>
+    </div>
+  </div>
+</header>
+
+<section class="section section--tight" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Ordering</p>
+      <h2 id="how-title">How ordering works</h2>
+    </div>
+    <ol class="rail rail--light">
+      <li class="rail__step"><span class="rail__n">01</span><h3>Pick the gig</h3><p>The one closest to your problem.</p></li>
+      <li class="rail__step"><span class="rail__n">02</span><h3>Message us</h3><p>Your problem and starting number.</p></li>
+      <li class="rail__step"><span class="rail__n">03</span><h3>Agree the scope</h3><p>What is included and what is not.</p></li>
+      <li class="rail__step"><span class="rail__n">04</span><h3>Order and track</h3><p>Follow the project on Fiverr.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--panel" aria-labelledby="gigs-title">
+  <div class="wrap split">
+    <div class="split__sticky">
+      <p class="eyebrow">Gigs</p>
+      <h2 id="gigs-title">Find the gig closest to your problem</h2>
+      <p class="muted mt-4">Not sure which gig? Message us on Fiverr and describe the problem. Use the brief checklist below.</p>
+    </div>
+    <div class="gigs">
+      {% for g in gigs %}
+        <div class="gig">
+          <span class="gig__name">{{ g.title }}</span>
+          <span class="gig__proj">{% if g.projects %}Covers {% endif %}{% for p in g.projects %}<a href="{% url 'try_project' p.slug %}">{{ p.title }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span>
+          <a href="{{ g.url|utm:'hire-page' }}" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">View gig</a>
+        </div>
+      {% endfor %}
+      <p class="muted small mt-4">Need something else? <a href="{% url 'start_project' %}">Send us the details</a> and we will tell you how we can help.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-label="Brief checklist">
+  <div class="wrap wrap--narrow">
+    {% include "components/brief.html" with brief_id="hire-brief" %}
+    <div class="btn-row mt-6">
+      <a href="{{ FIVERR_URL|utm:'hire-brief' }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Message us on Fiverr {% include "components/icon.html" with name="external" %}</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

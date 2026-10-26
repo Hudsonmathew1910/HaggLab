@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load site_tags %}
+
+{% block title %}{{ project.title }}: {{ project.headline|truncatewords:6 }} | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}{{ project.problem }} {{ project.step3_desc|truncatechars:90 }}{% endblock %}
+{% block og_title %}{{ project.title }}: {{ project.headline }}{% endblock %}
+{% block og_desc %}{{ project.problem }}{% endblock %}
+
+{% block breadcrumbs %}{% url 'projects_hub' as hub_url %}{% include "components/breadcrumbs.html" with parent_title="Projects" parent_url=hub_url title=project.title %}{% endblock %}
+
+{% block content %}
+<!-- Headline (the problem) -->
+<header class="page-head">
+  <div class="wrap">
+    <div class="page-head__meta">
+      <span class="feature__name">{{ project.title }}</span>
+      {% for s in project.solutions.all %}<a class="tag" href="{% url 'solution_detail' s.slug %}">{{ s.title }}</a>{% endfor %}
+      {% if project.delivered_count %}<span class="p-card__delivered">Delivered for {{ project.delivered_count }} client{{ project.delivered_count|pluralize }}</span>{% endif %}
+    </div>
+    <div class="page-head__grid">
+      <div>
+        <h1>{{ project.headline }}</h1>
+        <p class="lead">{{ project.problem }}</p>
+      </div>
+      <div class="btn-row">
+        <a href="{% url 'try_project' project.slug %}" class="btn btn-primary btn-lg">Try it now {% include "components/icon.html" with name="arrow" %}</a>
+        {% if not FIVERR_ON %}
+          <a href="{% url 'start_project' %}" class="btn btn-secondary">Get your project plan</a>
+        {% elif gig.url %}
+          <a href="{{ gig.url|utm:project.slug }}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">{{ gig.button }} (Fiverr)</a>
+        {% elif IS_FIVERR %}
+          <a href="{{ FIVERR_URL|utm:project.slug }}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Message us on Fiverr</a>
+        {% else %}
+          <a href="{% url 'start_project' %}" class="btn btn-secondary">Get your project plan</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="demo-stage">
+      <div class="demo-stage__inner">
+        <a class="demo-stage__link" href="{% url 'try_project' project.slug %}" aria-label="Try {{ project.title }}">{% include "components/preview.html" with p=project %}</a>
+        <div class="demo-stage__note">
+          <span>{% if project.built_for_list %}Built for: {{ project.built_for_list|join:" · " }}{% endif %}</span>
+          {% if project.video_url %}
+            <a href="{{ project.video_url }}" target="_blank" rel="noopener noreferrer" class="link-arrow">Watch the 60-second video {% include "components/icon.html" with name="external" %}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% if project.use_case_list %}
+<!-- Use cases -->
+<section class="section section--panel" aria-labelledby="uses-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Use cases</p>
+      <h2 id="uses-title">Where {{ project.title }} fits</h2>
+    </div>
+    <ul class="grid-3 uses">
+      {% for u in project.use_case_list %}<li class="use"><span class="use__n">0{{ forloop.counter }}</span><p>{{ u }}</p></li>{% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+<!-- The problem and how it is done today -->
+<section class="section" aria-labelledby="today-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Before</p>
+      <h2 id="today-title">How it is done today</h2>
+    </div>
+    <div class="compare">
+      <div class="compare__col">
+        <span class="label">The problem</span>
+        <p>{{ project.problem }}</p>
+      </div>
+      <div class="compare__col">
+        <span class="label">Today</span>
+        <p>{{ project.cost_today }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The fix in 3 steps -->
+<section class="section section--panel" aria-labelledby="fix-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The fix</p>
+      <h2 id="fix-title">The fix in 3 steps</h2>
+    </div>
+    <ol class="steps3">
+      <li><h3>{{ project.step1_title }}</h3><p>{{ project.step1_desc }}</p></li>
+      <li><h3>{{ project.step2_title }}</h3><p>{{ project.step2_desc }}</p></li>
+      <li><h3>{{ project.step3_title }}</h3><p>{{ project.step3_desc }}</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Measured / expected, and what's inside -->
+<section class="section" aria-labelledby="inside-title">
+  <div class="wrap split split--even">
+    <div>
+      <p class="eyebrow">Proof</p>
+      <h2>What to expect</h2>
+      <div class="mt-6">
+        {% include "components/result_block.html" with measured_text=project.measured_text expected_text=project.expected_text %}
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow">Technical</p>
+      <h2 id="inside-title">What’s inside</h2>
+      <dl class="spec mt-6">
+        {% if project.inside_text %}<div class="spec__row"><dt>Built with</dt><dd>{{ project.inside_text }}</dd></div>{% endif %}
+        {% if project.built_for %}<div class="spec__row"><dt>Built for</dt><dd>{{ project.built_for }}</dd></div>{% endif %}
+        {% if project.github_url %}<div class="spec__row"><dt>Code</dt><dd><a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer">View on GitHub</a></dd></div>{% endif %}
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- Related projects -->
+{% if related_projects %}
+<section class="section section--panel" aria-labelledby="related-title">
+  <div class="wrap">
+    <div class="section-head section-head--row">
+      <div>
+        <p class="eyebrow">More projects</p>
+        <h2 id="related-title">Related projects</h2>
+      </div>
+      <a href="{% url 'projects_hub' %}" class="link-arrow">All projects {% include "components/icon.html" with name="arrow" %}</a>
+    </div>
+    <div class="grid-3">
+      {% for rp in related_projects %}
+        {% include "components/project_card.html" with p=rp %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% include "components/final_cta.html" %}
+{% endblock %}

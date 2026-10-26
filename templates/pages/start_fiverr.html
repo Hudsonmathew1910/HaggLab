@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load site_tags %}
+
+{% block title %}Message us on Fiverr | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}Found us on Fiverr? Message us there so your order stays protected.{% endblock %}
+
+{% block breadcrumbs %}{% include "components/breadcrumbs.html" with title="Message us on Fiverr" %}{% endblock %}
+
+{% block content %}
+<section class="section section--tight">
+  <div class="wrap form-shell">
+    <div>
+      <p class="eyebrow">Fiverr</p>
+      <h1>Found us on Fiverr?</h1>
+      <p class="lead mt-4">Please message us there so your order stays protected. Chat, orders and payment stay on Fiverr.</p>
+      <div class="btn-row mt-6">
+        <a href="{{ FIVERR_URL|utm:'start-fiverr' }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Message us on Fiverr {% include "components/icon.html" with name="external" %}</a>
+      </div>
+      <p class="muted small mt-5">Not sure what to write? Copy the checklist and paste it into the Fiverr chat.</p>
+    </div>
+    <div>
+      {% include "components/brief.html" with brief_id="fiverr-brief" %}
+    </div>
+  </div>
+</section>
+{% endblock %}

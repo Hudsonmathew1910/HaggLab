@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load site_tags %}
+
+{% block title %}{{ STUDIO_NAME }}: AI and data tools for small businesses{% endblock %}
+{% block meta_description %}We build working tools that fix one business problem at a time. Try them before you hire.{% endblock %}
+
+{% block content %}
+
+<!-- 1. Hero: the problem, the promise, the proof -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero__grid">
+    <div>
+      <p class="hero__kicker"><b>Software &amp; AI</b> Working tools for small businesses and startups</p>
+      <h1 id="hero-title" class="display">Answer customers faster. Understand your numbers. <span class="soft">Stop the copy-paste.</span></h1>
+      <p class="lead">{{ STUDIO_NAME }} builds working AI and data tools that fix one business problem at a time. Try our tools before you hire.</p>
+      <div class="hero__cta">
+        {% if IS_FIVERR %}
+          <a href="{{ FIVERR_URL|utm:'home-hero' }}" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">Message us on Fiverr {% include "components/icon.html" with name="arrow" %}</a>
+        {% else %}
+          <a href="{% url 'start_project' %}" class="btn btn-primary btn-lg">Get your project plan {% include "components/icon.html" with name="arrow" %}</a>
+        {% endif %}
+        <a href="{% url 'projects_hub' %}" class="link-arrow">Try our tools {% include "components/icon.html" with name="arrow" %}</a>
+      </div>
+      <p class="hero__promise">One short message is enough. We reply with what is possible and a one-page scope{% if SITE.reply_time %} within {{ SITE.reply_time }}{% endif %}.</p>
+      <ul class="hero__checks" aria-label="How it works">
+        <li>{% include "components/icon.html" with name="check" %}Free to ask</li>
+        <li>{% include "components/icon.html" with name="check" %}Scope agreed before you pay</li>
+        <li>{% include "components/icon.html" with name="check" %}A working demo every week</li>
+      </ul>
+    </div>
+
+    {% if hero_project %}
+      <div class="hero-stage">
+        {% include "components/preview.html" with p=hero_project %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- 2. Proof: products already built and shipped (facts only) -->
+<section class="proof" aria-label="Already built and deployed">
+  <div class="wrap proof__inner">
+    <div class="proof__intro">
+      <span class="label">Already built and deployed</span>
+      <p class="mt-2">Facts only. Built and shipped by us.</p>
+    </div>
+    {% for item in built %}
+      {% if item.link %}<a class="proof__item" href="{{ item.link }}" target="_blank" rel="noopener noreferrer">{% else %}<div class="proof__item">{% endif %}
+        <span class="proof__kind">{{ item.kind }}</span>
+        <span class="proof__name">{{ item.name }}{% if item.link %} {% include "components/icon.html" with name="external" %}{% endif %}</span>
+        <p class="proof__desc">{{ item.desc }}</p>
+      {% if item.link %}</a>{% else %}</div>{% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<!-- 3. Services: the problems we fix -->
+<section class="section" aria-labelledby="problems-title">
+  <div class="wrap">
+    <div class="section-head section-head--row">
+      <div>
+        <p class="eyebrow">Services</p>
+        <h2 id="problems-title">Problems we fix</h2>
+        <p class="lead mt-4">Pick the problem that sounds like yours. Each page shows how the fix works, the related projects, and what to expect.</p>
+      </div>
+      <a href="{% url 'solutions_hub' %}" class="link-arrow">Compare all services {% include "components/icon.html" with name="arrow" %}</a>
+    </div>
+
+    <div class="svc-grid">
+      {% for s in solutions %}{% with m=s|service %}
+        <a class="svc" href="{% url 'solution_detail' s.slug %}">
+          <div class="svc__top">
+            <span class="mega__icon">{% include "components/icon.html" with name=m.icon %}</span>
+            <span class="svc__num">0{{ forloop.counter }}</span>
+          </div>
+          <h3 class="svc__name">{{ m.name }}</h3>
+          <p class="svc__desc">{{ m.desc }}</p>
+          <p class="svc__problem">{{ s.headline }}</p>
+          {% with projs=s|public_projects %}{% if projs %}
+            <span class="tag-list">{% for p in projs %}<span class="tag">{{ p.title }}</span>{% endfor %}</span>
+          {% endif %}{% endwith %}
+          <span class="svc__go">See the service {% include "components/icon.html" with name="arrow" %}</span>
+        </a>
+      {% endwith %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 4. Projects: compact cards -->
+<section class="section section--panel" aria-labelledby="try-title">
+  <div class="wrap">
+    <div class="section-head section-head--row">
+      <div>
+        <p class="eyebrow">Projects</p>
+        <h2 id="try-title">Try it before you hire</h2>
+        <p class="lead mt-4">Each project solves one business problem. Click one and try it right now.</p>
+      </div>
+      <a href="{% url 'projects_hub' %}" class="link-arrow">All 10 projects {% include "components/icon.html" with name="arrow" %}</a>
+    </div>
+    <div class="grid-3">
+      {% for p in featured_projects %}{% include "components/project_card.html" with p=p %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 5. How a project works -->
+<section class="section section--ink" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="section-head section-head--row">
+      <div>
+        <p class="eyebrow">Process</p>
+        <h2 id="process-title">How a project works</h2>
+      </div>
+      <a href="{% url 'process' %}" class="link-arrow">The full process {% include "components/icon.html" with name="arrow" %}</a>
+    </div>
+    <ol class="rail">
+      <li class="rail__step"><span class="rail__n">01</span><h3>Tell us the problem</h3><p>One short message and one starting number.</p></li>
+      <li class="rail__step"><span class="rail__n">02</span><h3>Agree the scope</h3><p>One page: what is included and what is not.</p></li>
+      <li class="rail__step"><span class="rail__n">03</span><h3>See it grow</h3><p>A working demo every week.</p></li>
+      <li class="rail__step"><span class="rail__n">04</span><h3>Take it over</h3><p>The tool, plain-language documents and a walkthrough.</p></li>
+    </ol>
+    <div class="handover">
+      <p class="handover__label">What you get at handover</p>
+      <div class="handover__item"><span class="mega__icon">{% include "components/icon.html" with name="box" %}</span><div><strong>The working tool</strong><span>The tool we built for your problem.</span></div></div>
+      <div class="handover__item"><span class="mega__icon">{% include "components/icon.html" with name="book" %}</span><div><strong>Plain-language documents</strong><span>How to use it and run it.</span></div></div>
+      <div class="handover__item"><span class="mega__icon">{% include "components/icon.html" with name="play" %}</span><div><strong>A walkthrough</strong><span>A short tour of the tool.</span></div></div>
+    </div>
+  </div>
+</section>
+
+{# 6. Final call to action (includes the Fiverr route when Fiverr is on) #}
+{% include "components/final_cta.html" with show_fiverr=True %}
+{% endblock %}

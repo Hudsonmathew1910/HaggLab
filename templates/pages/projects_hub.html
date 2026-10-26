@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Projects you can try | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}Ten projects, each solving one business problem. Badges show what is built.{% endblock %}
+{% block og_title %}Projects you can try | {{ STUDIO_NAME }}{% endblock %}
+
+{% block breadcrumbs %}{% include "components/breadcrumbs.html" with title="Projects" %}{% endblock %}
+
+{% block content %}
+<header class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Projects</p>
+    <h1>Projects: problems we set out to solve</h1>
+    <p class="lead">Each project solves one business problem. Pick one and try it right now.</p>
+
+  </div>
+</header>
+
+<section class="section section--tight">
+  <div class="wrap">
+    {% url 'projects_hub' as hub %}
+    <nav class="filters" aria-label="Filter projects">
+      <span class="filters__label">By service</span>
+      <div class="chips">
+        <a class="chip" href="{{ hub }}"{% if not current_solution %} aria-current="true"{% endif %}>All</a>
+        {% for s in solutions %}
+          <a class="chip" href="{{ hub }}?solution={{ s.slug }}"{% if current_solution == s.slug %} aria-current="true"{% endif %}>{{ s.title }}</a>
+        {% endfor %}
+      </div>
+    </nav>
+
+    {% if projects %}
+      <p class="results-count" role="status">Showing {{ projects|length }} project{{ projects|length|pluralize }}</p>
+      <div class="grid-3">
+        {% for p in projects %}
+          {% include "components/project_card.html" with p=p %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty" role="status">
+        <h2>No projects match these filters.</h2>
+        <a class="btn btn-secondary" href="{{ hub }}">Reset filters</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% include "components/final_cta.html" %}
+{% endblock %}

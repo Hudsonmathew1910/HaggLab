@@ -1,0 +1,17 @@
+{% comment %}Project card. The card opens the Try it page; "How it works" opens the detail page.{% endcomment %}
+<article class="p-card">
+  <div class="p-card__visual" aria-hidden="true">{% include "components/preview.html" with p=p %}</div>
+  <div class="p-card__body">
+    <div class="p-card__meta">
+      <span class="p-card__name">{{ p.title }}</span>
+      {% if p.delivered_count %}<span class="p-card__delivered">Delivered for {{ p.delivered_count }} client{{ p.delivered_count|pluralize }}</span>{% endif %}
+    </div>
+    <h3><a class="p-card__link" href="{% url 'try_project' p.slug %}">{{ p.headline }}</a></h3>
+    <p>{{ p.problem }}</p>
+    {% if p.built_for_list %}<p class="p-card__for"><span class="label">Built for</span> {{ p.built_for_list|join:" · " }}</p>{% endif %}
+    <div class="p-card__foot">
+      <span class="svc__go">Try it {% include "components/icon.html" with name="arrow" %}</span>
+      <a class="p-card__more" href="{% url 'project_detail' p.slug %}">How it works</a>
+    </div>
+  </div>
+</article>

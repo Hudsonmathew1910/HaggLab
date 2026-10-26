@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy policy | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}What we collect, how it is handled, and how to ask for deletion.{% endblock %}
+
+{% block breadcrumbs %}{% include "components/breadcrumbs.html" with title="Privacy policy" %}{% endblock %}
+
+{% block content %}
+<header class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Legal</p>
+    <h1>Privacy policy</h1>
+    <p class="lead">Last updated: October 2026</p>
+  </div>
+</header>
+
+<section class="section section--tight">
+  <div class="wrap legal">
+    <nav class="toc" aria-label="On this page">
+      <span class="label">On this page</span>
+      <ol>
+          <li><a href="#s1">Information we collect</a></li>
+          <li><a href="#s2">Try it pages and file uploads</a></li>
+          <li><a href="#s3">Analytics and tracking</a></li>
+          <li><a href="#s4">Spam protection</a></li>
+          <li><a href="#s5">Services we use</a></li>
+          <li><a href="#s6">How long we keep data</a></li>
+          <li><a href="#s7">Deletion rights</a></li>
+      </ol>
+    </nav>
+    <article class="prose">
+      <section id="s1" aria-labelledby="s1-h">
+        <h2 id="s1-h">1. Information we collect</h2>
+        <p>We believe in data minimization. When you use our contact form, we collect what you provide: your name, your work email, the description of the project you want built, and the optional details you choose to add (business name, budget, how you found us). We also record the IP address the form was sent from, to stop spam and abuse. Your inquiry is stored in our database and a copy is emailed to our team so we can reply. We do not sell, rent, or monetize your contact information.</p>
+      </section>
+      <section id="s2" aria-labelledby="s2-h">
+        <h2 id="s2-h">2. Try it pages and file uploads</h2>
+        <p>The Try it pages run on built-in sample data and on text you type or paste. They do not accept file uploads. What you type is sent from our server to our AI providers (listed below) to produce the answer, and some tools first look up relevant parts of their sample data in our search database. We do not use what you type for anything else. Our AI providers process it under their own terms. Please do not enter passwords or confidential information.</p>
+      </section>
+      <section id="s3" aria-labelledby="s3-h">
+        <h2 id="s3-h">3. Analytics and tracking</h2>
+        <p>We use a first-party, privacy-friendly analytics endpoint. We do not use third-party tracking scripts, cross-site tracking cookies, or external advertising networks. Event tracking logs only general interactions (such as opening a project or trying one) with anonymized IP addresses.</p>
+      </section>
+      <section id="s4" aria-labelledby="s4-h">
+        <h2 id="s4-h">4. Spam protection</h2>
+        <p>To protect our public forms against automated abuse, we utilize Cloudflare Turnstile. Turnstile evaluates visitor interaction patterns to block spam bots without tracking users across non-affiliated websites.</p>
+      </section>
+      <section id="s5" aria-labelledby="s5-h">
+        <h2 id="s5-h">5. Services we use</h2>
+        <p>We use a small number of outside services to run this website. Each receives only what it needs:</p>
+        <ul>
+          <li><strong>Google Gemini</strong> (Google) and <strong>Hero's AI</strong>: produce the answers on the Try it pages. They receive the text you type there.</li>
+          <li><strong>Pinecone</strong>: a search database that holds our fictional sample data. It receives your Try it question to find the relevant sample data.</li>
+          <li><strong>Gmail</strong> (Google): delivers your contact form inquiry to our inbox.</li>
+          <li><strong>Neon</strong>: hosts our database, where contact form inquiries are stored.</li>
+          <li><strong>Cloudflare Turnstile</strong>: spam protection on the contact form.</li>
+          <li><strong>Our hosting provider</strong>: runs the website and keeps standard server logs.</li>
+        </ul>
+      </section>
+      <section id="s6" aria-labelledby="s6-h">
+        <h2 id="s6-h">6. How long we keep data</h2>
+        <p>We keep contact form inquiries for as long as we need them to reply and, if you hire us, to run the project. We do not store the text you type on the Try it pages after the answer is shown. Sample bookings made on the BookIt Try it page are deleted automatically after their date.</p>
+      </section>
+      <section id="s7" aria-labelledby="s7-h">
+        <h2 id="s7-h">7. Deletion rights</h2>
+        <p>You may ask us to delete your contact inquiry at any time. Send a request through the Start a project form, or reply to any email from us, and we will delete the records linked to your email address and confirm when it is done.</p>
+      </section>
+    </article>
+  </div>
+</section>
+{% endblock %}

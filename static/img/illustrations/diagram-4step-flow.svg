@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 140" width="100%" height="100%" fill="none">
+  <!-- Timeline Rail -->
+  <line x1="60" y1="56" x2="540" y2="56" stroke="#DDD6C6" stroke-width="3"/>
+  <line x1="60" y1="56" x2="220" y2="56" stroke="#0B6E6E" stroke-width="3"/>
+
+  <!-- Step 1: Scope -->
+  <circle cx="60" cy="56" r="20" fill="#0B6E6E" stroke="#0E1B2A" stroke-width="2"/>
+  <text x="60" y="62" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="14" font-weight="600" fill="#FCFBF8">1</text>
+  <rect x="20" y="88" width="80" height="24" rx="2" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="1.5"/>
+  <line x1="30" y1="100" x2="90" y2="100" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Step 2: Prototype -->
+  <circle cx="220" cy="56" r="20" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <text x="220" y="62" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="14" font-weight="600" fill="#0E1B2A">2</text>
+  <rect x="180" y="88" width="80" height="24" rx="2" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="1.5"/>
+  <line x1="190" y1="100" x2="250" y2="100" stroke="#0B6E6E" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Step 3: Build & Integrate -->
+  <circle cx="380" cy="56" r="20" fill="#ECE6D8" stroke="#0E1B2A" stroke-width="2"/>
+  <text x="380" y="62" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="14" font-weight="600" fill="#0E1B2A">3</text>
+  <rect x="340" y="88" width="80" height="24" rx="2" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="1.5"/>
+  <line x1="350" y1="100" x2="410" y2="100" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Step 4: Deliver & Handover -->
+  <circle cx="540" cy="56" r="20" fill="#ECE6D8" stroke="#0E1B2A" stroke-width="2"/>
+  <text x="540" y="62" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="14" font-weight="600" fill="#C4572A">4</text>
+  <rect x="500" y="88" width="80" height="24" rx="2" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="1.5"/>
+  <line x1="510" y1="100" x2="570" y2="100" stroke="#C4572A" stroke-width="2" stroke-linecap="round"/>
+</svg>

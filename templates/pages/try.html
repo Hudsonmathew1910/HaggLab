@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load site_tags %}
+
+{% block title %}Try {{ project.title }}: {{ project.headline|truncatewords:6 }} | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}Try {{ project.title }} now. {{ project.problem }}{% endblock %}
+{% block og_title %}Try {{ project.title }} | {{ STUDIO_NAME }}{% endblock %}
+
+{% block breadcrumbs %}{% url 'project_detail' project.slug as parent_url %}{% include "components/breadcrumbs.html" with parent_title=project.title parent_url=parent_url title="Try it" %}{% endblock %}
+
+{% block content %}
+<section class="section section--tight try">
+  <div class="wrap try__grid">
+
+    <!-- Tool switcher -->
+    <nav class="try__tools" aria-label="Choose a tool to try">
+      <p class="label">Try a tool</p>
+      <ul class="try__list">
+        {% for t in tools %}
+          <li>
+            <a class="try__tool" href="{% url 'try_project' t.slug %}"{% if t.slug == project.slug %} aria-current="page"{% endif %}>
+              <span class="try__tool-name">{{ t.title }}</span>
+              <span class="try__tool-desc">{{ t.headline|truncatewords:7 }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <!-- The tool -->
+    <div class="try__main">
+      <header class="try__head">
+        <p class="eyebrow">{{ project.title }}</p>
+        <h1>{{ project.headline }}</h1>
+        <p class="lead">{{ spec.intro }}</p>
+      </header>
+
+      <div class="try__panel">
+        <div class="try__bar">
+          <span class="ui__app"><i class="is-accent"></i>{{ project.title }}</span>
+          <span class="try__limit">Up to 10 tries an hour</span>
+        </div>
+
+        <form class="try-form" data-try-url="{% url 'try_api' project.slug %}" data-kind="{{ spec.kind }}" data-project="{{ project.slug }}" novalidate>
+          {% csrf_token %}
+          {% with "tryit/"|add:spec.kind|add:".html" as ui %}{% include ui %}{% endwith %}
+          <p class="try-error" role="alert" hidden></p>
+        </form>
+
+        <div class="try-out" aria-live="polite" hidden></div>
+      </div>
+
+      <p class="try__note">{% include "components/icon.html" with name="info" %}Please don’t enter passwords or confidential information.</p>
+    </div>
+
+    <!-- Next step -->
+    <aside class="try__side">
+      {% if project.built_for_list %}
+        <div class="aside-card">
+          <h2>Built for</h2>
+          <ul class="tag-list mt-3">{% for b in project.built_for_list %}<li class="tag">{{ b }}</li>{% endfor %}</ul>
+        </div>
+      {% endif %}
+      <div class="aside-card aside-card--ink">
+        <h2>Want this for your business?</h2>
+        <p>We build it on your own data and hand it over to you.</p>
+        {% if FIVERR_ON and gig.url %}
+          <a href="{{ gig.url|utm:project.slug }}" class="btn btn-primary btn-block mt-4" target="_blank" rel="noopener noreferrer">{{ gig.button }} on Fiverr</a>
+          <a href="{% url 'start_project' %}" class="link-arrow mt-3">Or send us the details directly {% include "components/icon.html" with name="arrow" %}</a>
+        {% elif IS_FIVERR %}
+          <a href="{{ FIVERR_URL|utm:project.slug }}" class="btn btn-primary btn-block mt-4" target="_blank" rel="noopener noreferrer">Message us on Fiverr</a>
+        {% else %}
+          <a href="{% url 'start_project' %}" class="btn btn-primary btn-block mt-4">Get your project plan</a>
+        {% endif %}
+      </div>
+      <a href="{% url 'project_detail' project.slug %}" class="link-arrow">How {{ project.title }} works {% include "components/icon.html" with name="arrow" %}</a>
+    </aside>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}<script src="/static/js/try.js" defer></script>{% endblock %}

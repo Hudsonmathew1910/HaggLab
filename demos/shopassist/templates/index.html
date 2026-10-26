@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopAssist Demo: Conversational Product Search</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0; }
+    body { background-color: #F4F1EA; color: #15191E; font-family: 'Public Sans', sans-serif; font-size: 16px; line-height: 1.6; padding: 24px; }
+    .demo-container { max-width: 800px; margin: 0 auto; }
+    .header-bar { border-bottom: 1px solid #CFC9BA; padding-bottom: 16px; margin-bottom: 24px; }
+    .header-title { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; }
+    .badge { display: inline-block; padding: 4px 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; border: 1px solid #0B6E6E; background-color: #0B6E6E; color: #F4F1EA; }
+    .search-form { display: flex; gap: 8px; margin-bottom: 24px; }
+    .search-input { flex: 1; padding: 10px 14px; background-color: #EBE7DD; border: 1px solid #CFC9BA; color: #15191E; font-size: 16px; outline: none; }
+    .search-btn { padding: 10px 20px; background-color: #0B6E6E; color: #F4F1EA; border: 1px solid #0B6E6E; font-weight: 600; cursor: pointer; }
+    .search-btn:hover { background-color: #15191E; }
+    .chat-history { border: 1px solid #CFC9BA; background-color: #EBE7DD; padding: 16px; margin-bottom: 24px; max-height: 250px; overflow-y: auto; }
+    .chat-msg { margin-bottom: 12px; }
+    .chat-role { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #4A5260; text-transform: uppercase; }
+    .product-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .product-item { display: flex; justify-content: space-between; align-items: center; border: 1px solid #CFC9BA; background-color: #F4F1EA; padding: 12px; }
+    .product-meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4A5260; }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <div class="header-bar">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="header-title">ShopAssist: AI Shopping Assistant</span>
+        <span class="badge">Live Demo</span>
+      </div>
+      <p style="font-size: 13px; color: #4A5260; margin-top: 6px;">Demo data. Not real customer information.</p>
+    </div>
+
+    {% if chat_history %}
+      <div class="chat-history">
+        {% for m in chat_history %}
+          <div class="chat-msg">
+            <span class="chat-role">{{ m.role }}:</span>
+            <p style="margin-top: 2px;">{{ m.text }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form method="get" action="" class="search-form">
+      <input type="text" name="q" value="{{ query }}" placeholder="What are you shopping for? (e.g. noise cancelling headphones under $150)" class="search-input" required>
+      <button type="submit" class="search-btn">Ask Assistant</button>
+    </form>
+
+    {% if result %}
+      <div style="border: 1px solid #CFC9BA; background-color: #EBE7DD; padding: 20px;">
+        <h3 style="font-family: 'Fraunces', serif; font-size: 18px; margin-bottom: 8px;">Assistant Response</h3>
+        <p style="color: #0B6E6E; font-weight: 600;">{{ result.reply }}</p>
+
+        {% if result.products %}
+          <div class="product-list">
+            {% for p in result.products %}
+              <div class="product-item">
+                <div>
+                  <strong>{{ p.name }}</strong>
+                  <div class="product-meta">Category: {{ p.category }} | Vendor: {{ p.vendor }}</div>
+                </div>
+                <div style="font-size: 18px; font-weight: 700; color: #15191E;">${{ p.price }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>

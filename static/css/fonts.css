@@ -1,0 +1,19 @@
+/* Self-hosted variable fonts for HaggLab (no third-party font requests, CSP friendly) */
+
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/static/fonts/instrument-sans-latin-wght-normal.woff2') format('woff2-variations'),
+       url('/static/fonts/instrument-sans-latin-wght-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/static/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2-variations'),
+       url('/static/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2');
+}

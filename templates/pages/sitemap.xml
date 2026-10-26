@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{ SITE_URL }}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>{{ SITE_URL }}/solutions/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  {% for s in solutions %}
+  <url><loc>{{ SITE_URL }}/solutions/{{ s.slug }}/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  {% endfor %}
+  <url><loc>{{ SITE_URL }}/projects/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  {% for p in projects %}
+  <url><loc>{{ SITE_URL }}/projects/{{ p.slug }}/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>{{ SITE_URL }}/projects/{{ p.slug }}/try/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  {% endfor %}
+  <url><loc>{{ SITE_URL }}/process/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>{{ SITE_URL }}/security/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>{{ SITE_URL }}/about/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>{{ SITE_URL }}/faq/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  {% if fiverr_on %}<url><loc>{{ SITE_URL }}/hire/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>{% endif %}
+  <url><loc>{{ SITE_URL }}/start/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>{{ SITE_URL }}/privacy/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>{{ SITE_URL }}/terms/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>

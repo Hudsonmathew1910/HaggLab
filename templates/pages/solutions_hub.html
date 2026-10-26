@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load site_tags %}
+
+{% block title %}Business problems we fix | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}Faster answers, clearer numbers, less manual work. Pick the problem that sounds like yours.{% endblock %}
+{% block og_title %}Business problems we fix | {{ STUDIO_NAME }}{% endblock %}
+
+{% block breadcrumbs %}{% include "components/breadcrumbs.html" with title="Services" %}{% endblock %}
+
+{% block content %}
+<header class="page-head">
+  <div class="wrap page-head__grid">
+    <div>
+      <p class="eyebrow">Services</p>
+      <h1>Business problems we fix</h1>
+      <p class="lead">Pick the problem that sounds like yours. Each page shows how the fix works, the related projects, and what to expect.</p>
+    </div>
+    <div class="page-head__aside">
+      <strong>Not sure which one fits?</strong>
+      Describe the problem in a few sentences and we will tell you whether we can fix it.
+      <div class="mt-4">
+        {% if IS_FIVERR %}
+          <a href="{% url 'hire_fiverr' %}" class="link-arrow">Message us on Fiverr {% include "components/icon.html" with name="arrow" %}</a>
+        {% else %}
+          <a href="{% url 'start_project' %}" class="link-arrow">Start a project {% include "components/icon.html" with name="arrow" %}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section section--tight">
+  <div class="wrap">
+    {% for s in solutions %}
+      {% with m=s|service %}
+      <article class="s-row" id="{{ s.slug }}">
+        <span class="s-row__num"><span class="mega__icon">{% include "components/icon.html" with name=m.icon %}</span></span>
+        <div>
+          <p class="label">0{{ forloop.counter }} &middot; {{ m.name }}</p>
+          <h2 class="mt-2"><a class="text-link" href="{% url 'solution_detail' s.slug %}">{{ s.headline }}</a></h2>
+          <p class="s-row__problem">{{ s.problem }}</p>
+          <div class="btn-row">
+            <a href="{% url 'solution_detail' s.slug %}" class="btn btn-secondary btn-sm">See the service</a>
+          </div>
+        </div>
+        <dl class="s-row__detail">
+          <dt class="label">How it is done today</dt>
+          <dd>{{ s.cost_today }}</dd>
+          <dt class="label">Expected outcome</dt>
+          <dd>{{ s.expected_outcome }}</dd>
+          {% with projs=s|public_projects %}{% if projs %}
+            <dt class="label">Projects</dt>
+            <dd class="tag-list">{% for p in projs %}<a class="tag" href="{% url 'project_detail' p.slug %}">{{ p.title }}</a>{% endfor %}</dd>
+          {% endif %}{% endwith %}
+        </dl>
+      </article>
+      {% endwith %}
+    {% empty %}
+      <div class="empty"><p>No solutions are published yet.</p></div>
+    {% endfor %}
+    {% if solutions %}<p class="small muted mt-6"><span class="note-expected">Expected, not guaranteed</span> Each expected outcome is what the service is built to change. Your own result depends on your data and how the tool is used.</p>{% endif %}
+  </div>
+</section>
+
+{% include "components/final_cta.html" %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Thank you | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}We got your message.{% endblock %}
+{% block extra_head %}<meta name="robots" content="noindex">{% endblock %}
+
+{% block content %}
+<section class="state">
+  <div class="wrap wrap--narrow">
+    <span class="state__code">Message received</span>
+    <h1>Thanks. We got your message.</h1>
+    <p class="lead">We’ll reply to {% if submitted_email %}<strong>{{ submitted_email }}</strong>{% else %}your email{% endif %}{% if SITE.reply_time %} {{ SITE.reply_time }}{% endif %}. While you wait, try a demo.</p>
+    <div class="btn-row">
+      <a href="{% url 'projects_hub' %}" class="btn btn-primary">See the projects</a>
+      <a href="{% url 'home' %}" class="btn btn-secondary">Back to home</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "user_message": "I need headphones for my office",
+    "expected_category": "Audio",
+    "should_find": true
+  },
+  {
+    "id": 2,
+    "user_message": "Show me mechanical keyboards",
+    "expected_category": "Hardware",
+    "should_find": true
+  },
+  {
+    "id": 3,
+    "user_message": "Do you have ergonomic office desks or chairs?",
+    "expected_category": "Office",
+    "should_find": true
+  },
+  {
+    "id": 4,
+    "user_message": "Looking for cotton hoodies or warm apparel",
+    "expected_category": "Apparel",
+    "should_find": true
+  },
+  {
+    "id": 5,
+    "user_message": "Show me audio microphones under $100",
+    "expected_category": "Audio",
+    "max_price": 100,
+    "should_find": true
+  },
+  {
+    "id": 6,
+    "user_message": "Looking for aerospace jet engines",
+    "expected_category": null,
+    "should_find": false
+  }
+]

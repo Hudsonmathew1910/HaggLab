@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 130" width="100%" height="100%" fill="none">
+  <!-- Step 1: Brief on Fiverr -->
+  <rect x="20" y="25" width="86" height="80" rx="4" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <rect x="32" y="38" width="62" height="10" rx="2" fill="#0B6E6E"/>
+  <line x1="32" y1="58" x2="80" y2="58" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="32" y1="72" x2="72" y2="72" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Arrow 1 -->
+  <path d="M116 65 H 144" stroke="#0E1B2A" stroke-width="2"/>
+  <polygon points="142,61 150,65 142,69" fill="#0E1B2A"/>
+
+  <!-- Step 2: Escrow & Buyer Protection -->
+  <rect x="160" y="25" width="86" height="80" rx="4" fill="#ECE6D8" stroke="#0E1B2A" stroke-width="2"/>
+  <path d="M203 45 L 217 52 V 65 C 217 73, 203 80, 203 80 C 203 80, 189 73, 189 65 V 52 Z" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+
+  <!-- Arrow 2 -->
+  <path d="M256 65 H 284" stroke="#0E1B2A" stroke-width="2"/>
+  <polygon points="282,61 290,65 282,69" fill="#0E1B2A"/>
+
+  <!-- Step 3: Milestone Delivery & Approval -->
+  <rect x="300" y="25" width="86" height="80" rx="4" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <polyline points="325,65 338,78 362,50" stroke="#1F7A4D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,18 @@
+{% comment %}Brief checklist from Content.md for Fiverr chat. Usage: {% include "components/brief.html" with brief_id="brief" %}{% endcomment %}
+<div class="brief">
+  <div class="brief__head">
+    <h2>Brief checklist to copy into Fiverr chat</h2>
+    <button type="button" class="btn btn-secondary btn-sm btn-copy-trigger" data-copy-target="#{{ brief_id|default:'brief' }}">
+      {% include "components/icon.html" with name="copy" %}<span data-copy-label>Copy checklist</span>
+    </button>
+  </div>
+  <ol id="{{ brief_id|default:'brief' }}">
+    <li><strong>The goal</strong> <span>What should be different when it is done?</span></li>
+    <li><strong>Who will use it</strong> <span>Customers, staff, or you.</span></li>
+    <li><strong>Data or documents</strong> <span>What you have today.</span></li>
+    <li><strong>What “good” looks like</strong> <span>One example.</span></li>
+    <li><strong>Your deadline</strong> <span>When you need it.</span></li>
+    <li><strong>Tools to connect</strong> <span>Anything it must work with.</span></li>
+    <li><strong>Starting number</strong> <span>For example, hours a week on the problem.</span></li>
+  </ol>
+</div>

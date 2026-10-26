@@ -1,0 +1,6 @@
+<div class="field">
+  <label for="try-message">Customer message</label>
+  <textarea id="try-message" name="message" rows="5" maxlength="2000" placeholder="{{ spec.placeholder }}" required></textarea>
+</div>
+<div class="try-actions"><button type="submit" class="btn btn-primary">Sort and draft a reply {% include "components/icon.html" with name="arrow" %}</button></div>
+{% include "tryit/_examples.html" %}

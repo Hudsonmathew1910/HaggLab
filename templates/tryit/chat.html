@@ -1,0 +1,33 @@
+<div class="chat">
+  <div class="chat__head">
+    <span class="chat__status"><i aria-hidden="true"></i>Ready</span>
+    <button type="button" class="chat__clear" data-clear hidden>{% include "components/icon.html" with name="repeat" %}New chat</button>
+  </div>
+
+  <div class="try-log" data-log role="log" aria-live="polite" aria-label="Conversation">
+    <div class="chat-row chat-row--ai chat-welcome">
+      <span class="chat-avatar" aria-hidden="true">{{ project.title|slice:":1" }}</span>
+      <div class="ui-msg ui-msg--ai"><p class="try-text">Hi, I’m {{ project.title }}. {{ spec.intro }}</p></div>
+    </div>
+  </div>
+
+  <div class="chat__composer">
+    <label class="visually-hidden" for="try-message">Your message</label>
+    <textarea id="try-message" name="message" rows="1" maxlength="600" placeholder="{{ spec.placeholder }}" autocomplete="off" required data-autogrow></textarea>
+    <button type="submit" class="chat__send" aria-label="Send message">{% include "components/icon.html" with name="send" %}</button>
+  </div>
+  {% if spec.with_document %}
+    <details class="try-doc">
+      <summary>Use your own text instead of the sample handbook</summary>
+      <div class="field mt-3">
+        <label for="try-document">Paste your text</label>
+        <textarea id="try-document" name="document" rows="6" maxlength="8000" placeholder="Paste a policy, FAQ or handbook section here"></textarea>
+        <p class="hint">Up to 8,000 characters. Your questions are then answered from this text.</p>
+      </div>
+    </details>
+  {% endif %}
+
+  {% include "tryit/_examples.html" %}
+
+  <p class="chat__hint">Press Enter to send, Shift + Enter for a new line.</p>
+</div>

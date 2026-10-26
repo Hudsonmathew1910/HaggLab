@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Django System Checks
+      run: python manage.py check
+    - name: Run Tests
+      run: python manage.py test
+    - name: Run Deploy Check
+      env:
+        SECRET_KEY: test-secret-key-for-ci-check-only-never-use-in-prod-1234567890
+        ALLOWED_HOSTS: localhost,127.0.0.1
+        NEON_DB_NAME: testdb
+        NEON_DB_USER: testuser
+        NEON_DB_PASSWORD: testpassword
+        NEON_DB_HOST: localhost
+        NEON_DB_PORT: 5432
+        TURNSTILE_SITE_KEY: ci-dummy-site-key
+        TURNSTILE_SECRET_KEY: ci-dummy-secret-key
+        OWNER_EMAIL: owner@example.com
+        EMAIL_HOST: smtp.example.com
+        EMAIL_HOST_USER: sender@example.com
+        EMAIL_HOST_PASSWORD: ci-dummy-password
+      run: python manage.py check --deploy --settings=config.settings.prod
+    - name: Run Design Rule Check
+      run: python scripts/check_design_rules.py
+    - name: Run Pip Audit
+      run: pip-audit

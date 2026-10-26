@@ -1,0 +1,20 @@
+<div class="field">
+  <label for="try-sample">Page</label>
+  <select id="try-sample" name="sample">
+    {% for key, name in spec.fields.sample.1 %}<option value="{{ key }}">{{ name }}</option>{% endfor %}
+  </select>
+</div>
+<div class="field mt-4">
+  <label for="try-message">What do you want to know?</label>
+  <input id="try-message" name="message" type="text" maxlength="400" placeholder="{{ spec.placeholder }}">
+</div>
+<div class="try-actions"><button type="submit" class="btn btn-primary">Ask the page {% include "components/icon.html" with name="arrow" %}</button></div>
+<details class="try-doc">
+  <summary>Paste your own page text instead</summary>
+  <div class="field mt-3">
+    <label for="try-page">Page text</label>
+    <textarea id="try-page" name="page_text" rows="7" maxlength="12000" placeholder="Paste the text of a web page here"></textarea>
+    <p class="hint">Up to 12,000 characters. Pasted text is used instead of the sample page.</p>
+  </div>
+</details>
+{% include "tryit/_examples.html" %}

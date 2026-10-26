@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="100%" height="100%" fill="none">
+  <!-- Store Shelf / Product Catalog Frame -->
+  <rect x="28" y="38" width="94" height="102" rx="4" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <rect x="38" y="48" width="34" height="34" rx="2" fill="#ECE6D8" stroke="#0E1B2A" stroke-width="1.5"/>
+  <rect x="78" y="48" width="34" height="34" rx="2" fill="#0B6E6E"/>
+  <line x1="38" y1="96" x2="104" y2="96" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="38" y1="108" x2="88" y2="108" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <rect x="38" y="120" width="40" height="10" rx="2" fill="#C4572A"/>
+
+  <!-- Bi-directional booking calendar bridge -->
+  <path d="M130 89 H 176" stroke="#0E1B2A" stroke-width="2"/>
+  <polygon points="174,85 182,89 174,93" fill="#0E1B2A"/>
+
+  <!-- Calendar Scheduling Matrix -->
+  <rect x="184" y="38" width="108" height="102" rx="4" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <rect x="184" y="38" width="108" height="24" rx="4" fill="#0E1B2A"/>
+  <!-- Date Grid Dots -->
+  <rect x="194" y="72" width="14" height="14" rx="2" fill="#ECE6D8"/>
+  <rect x="214" y="72" width="14" height="14" rx="2" fill="#ECE6D8"/>
+  <rect x="234" y="72" width="14" height="14" rx="2" fill="#0B6E6E"/>
+  <rect x="254" y="72" width="14" height="14" rx="2" fill="#ECE6D8"/>
+  <rect x="194" y="94" width="14" height="14" rx="2" fill="#ECE6D8"/>
+  <rect x="214" y="94" width="14" height="14" rx="2" fill="#C4572A"/>
+  <rect x="234" y="94" width="14" height="14" rx="2" fill="#ECE6D8"/>
+  <rect x="254" y="94" width="14" height="14" rx="2" fill="#0B6E6E"/>
+  <rect x="194" y="118" width="74" height="12" rx="2" fill="#0B6E6E"/>
+
+  <!-- Baseline -->
+  <line x1="16" y1="168" x2="304" y2="168" stroke="#0E1B2A" stroke-width="2"/>
+</svg>

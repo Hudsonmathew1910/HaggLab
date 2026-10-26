@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Something went wrong | HaggLab</title>
+  <link rel="icon" type="image/svg+xml" href="/static/img/v2/favicon.svg">
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/site.css">
+</head>
+<body>
+  {% comment %}Standalone on purpose: no base template and no database queries, so it still renders when the database is down.{% endcomment %}
+  <main class="state">
+    <div class="wrap wrap--narrow">
+      <a href="/" class="brand" aria-label="HaggLab home">{% include "components/mark.html" %}<span class="brand__name">HaggLab</span></a>
+      <p class="state__code mt-8">Error 500</p>
+      <h1>Something went wrong on our side.</h1>
+      <p class="lead">Please try again in a minute.</p>
+      <div class="btn-row">
+        <a href="/" class="btn btn-primary">Back to home</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

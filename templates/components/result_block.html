@@ -1,0 +1,14 @@
+{% comment %}Measured block is hidden when empty. Expected outcome always carries its label.{% endcomment %}
+{% if measured_text %}
+  <div class="result result--measured">
+    <span class="badge badge--live">Measured in testing</span>
+    <p>{{ measured_text }}</p>
+  </div>
+{% endif %}
+{% if expected_text %}
+  <div class="result result--expected">
+    <span class="note-expected">Expected, not guaranteed</span>
+    <p>{{ expected_text }}</p>
+    {% if metrics %}<p class="small">What we track: {{ metrics }}.</p>{% endif %}
+  </div>
+{% endif %}

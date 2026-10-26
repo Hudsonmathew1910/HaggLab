@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 36" width="180" height="36" fill="none">
+  <!-- Mark icon -->
+  <g transform="translate(0, 2) scale(0.666)">
+    <rect x="2" y="2" width="44" height="44" rx="4" stroke="#0E1B2A" stroke-width="2.5" fill="#F6F3EC"/>
+    <path d="M11 13H37M24 13V24" stroke="#0B6E6E" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M11 35H37M24 35V24" stroke="#0B6E6E" stroke-width="2.5" stroke-linecap="round"/>
+    <polygon points="24,20 28,24 24,28 20,24" fill="#C4572A"/>
+  </g>
+  <!-- Wordmark Text -->
+  <text x="42" y="24" font-family="'Newsreader', Georgia, serif" font-size="22" font-weight="600" letter-spacing="-0.02em" fill="#0E1B2A">Tenet</text>
+  <text x="108" y="23" font-family="'IBM Plex Mono', monospace" font-size="9" font-weight="500" letter-spacing="0.12em" fill="#4D5866">STUDIO</text>
+</svg>

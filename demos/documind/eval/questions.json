@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "question": "When does Fall registration open and close?",
+    "expected_page": 1,
+    "should_find": true
+  },
+  {
+    "id": 2,
+    "question": "What is the fee for late registration?",
+    "expected_page": 1,
+    "should_find": true
+  },
+  {
+    "id": 3,
+    "question": "What minimum GPA is required for good academic standing?",
+    "expected_page": 2,
+    "should_find": true
+  },
+  {
+    "id": 4,
+    "question": "What happens if a student GPA falls below 2.0?",
+    "expected_page": 2,
+    "should_find": true
+  },
+  {
+    "id": 5,
+    "question": "What is the minimum class attendance required?",
+    "expected_page": 3,
+    "should_find": true
+  },
+  {
+    "id": 6,
+    "question": "Who approves a medical leave of absence?",
+    "expected_page": 3,
+    "should_find": true
+  },
+  {
+    "id": 7,
+    "question": "What are the campus library hours on weekends?",
+    "expected_page": 4,
+    "should_find": true
+  },
+  {
+    "id": 8,
+    "question": "How do remote students access library research databases?",
+    "expected_page": 4,
+    "should_find": true
+  },
+  {
+    "id": 9,
+    "question": "What tuition refund is granted for dropping a course in week 3?",
+    "expected_page": 5,
+    "should_find": true
+  },
+  {
+    "id": 10,
+    "question": "How many installments are available for tuition payment plans?",
+    "expected_page": 5,
+    "should_find": true
+  },
+  {
+    "id": 11,
+    "question": "Who investigates academic integrity and cheating violations?",
+    "expected_page": 6,
+    "should_find": true
+  },
+  {
+    "id": 12,
+    "question": "Are immunization records required before course registration?",
+    "expected_page": 1,
+    "should_find": true
+  },
+  {
+    "id": 13,
+    "question": "What is the numerical grade value of a B?",
+    "expected_page": 2,
+    "should_find": true
+  },
+  {
+    "id": 14,
+    "question": "Can a student take a leave of absence for family emergency?",
+    "expected_page": 3,
+    "should_find": true
+  },
+  {
+    "id": 15,
+    "question": "What time does the library close on Friday?",
+    "expected_page": 4,
+    "should_find": true
+  },
+  {
+    "id": 16,
+    "question": "Is any refund issued if a student drops a course in week 5?",
+    "expected_page": 5,
+    "should_find": true
+  },
+  {
+    "id": 17,
+    "question": "Can plagiarism result in disciplinary suspension?",
+    "expected_page": 6,
+    "should_find": true
+  },
+  {
+    "id": 18,
+    "question": "What is the policy for parking permits on campus?",
+    "expected_page": null,
+    "should_find": false
+  },
+  {
+    "id": 19,
+    "question": "What meal plans are offered in the student dining hall?",
+    "expected_page": null,
+    "should_find": false
+  },
+  {
+    "id": 20,
+    "question": "How much does a dorm room cost per semester?",
+    "expected_page": null,
+    "should_find": false
+  }
+]

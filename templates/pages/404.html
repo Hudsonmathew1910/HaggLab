@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load site_tags %}
+
+{% block title %}Page not found | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}This page does not exist. Find our services, projects and Try it tools here.{% endblock %}
+{% block extra_head %}<meta name="robots" content="noindex">{% endblock %}
+
+{% block content %}
+<section class="state state--404" aria-labelledby="nf-title">
+  <div class="wrap">
+    <div class="nf">
+      <div class="nf__text">
+        <span class="state__code">Error 404</span>
+        <h1 id="nf-title">We can’t find that page.</h1>
+        <p class="lead">The link may be old, or the address may have a typo. Here are the places most people are looking for.</p>
+        <div class="btn-row">
+          <a href="{% url 'projects_hub' %}" class="btn btn-primary">Try our tools {% include "components/icon.html" with name="arrow" %}</a>
+          <a href="{% url 'home' %}" class="btn btn-secondary">Back to home</a>
+        </div>
+        {% if request.path %}<p class="nf__path">You asked for <code>{{ request.path|truncatechars:80 }}</code></p>{% endif %}
+      </div>
+
+      <nav class="nf__links" aria-label="Popular pages">
+        <p class="label">Services</p>
+        <ul>
+          {% for s in NAV_SOLUTIONS %}{% with m=s|service %}
+            <li><a href="{% url 'solution_detail' s.slug %}"><span class="mega__icon">{% include "components/icon.html" with name=m.icon %}</span><span>{{ m.name }}</span></a></li>
+          {% endwith %}{% endfor %}
+        </ul>
+        <p class="label mt-6">Company</p>
+        <ul class="nf__plain">
+          <li><a href="{% url 'process' %}">How we work</a></li>
+          <li><a href="{% url 'faq' %}">FAQ</a></li>
+          {% if not IS_FIVERR %}<li><a href="{% url 'start_project' %}">Start a project</a></li>{% endif %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+{% endblock %}

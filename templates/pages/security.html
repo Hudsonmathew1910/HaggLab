@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Security and data | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}How we handle uploads, keys and your data.{% endblock %}
+{% block og_title %}Security and data | {{ STUDIO_NAME }}{% endblock %}
+
+{% block breadcrumbs %}{% include "components/breadcrumbs.html" with title="Security and data" %}{% endblock %}
+
+{% block content %}
+<header class="page-head">
+  <div class="wrap page-head__grid">
+    <div>
+      <p class="eyebrow">Security</p>
+      <h1>Security and data</h1>
+      <p class="lead">How we handle uploads, keys and your data. Each point below describes how the system works, not a promise that nothing can go wrong.</p>
+    </div>
+    <div class="page-head__aside">
+      <strong>Known limits</strong>
+      AI tools can be wrong. We test them and show where they fail.
+    </div>
+  </div>
+</header>
+
+<section class="section section--tight" aria-labelledby="life-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Try it pages</p>
+      <h2 id="life-title">What happens when you try a project</h2>
+    </div>
+    <ol class="lifecycle">
+      <li class="lifecycle__step"><span class="label">Step 1</span><strong>Sample data</strong><p>Each tool runs on built-in sample data, such as a sample handbook, sales file or product list.</p></li>
+      <li class="lifecycle__step"><span class="label">Step 2</span><strong>No file uploads</strong><p>You type or paste text. Text is limited in length and checked before use.</p></li>
+      <li class="lifecycle__step"><span class="label">Step 3</span><strong>Processed on the server</strong><p>The AI call runs on our server. Keys never reach your browser.</p></li>
+      <li class="lifecycle__step"><span class="label">Step 4</span><strong>Limited</strong><p>Each visitor can try up to 10 times an hour, to prevent misuse.</p></li>
+    </ol>
+    <p class="mt-5 muted small">Please do not enter passwords or confidential information when you try a project.</p>
+  </div>
+</section>
+
+<section class="section section--panel" aria-labelledby="points-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2 id="points-title">Keys, data and limits</h2>
+    </div>
+    <div class="sec-list">
+      <div class="sec-item">
+        <span class="sec-item__icon">{% include "components/icon.html" with name="user" %}</span>
+        <h3>What the contact form collects</h3>
+        <p>Your name, email and the project details you type. We also record your IP address to stop spam.</p>
+      </div>
+      <div class="sec-item">
+        <span class="sec-item__icon">{% include "components/icon.html" with name="key" %}</span>
+        <h3>API keys stay on our servers</h3>
+        <p>They are never in your browser. Keys that clients give us are stored encrypted.</p>
+      </div>
+      <div class="sec-item">
+        <span class="sec-item__icon">{% include "components/icon.html" with name="gauge" %}</span>
+        <h3>Rate limits</h3>
+        <p>Rate limits protect the Try it pages and the contact form from misuse.</p>
+      </div>
+      <div class="sec-item">
+        <span class="sec-item__icon">{% include "components/icon.html" with name="box" %}</span>
+        <h3>Client projects</h3>
+        <p>We ask only for the data the project needs, and we delete it at handover if you ask.{% if SITE.nda_policy %} {{ SITE.nda_policy }}{% endif %}</p>
+      </div>
+      <div class="sec-item">
+        <span class="sec-item__icon">{% include "components/icon.html" with name="alert" %}</span>
+        <h3>Known limits</h3>
+        <p>AI tools can be wrong. We test them with questions written for your case, show where they fail, and add a human check for sensitive items.</p>
+      </div>
+      {% if SITE.deletion_contact %}
+      <div class="sec-item">
+        <span class="sec-item__icon">{% include "components/icon.html" with name="cross" %}</span>
+        <h3>To ask for deletion</h3>
+        <p>{{ SITE.deletion_contact }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% include "components/final_cta.html" with title="Have a question about your data?" text="Tell us what data the project would touch. We will explain how it would be handled before any work starts." %}
+{% endblock %}

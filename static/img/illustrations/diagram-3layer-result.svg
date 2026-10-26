@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 220" width="100%" height="100%" fill="none">
+  <!-- Layer 1: Measured in the Demo (Solid Ground) -->
+  <rect x="30" y="148" width="320" height="44" rx="4" fill="#0E1B2A" stroke="#0E1B2A" stroke-width="2"/>
+  <rect x="42" y="160" width="20" height="20" rx="2" fill="#1F7A4D"/>
+  <line x1="72" y1="166" x2="180" y2="166" stroke="#FCFBF8" stroke-width="2" stroke-linecap="round"/>
+  <line x1="72" y1="178" x2="280" y2="178" stroke="#DDD6C6" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Layer 2: Expected Outcome (Calculated Projection) -->
+  <rect x="45" y="88" width="290" height="44" rx="4" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+  <rect x="57" y="100" width="20" height="20" rx="2" fill="#0B6E6E"/>
+  <line x1="87" y1="106" x2="195" y2="106" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="87" y1="118" x2="260" y2="118" stroke="#4D5866" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Layer 3: Your Result (Custom Calibration) -->
+  <rect x="60" y="28" width="260" height="44" rx="4" fill="#ECE6D8" stroke="#0E1B2A" stroke-width="2" stroke-dasharray="6 3"/>
+  <rect x="72" y="40" width="20" height="20" rx="2" fill="#C4572A"/>
+  <line x1="102" y1="46" x2="210" y2="46" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  <line x1="102" y1="58" x2="240" y2="58" stroke="#4D5866" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,4 @@
+{% spaceless %}{% if status == 'Live demo' %}<span class="badge badge--live" title="Working. Try it with sample data.">Live demo</span>
+{% elif status == 'Prototype' %}<span class="badge badge--prototype" title="Working, but still being tested.">Prototype</span>
+{% elif status == 'Delivered' %}<span class="badge badge--delivered" title="Built for a real client.">Delivered</span>
+{% else %}<span class="badge badge--concept" title="Planned. Not built yet.">Concept</span>{% endif %}{% endspaceless %}

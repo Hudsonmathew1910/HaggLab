@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Style guide | {{ STUDIO_NAME }}{% endblock %}
+{% block extra_head %}<meta name="robots" content="noindex">{% endblock %}
+
+{% block content %}
+<header class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Internal</p>
+    <h1>Style guide</h1>
+    <p class="lead">Tokens and components of the v2 design. Values live in static/css/tokens.css.</p>
+  </div>
+</header>
+
+<section class="section section--tight">
+  <div class="wrap stack-lg">
+    <div>
+      <h2>Type</h2>
+      <p class="display mt-5">Display, 600</p>
+      <h2 class="mt-4">Heading 2</h2>
+      <h3 class="mt-4">Heading 3</h3>
+      <p class="lead mt-4">Lead paragraph for page introductions.</p>
+      <p class="mt-4">Body text in Instrument Sans. Plain words, short sentences.</p>
+      <p class="eyebrow mt-4">Eyebrow label</p>
+      <p class="label">Mono label</p>
+    </div>
+
+    <div>
+      <h2>Buttons and links</h2>
+      <div class="btn-row mt-5">
+        <a class="btn btn-primary" href="#">Primary</a>
+        <a class="btn btn-secondary" href="#">Secondary</a>
+        <a class="btn btn-dark" href="#">Dark</a>
+        <a class="link-arrow" href="#">Arrow link {% include "components/icon.html" with name="arrow" %}</a>
+      </div>
+    </div>
+
+    <div>
+      <h2>Status badges</h2>
+      <div class="btn-row mt-5">
+        <span class="note-expected">Expected, not guaranteed</span>
+      </div>
+    </div>
+
+    <div>
+      <h2>Product previews</h2>
+      <div class="grid-3 mt-5">
+        {% for p in NAV_PROJECTS %}{% include "components/preview.html" with p=p %}{% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--ink">
+  <div class="wrap">
+    <p class="eyebrow">Dark section</p>
+    <h2>Used for process, Fiverr and the final call to action</h2>
+    <div class="btn-row mt-5"><a class="btn btn-primary" href="#">Primary on dark</a><a class="btn btn-secondary" href="#">Secondary on dark</a></div>
+  </div>
+</section>
+{% endblock %}

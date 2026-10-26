@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of service | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}Scope, ownership and Try it pages.{% endblock %}
+
+{% block breadcrumbs %}{% include "components/breadcrumbs.html" with title="Terms of service" %}{% endblock %}
+
+{% block content %}
+<header class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Legal</p>
+    <h1>Terms of service</h1>
+    <p class="lead">Last updated: October 2026</p>
+  </div>
+</header>
+
+<section class="section section--tight">
+  <div class="wrap legal">
+    <nav class="toc" aria-label="On this page">
+      <span class="label">On this page</span>
+      <ol>
+          <li><a href="#s1">Studio services</a></li>
+          <li><a href="#s2">Code ownership</a></li>
+          <li><a href="#s3">Try it pages and sample data</a></li>
+          {% if FIVERR_ON %}<li><a href="#s4">Fiverr transactions</a></li>{% endif %}
+      </ol>
+    </nav>
+    <article class="prose">
+      <section id="s1" aria-labelledby="s1-h">
+        <h2 id="s1-h">1. Studio services</h2>
+        <p>{{ STUDIO_NAME }} is a software and AI studio providing bespoke software and artificial intelligence tools for small businesses. All client engagements are governed by an agreed one-page scope specifying deliverables, milestones, and timelines.</p>
+      </section>
+      <section id="s2" aria-labelledby="s2-h">
+        <h2 id="s2-h">2. Code ownership</h2>
+        <p>Upon receipt of final payment, full intellectual property and code ownership for custom deliverables transfer directly to the client. Pre-existing studio libraries and open source dependencies remain under their respective licenses.</p>
+      </section>
+      <section id="s3" aria-labelledby="s3-h">
+        <h2 id="s3-h">3. Try it pages and sample data</h2>
+        <p>The public Try it pages are provided for evaluation purposes only. They must not be used for production operations or repository storage of sensitive financial or personal records.</p>
+      </section>
+      {% if FIVERR_ON %}
+      <section id="s4" aria-labelledby="s4-h">
+        <h2 id="s4-h">4. Fiverr transactions</h2>
+        <p>Clients engaging our studio via Fiverr agree that communications, milestone signoffs, order processing, and payments will remain strictly on the Fiverr platform in compliance with Fiverr Terms of Service.</p>
+      </section>
+      {% endif %}
+    </article>
+  </div>
+</section>
+{% endblock %}

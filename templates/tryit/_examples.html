@@ -1,0 +1,6 @@
+{% if spec.examples %}
+<div class="try-examples" role="group" aria-label="Example questions">
+  <span class="try-examples__label">Try an example</span>
+  {% for ex in spec.examples %}<button type="button" class="try-chip" data-example="{{ ex }}">{{ ex }}</button>{% endfor %}
+</div>
+{% endif %}

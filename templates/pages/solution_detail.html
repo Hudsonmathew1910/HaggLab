@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load site_tags %}
+
+{% block title %}{{ solution.title }} | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}{{ solution.problem|truncatechars:158 }}{% endblock %}
+{% block og_title %}{{ solution.headline }} | {{ STUDIO_NAME }}{% endblock %}
+{% block og_desc %}{{ solution.problem|truncatechars:158 }}{% endblock %}
+
+{% block breadcrumbs %}{% url 'solutions_hub' as hub_url %}{% include "components/breadcrumbs.html" with parent_title="Services" parent_url=hub_url title=solution.title %}{% endblock %}
+
+{% block content %}
+<!-- 1. Headline: the problem in the visitor's words -->
+<header class="page-head">
+  <div class="wrap page-head__grid">
+    <div>
+      {% with m=solution|service %}<p class="eyebrow">Service &middot; {{ m.name }}</p>{% endwith %}
+      <h1>{{ solution.headline }}</h1>
+      <p class="lead">{{ solution.problem }}</p>
+    </div>
+    <div class="btn-row">
+      {% with first=matching_projects.0 %}
+        {% if first %}
+          <a href="{% url 'try_project' first.slug %}" class="btn btn-primary">Try {{ first.title }} {% include "components/icon.html" with name="arrow" %}</a>
+        {% endif %}
+      {% endwith %}
+      {% if IS_FIVERR %}
+        <a href="{{ FIVERR_URL|utm:solution.slug }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Order on Fiverr</a>
+      {% else %}
+        <a href="{% url 'start_project' %}" class="btn btn-primary">Start a project</a>
+        {% if FIVERR_ON and solution_gig %}<a href="{{ solution_gig|utm:solution.slug }}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Order on Fiverr</a>{% endif %}
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+<!-- 2. The problem and how it is done today -->
+<section class="section" aria-labelledby="today-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Before</p>
+      <h2 id="today-title">The problem, and how it is done today</h2>
+    </div>
+    <div class="compare">
+      <div class="compare__col">
+        <span class="label">The problem</span>
+        <p>{{ solution.problem }}</p>
+      </div>
+      <div class="compare__col">
+        <span class="label">How it is done today</span>
+        <p>{{ solution.cost_today }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. The fix in 3 steps -->
+<section class="section section--panel" aria-labelledby="fix-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The fix</p>
+      <h2 id="fix-title">The fix in 3 steps</h2>
+    </div>
+    <ol class="steps3">
+      <li><h3>{{ solution.step1_title }}</h3><p>{{ solution.step1_desc }}</p></li>
+      <li><h3>{{ solution.step2_title }}</h3><p>{{ solution.step2_desc }}</p></li>
+      <li><h3>{{ solution.step3_title }}</h3><p>{{ solution.step3_desc }}</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 4. Try it: matching projects -->
+{% if matching_projects %}
+<section class="section" aria-labelledby="try-title">
+  <div class="wrap">
+    <div class="section-head section-head--row">
+      <div>
+        <p class="eyebrow">Projects</p>
+        <h2 id="try-title">Try it</h2>
+      </div>
+      <a href="{% url 'projects_hub' %}?solution={{ solution.slug }}" class="link-arrow">See them in Projects {% include "components/icon.html" with name="arrow" %}</a>
+    </div>
+    <div class="grid-3">
+      {% for p in matching_projects %}
+        {% include "components/project_card.html" with p=p %}
+      {% endfor %}
+    </div>
+    {% if solution.slug == "turn-idea-into-working-product" and SITE.link_epicoutlet %}
+      <p class="mt-6 muted">Also see <a href="{{ SITE.link_epicoutlet }}" target="_blank" rel="noopener noreferrer">EpicOutlet</a>, a real store we built earlier.</p>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+
+<!-- 5. What to expect -->
+<section class="section section--panel" aria-labelledby="expect-title">
+  <div class="wrap split">
+    <div class="split__sticky">
+      <p class="eyebrow">Proof</p>
+      <h2 id="expect-title">What to expect</h2>
+    </div>
+    <div>
+      {% include "components/result_block.html" with expected_text=solution.expected_outcome metrics=solution.metrics %}
+      <div class="result">
+        <span class="label">Your starting number</span>
+        <p>Before we start, we ask for one starting number, such as hours a week spent on this. We check it again 2 and 4 weeks after handover so you can see what changed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. FAQs for this solution -->
+{% if faqs %}
+<section class="section" aria-labelledby="sfaq-title">
+  <div class="wrap split">
+    <div class="split__sticky">
+      <p class="eyebrow">FAQ</p>
+      <h2 id="sfaq-title">Questions</h2>
+    </div>
+    {% include "components/faq_list.html" with faqs=faqs %}
+  </div>
+</section>
+{% endif %}
+
+<!-- 7. Next step -->
+{% include "components/final_cta.html" %}
+{% endblock %}

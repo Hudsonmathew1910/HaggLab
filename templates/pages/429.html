@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Too many requests | {{ STUDIO_NAME }}{% endblock %}
+{% block extra_head %}<meta name="robots" content="noindex">{% endblock %}
+
+{% block content %}
+<section class="state">
+  <div class="wrap wrap--narrow">
+    <span class="state__code">Error 429</span>
+    <h1>The limit has been reached for now.</h1>
+    <p class="lead">Too many requests came from your connection in a short time. Please wait a minute and try again.</p>
+    <div class="btn-row">
+      <a href="{% url 'home' %}" class="btn btn-primary">Back to home</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

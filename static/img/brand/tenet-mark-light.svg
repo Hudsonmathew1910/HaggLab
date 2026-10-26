@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <!-- Symmetrical geometric monogram for TENET (Light version for dark sections) -->
+  <rect x="3" y="3" width="42" height="42" rx="4" stroke="#F6F3EC" stroke-width="2.5" fill="#0E1B2A"/>
+  <!-- Bilateral Top T -->
+  <path d="M12 14H36M24 14V24" stroke="#4ECDC4" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Inverted Bilateral Bottom T (Mirrored) -->
+  <path d="M12 34H36M24 34V24" stroke="#4ECDC4" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Central Diamond Pivot -->
+  <polygon points="24,20 28,24 24,28 20,24" fill="#E2845C"/>
+</svg>

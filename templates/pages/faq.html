@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}FAQ | {{ STUDIO_NAME }}{% endblock %}
+{% block meta_description %}Answers about trying our tools, ordering, ownership and data.{% endblock %}
+{% block og_title %}FAQ | {{ STUDIO_NAME }}{% endblock %}
+
+{% block breadcrumbs %}{% include "components/breadcrumbs.html" with title="FAQ" %}{% endblock %}
+
+{% block content %}
+<header class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">FAQ</p>
+    <h1>Frequently asked questions</h1>
+    <p class="lead">Answers about trying our tools, ordering, ownership and data.</p>
+  </div>
+</header>
+
+<section class="section section--tight">
+  <div class="wrap split">
+    <div class="split__sticky">
+      <div class="aside-card">
+        <h2>Still have a question?</h2>
+        {% if IS_FIVERR %}
+          <p>Ask us in the Fiverr chat.</p>
+          <a href="{% url 'hire_fiverr' %}" class="link-arrow">Message us on Fiverr {% include "components/icon.html" with name="arrow" %}</a>
+        {% else %}
+          <p>Send it with your project details and we will answer it.</p>
+          <a href="{% url 'start_project' %}" class="link-arrow">Start a project {% include "components/icon.html" with name="arrow" %}</a>
+        {% endif %}
+      </div>
+      <p class="muted small mt-5">About data and uploads, see <a href="{% url 'security_data' %}">Security and data</a>.</p>
+    </div>
+    {% if faqs %}
+      {% include "components/faq_list.html" with faqs=faqs %}
+    {% else %}
+      <div class="empty"><p>No questions are published yet.</p></div>
+    {% endif %}
+  </div>
+</section>
+
+{% include "components/final_cta.html" %}
+{% endblock %}

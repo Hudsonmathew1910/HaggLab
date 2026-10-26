@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="100%" height="100%" fill="none">
+  <!-- Isometric Architectural Layers of a Full System -->
+  <!-- Layer 3: Database & Infra (bottom) -->
+  <polygon points="160,118 244,78 160,38 76,78" fill="#ECE6D8" stroke="#0E1B2A" stroke-width="2"/>
+  <polygon points="76,78 160,118 160,132 76,92" fill="#DDD6C6" stroke="#0E1B2A" stroke-width="2"/>
+  <polygon points="160,118 244,78 244,92 160,132" fill="#CFC9BA" stroke="#0E1B2A" stroke-width="2"/>
+
+  <!-- Layer 2: API & Logic Engine (middle) -->
+  <g transform="translate(0, -32)">
+    <polygon points="160,118 244,78 160,38 76,78" fill="#0B6E6E" stroke="#0E1B2A" stroke-width="2"/>
+    <polygon points="76,78 160,118 160,132 76,92" fill="#084F50" stroke="#0E1B2A" stroke-width="2"/>
+    <polygon points="160,118 244,78 244,92 160,132" fill="#063E3E" stroke="#0E1B2A" stroke-width="2"/>
+  </g>
+
+  <!-- Layer 1: Web & Mobile Interface (top) -->
+  <g transform="translate(0, -64)">
+    <polygon points="160,118 244,78 160,38 76,78" fill="#FCFBF8" stroke="#0E1B2A" stroke-width="2"/>
+    <polygon points="76,78 160,118 160,132 76,92" fill="#ECE6D8" stroke="#0E1B2A" stroke-width="2"/>
+    <polygon points="160,118 244,78 244,92 160,132" fill="#DDD6C6" stroke="#0E1B2A" stroke-width="2"/>
+    <!-- Interface detail on top surface -->
+    <line x1="130" y1="62" x2="190" y2="62" stroke="#C4572A" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="110" y1="74" x2="170" y2="74" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+    <line x1="140" y1="86" x2="200" y2="86" stroke="#0E1B2A" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Baseline -->
+  <line x1="16" y1="168" x2="304" y2="168" stroke="#0E1B2A" stroke-width="2"/>
+</svg>

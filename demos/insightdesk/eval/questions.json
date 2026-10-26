@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "question": "What is the total revenue?",
+    "expected_answer": "69475.0",
+    "should_succeed": true
+  },
+  {
+    "id": 2,
+    "question": "What is the total units sold?",
+    "expected_answer": "755",
+    "should_succeed": true
+  },
+  {
+    "id": 3,
+    "question": "Which item generated the highest revenue?",
+    "expected_answer": "App Pro",
+    "should_succeed": true
+  },
+  {
+    "id": 4,
+    "question": "What is the average revenue per sale?",
+    "expected_answer": "5789.58",
+    "should_succeed": true
+  },
+  {
+    "id": 5,
+    "question": "What is the total revenue in the North region?",
+    "expected_answer": "17000.0",
+    "should_succeed": true
+  },
+  {
+    "id": 6,
+    "question": "What is the total revenue in the South region?",
+    "expected_answer": "21125.0",
+    "should_succeed": true
+  },
+  {
+    "id": 7,
+    "question": "What is the total revenue in the East region?",
+    "expected_answer": "11600.0",
+    "should_succeed": true
+  },
+  {
+    "id": 8,
+    "question": "What is the total revenue in the West region?",
+    "expected_answer": "19750.0",
+    "should_succeed": true
+  },
+  {
+    "id": 9,
+    "question": "What is the revenue for Software products?",
+    "expected_answer": "36750.0",
+    "should_succeed": true
+  },
+  {
+    "id": 10,
+    "question": "What is the revenue for Hardware products?",
+    "expected_answer": "16225.0",
+    "should_succeed": true
+  },
+  {
+    "id": 11,
+    "question": "What is the revenue for Services?",
+    "expected_answer": "16500.0",
+    "should_succeed": true
+  },
+  {
+    "id": 12,
+    "question": "How many transactions are recorded?",
+    "expected_answer": "12",
+    "should_succeed": true
+  },
+  {
+    "id": 13,
+    "question": "How many units sold for Widget A?",
+    "expected_answer": "345",
+    "should_succeed": true
+  },
+  {
+    "id": 14,
+    "question": "What is the total revenue for Consulting?",
+    "expected_answer": "12500.0",
+    "should_succeed": true
+  },
+  {
+    "id": 15,
+    "question": "What is the weather in New York next week?",
+    "expected_answer": "unsupported",
+    "should_succeed": false
+  }
+]

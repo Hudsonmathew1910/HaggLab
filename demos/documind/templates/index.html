@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocuMind Demo: College Handbook</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0; }
+    body { background-color: #F4F1EA; color: #15191E; font-family: 'Public Sans', sans-serif; font-size: 16px; line-height: 1.6; padding: 24px; }
+    .demo-container { max-width: 800px; margin: 0 auto; }
+    .header-bar { border-bottom: 1px solid #CFC9BA; padding-bottom: 16px; margin-bottom: 24px; }
+    .header-title { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; }
+    .badge { display: inline-block; padding: 4px 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; border: 1px solid #0B6E6E; background-color: #0B6E6E; color: #F4F1EA; }
+    .search-form { display: flex; gap: 8px; margin-bottom: 24px; }
+    .search-input { flex: 1; padding: 10px 14px; background-color: #EBE7DD; border: 1px solid #CFC9BA; color: #15191E; font-size: 16px; outline: none; }
+    .search-btn { padding: 10px 20px; background-color: #0B6E6E; color: #F4F1EA; border: 1px solid #0B6E6E; font-weight: 600; cursor: pointer; }
+    .search-btn:hover { background-color: #15191E; }
+    .answer-box { border: 1px solid #CFC9BA; background-color: #EBE7DD; padding: 20px; margin-bottom: 24px; }
+    .answer-meta { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #4A5260; margin-bottom: 8px; }
+    .handbook-list { border-top: 1px solid #CFC9BA; padding-top: 24px; margin-top: 32px; }
+    .page-item { border: 1px solid #CFC9BA; padding: 12px; margin-bottom: 8px; background-color: #F4F1EA; }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <div class="header-bar">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="header-title">DocuMind: Document Assistant Demo</span>
+        <span class="badge">Live Demo</span>
+      </div>
+      <p style="font-size: 13px; color: #4A5260; margin-top: 6px;">Demo data. Not real customer information.</p>
+    </div>
+
+    <form method="get" action="" class="search-form">
+      <input type="text" name="q" value="{{ question }}" placeholder="Ask a question about the college handbook..." class="search-input" required>
+      <button type="submit" class="search-btn">Ask</button>
+    </form>
+
+    {% if question %}
+      <div class="answer-box">
+        {% if result.status == 'found' %}
+          <div class="answer-meta">Source: {{ result.source_title }} (Page {{ result.source_page }}) - Confidence: {{ result.confidence }}</div>
+          <p>{{ result.answer }}</p>
+        {% else %}
+          <div class="answer-meta" style="color: #9A4A0B;">No direct citation found</div>
+          <p>{{ result.answer }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="handbook-list">
+      <h3 style="font-family: 'Fraunces', serif; font-size: 18px; margin-bottom: 12px;">Sample Handbook Pages Indexed</h3>
+      {% for p in pages %}
+        <div class="page-item">
+          <strong>Page {{ p.page }}: {{ p.title }}</strong>
+          <p style="font-size: 14px; color: #4A5260; margin-top: 4px;">{{ p.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>

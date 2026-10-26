@@ -1,0 +1,203 @@
+{% load site_tags %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ STUDIO_NAME }}: AI and data tools for small businesses{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}We build working tools that fix one business problem at a time. Try them before you hire.{% endblock %}">
+  <link rel="canonical" href="{{ SITE_URL }}{{ request.path }}">
+  <meta name="theme-color" content="#0C1517">
+
+  <link rel="icon" type="image/svg+xml" href="/static/img/v2/favicon.svg">
+
+  <meta property="og:site_name" content="{{ STUDIO_NAME }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ SITE_URL }}{{ request.path }}">
+  <meta property="og:title" content="{% block og_title %}{{ STUDIO_NAME }}: AI and data tools for small businesses{% endblock %}">
+  <meta property="og:description" content="{% block og_desc %}We build working tools that fix one business problem at a time. Try them before you hire.{% endblock %}">
+  <meta property="og:image" content="{{ SITE_URL }}/static/img/v2/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preload" href="/static/fonts/instrument-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/site.css">
+  <script src="/static/js/early.js"></script>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <noscript><div class="noscript-note">This page works best with JavaScript on. You can still read everything and use the contact form.</div></noscript>
+
+  {% if IS_FIVERR %}
+    <div class="fiverr-bar"><strong>You came from Fiverr.</strong> Chat, orders and payment stay on Fiverr, so your order stays protected.</div>
+  {% endif %}
+
+  {% with current=request.resolver_match.url_name %}
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="{% url 'home' %}" class="brand" aria-label="{{ STUDIO_NAME }} home">
+        {% include "components/mark.html" %}
+        <span class="brand__name">{{ STUDIO_NAME }}</span>
+        <span class="brand__tag">Software &amp; AI studio</span>
+      </a>
+
+      <nav class="nav" aria-label="Main">
+        <!-- Services mega menu -->
+        <div class="nav-drop nav-drop--mega" data-drop>
+          <button type="button" class="nav__link" aria-expanded="false" aria-controls="menu-services"{% if current == 'solutions_hub' or current == 'solution_detail' %} data-active{% endif %}>
+            Services {% include "components/icon.html" with name="chevron" %}
+          </button>
+          <div class="mega" id="menu-services">
+            <div class="mega__main">
+              <p class="mega__label">Services</p>
+              <div class="mega__grid">
+                {% for s in NAV_SOLUTIONS %}{% with m=s|service %}
+                  <a class="mega__item" href="{% url 'solution_detail' s.slug %}">
+                    <span class="mega__icon">{% include "components/icon.html" with name=m.icon %}</span>
+                    <span>
+                      <span class="mega__title">{{ m.name }}</span>
+                      <span class="mega__desc">{{ m.desc }}</span>
+                    </span>
+                  </a>
+                {% endwith %}{% endfor %}
+              </div>
+              <a class="mega__all" href="{% url 'solutions_hub' %}">Compare all services {% include "components/icon.html" with name="arrow" %}</a>
+            </div>
+            <div class="mega__side">
+              <p class="mega__label">Not sure which one?</p>
+              <p class="mega__side-title">Tell us the problem. We’ll tell you if we can fix it.</p>
+              {% if IS_FIVERR %}
+                <a href="{{ FIVERR_URL|utm:'mega-menu' }}" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">Message us on Fiverr</a>
+              {% else %}
+                <a href="{% url 'start_project' %}" class="btn btn-primary btn-sm">Start a project</a>
+              {% endif %}
+              <a href="{% url 'projects_hub' %}" class="mega__side-link">{% include "components/icon.html" with name="play" %} See all 10 projects</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="{% url 'projects_hub' %}" class="nav__link"{% if current == 'projects_hub' or current == 'project_detail' %} aria-current="page"{% endif %}>Projects</a>
+
+        <!-- Company menu -->
+        <div class="nav-drop" data-drop>
+          <button type="button" class="nav__link" aria-expanded="false" aria-controls="menu-company"{% if current == 'about' or current == 'process' or current == 'security_data' or current == 'faq' %} data-active{% endif %}>
+            Company {% include "components/icon.html" with name="chevron" %}
+          </button>
+          <div class="drop" id="menu-company">
+            <a class="drop__item" href="{% url 'about' %}"><span class="mega__icon">{% include "components/icon.html" with name="layers" %}</span><span><span class="mega__title">About</span><span class="mega__desc">What we do and what we have built</span></span></a>
+            <a class="drop__item" href="{% url 'process' %}"><span class="mega__icon">{% include "components/icon.html" with name="repeat" %}</span><span><span class="mega__title">How we work</span><span class="mega__desc">Four steps, a demo every week</span></span></a>
+            <a class="drop__item" href="{% url 'security_data' %}"><span class="mega__icon">{% include "components/icon.html" with name="shield" %}</span><span><span class="mega__title">Security and data</span><span class="mega__desc">How we handle keys and uploads</span></span></a>
+            <a class="drop__item" href="{% url 'faq' %}"><span class="mega__icon">{% include "components/icon.html" with name="book" %}</span><span><span class="mega__title">FAQ</span><span class="mega__desc">Demos, ordering, ownership, data</span></span></a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        {% if IS_FIVERR %}
+          <a href="{{ FIVERR_URL|utm:'header' }}" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">Message us on Fiverr</a>
+        {% else %}
+          {% if FIVERR_ON %}<a href="{% url 'hire_fiverr' %}" class="nav__link"{% if current == 'hire_fiverr' %} aria-current="page"{% endif %}>Hire on Fiverr</a>{% endif %}
+          <a href="{% url 'start_project' %}" class="btn btn-primary btn-sm">Start a project {% include "components/icon.html" with name="arrow" %}</a>
+        {% endif %}
+      </div>
+
+      <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-panel" aria-label="Open menu">
+        {% include "components/icon.html" with name="menu" %}
+      </button>
+    </div>
+
+    <div class="mobile-panel" id="mobile-panel">
+      <details class="m-acc">
+        <summary>Services {% include "components/icon.html" with name="chevron" %}</summary>
+        <div class="m-acc__body">
+          {% for s in NAV_SOLUTIONS %}{% with m=s|service %}
+            <a class="m-acc__item" href="{% url 'solution_detail' s.slug %}"><span class="mega__icon">{% include "components/icon.html" with name=m.icon %}</span>{{ m.name }}</a>
+          {% endwith %}{% endfor %}
+          <a class="m-acc__item m-acc__all" href="{% url 'solutions_hub' %}">Compare all services</a>
+        </div>
+      </details>
+      <a class="mobile-panel__link" href="{% url 'projects_hub' %}">Projects {% include "components/icon.html" with name="arrow" %}</a>
+      <details class="m-acc">
+        <summary>Company {% include "components/icon.html" with name="chevron" %}</summary>
+        <div class="m-acc__body">
+          <a class="m-acc__item" href="{% url 'about' %}">About</a>
+          <a class="m-acc__item" href="{% url 'process' %}">How we work</a>
+          <a class="m-acc__item" href="{% url 'security_data' %}">Security and data</a>
+          <a class="m-acc__item" href="{% url 'faq' %}">FAQ</a>
+        </div>
+      </details>
+      {% if FIVERR_ON %}<a class="mobile-panel__link" href="{% url 'hire_fiverr' %}">Hire on Fiverr {% include "components/icon.html" with name="arrow" %}</a>{% endif %}
+      <div class="mobile-panel__cta">
+        {% if IS_FIVERR %}
+          <a href="{{ FIVERR_URL|utm:'mobile-menu' }}" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer">Message us on Fiverr</a>
+        {% else %}
+          <a href="{% url 'start_project' %}" class="btn btn-primary btn-block">Start a project</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+  {% endwith %}
+
+  {% block breadcrumbs %}{% endblock %}
+
+  <main id="main-content" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="{% url 'home' %}" class="brand" aria-label="{{ STUDIO_NAME }} home">
+            {% include "components/mark.html" %}
+            <span class="brand__name">{{ STUDIO_NAME }}</span>
+          </a>
+          <p>{{ STUDIO_NAME }}, a software and AI studio. Try any of our projects before you hire.</p>
+        </div>
+
+        <div class="footer-col">
+          <h2>Services</h2>
+          <ul class="footer-list">
+            {% for s in NAV_SOLUTIONS %}{% with m=s|service %}
+              <li><a href="{% url 'solution_detail' s.slug %}">{{ m.name }}</a></li>
+            {% endwith %}{% endfor %}
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h2>Projects</h2>
+          <ul class="footer-list">
+            <li><a href="{% url 'projects_hub' %}">All projects</a></li>
+            {% for p in NAV_PROJECTS|slice:":4" %}
+              <li><a href="{% url 'try_project' p.slug %}">{{ p.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h2>Studio</h2>
+          <ul class="footer-list">
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'process' %}">How a project works</a></li>
+            <li><a href="{% url 'security_data' %}">Security and data</a></li>
+            <li><a href="{% url 'faq' %}">FAQ</a></li>
+            {% if not IS_FIVERR %}<li><a href="{% url 'start_project' %}">Start a project</a></li>{% endif %}
+            {% if FIVERR_ON %}<li><a href="{% url 'hire_fiverr' %}">Hire on Fiverr</a></li>{% endif %}
+            {% if FIVERR_ON and SITE.fiverr_profile_url %}<li><a href="{{ SITE.fiverr_profile_url|utm:'footer' }}" target="_blank" rel="noopener noreferrer">Fiverr profile</a></li>{% endif %}
+            {% if SITE.github_url %}<li><a href="{{ SITE.github_url }}" target="_blank" rel="noopener noreferrer">GitHub</a></li>{% endif %}
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; {% now "Y" %} {{ STUDIO_NAME }}. We use privacy-friendly, first-party analytics.</p>
+        <p><a href="{% url 'privacy_policy' %}">Privacy</a> &nbsp;&middot;&nbsp; <a href="{% url 'terms_of_service' %}">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/site.js" defer></script>
+  <script src="/static/js/analytics.js" defer></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
