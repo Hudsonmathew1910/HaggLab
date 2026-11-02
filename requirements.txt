@@ -18,7 +18,7 @@ certifi>=2026.10.18  # trusted certificates for every AI/API request (older vers
 
 # Try it calculations (InsightDesk, ReportBot, ForecastBoard); openpyxl reads the sample .xlsx
 pandas>=3.1.0
-numpy>=2.2.3
+numpy>=2.5.4
 openpyxl>=3.1.5
 asteval>=1.0.6
 
