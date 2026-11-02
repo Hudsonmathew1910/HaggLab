@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 from apps.content.models import Solution, Project, FAQ, SiteSetting, FiverrGig
+from apps.content import gig_details
 from apps.content.project_fit import PROJECT_FIT
 
 class Command(BaseCommand):
@@ -32,10 +33,10 @@ class Command(BaseCommand):
             ("fiverr_profile_url", "Fiverr profile link (used by every Fiverr button)", ""),
             ("github_url", "GitHub profile link", ""),
             ("revisions_per_tier", "Revisions included (per package tier)", ""),
-            ("link_heros_ai", "Hero's AI live link", ""),
-            ("link_epicoutlet", "EpicOutlet live link", ""),
-            ("link_zenos", "ZenOS link (download or repository)", ""),
+            ("link_heros_ai", "Heros live link", "https://hero-s-ai.alwaysdata.net/"),
             ("link_zeno", "Zeno extension link (store or repository)", ""),
+            ("assistant_enabled", "Haggi chat assistant: on = show the chat on every page, off = hide it", "on"),
+            ("inr_rate", "Rupees per US dollar: shows an estimate like '≈ ₹5,700' next to each $ price. Empty = hide rupees.", "95"),
         ]
         # get_or_create: re-running the seed on deploy must not wipe values entered in the admin
         for key, label, val in settings_data:
@@ -44,83 +45,83 @@ class Command(BaseCommand):
         self.stdout.write("Seeding Solutions...")
         solutions_data = [
             {
-                "title": "Answer customers and staff faster",
-                "slug": "answer-customers-staff-faster",
+                "title": "AI chatbots, RAG assistants and LLM apps",
+                "slug": "ai-chatbots-rag-assistants",
                 "headline": "Stop answering the same questions all day",
-                "problem": "Customers and staff ask the same things again and again. The answers sit in long documents or old messages, and urgent messages get buried.",
-                "cost_today": "Someone searches files, copies an answer or replies from memory. Replies are slow and uneven. Urgent messages wait in the same queue as everything else.",
+                "problem": "Customers and staff ask the same things again and again. The answers sit in long documents, spreadsheets and old messages.",
+                "cost_today": "Someone searches files, copies an answer or replies from memory. Replies are slow and uneven.",
                 "step1_title": "Connect sources",
-                "step1_desc": "Connect your documents, FAQs or a sample of your messages.",
-                "step2_title": "Retrieve & draft",
-                "step2_desc": "The assistant answers from your own content and shows its source, or sorts messages by urgency and drafts replies.",
+                "step1_desc": "Connect your documents, FAQs, product list or data.",
+                "step2_title": "Answer with sources",
+                "step2_desc": "The assistant answers only from your own content and shows its source. If it cannot find the answer, it says \"I don't know\".",
                 "step3_title": "Human check",
                 "step3_desc": "A person approves anything unsure or sensitive.",
-                "expected_outcome": "Fewer repeat questions reach staff; a faster first reply; urgent messages found first.",
-                "metrics": "repeat questions per week, first-reply time, share answered without staff",
+                "expected_outcome": "Fewer repeat questions reach staff; a faster first reply.",
+                "metrics": "repeat questions per week, share answered without staff",
                 "order": 1
             },
             {
-                "title": "Help more visitors buy or book",
-                "slug": "help-visitors-buy-or-book",
-                "headline": "Help visitors find what they need, and book it",
-                "problem": "Visitors cannot find the right product quickly, and bookings arrive by phone and chat and get mixed up.",
-                "cost_today": "Shoppers scroll, filter and leave. Bookings sit in notebooks and messages, and double bookings happen.",
-                "step1_title": "Connect catalog",
-                "step1_desc": "Connect your product list or your available time slots.",
-                "step2_title": "Direct discovery",
-                "step2_desc": "A shopper says what they want and gets matching products, or a customer picks a free slot.",
-                "step3_title": "Unified dashboard",
-                "step3_desc": "You see orders or bookings on one simple dashboard.",
-                "expected_outcome": "Easier product discovery; fewer double bookings; fewer bookings taken by phone.",
-                "metrics": "chat-to-product-click rate, double bookings per month, share of bookings made online",
+                "title": "SaaS MVPs and full-stack AI web apps",
+                "slug": "saas-mvps-ai-web-apps",
+                "headline": "Turn your idea into a working first version",
+                "problem": "You have an app or portal idea but no developer. Big quotes scare you off before you see anything working.",
+                "cost_today": "The idea stays in notes, or a long agency project starts before anyone has tested the idea.",
+                "step1_title": "Core workflow",
+                "step1_desc": "Agree one core workflow, for example \"a customer books a slot\".",
+                "step2_title": "Weekly demo",
+                "step2_desc": "We build a first working version, with a demo every week.",
+                "step3_title": "Clean handover",
+                "step3_desc": "Handover with plain-language documents. You own the code.",
+                "expected_outcome": "A first version real users can try; a clear list of what to build next.",
+                "metrics": "the core workflow works end to end, feedback from first test users",
                 "order": 2
             },
             {
-                "title": "Turn your numbers into decisions",
-                "slug": "turn-numbers-into-decisions",
-                "headline": "Turn your spreadsheets into decisions",
-                "problem": "The data is in spreadsheets and nobody has time to analyze it.",
-                "cost_today": "Questions wait for someone with spare time. Answers arrive late and the calculation is hard to check.",
-                "step1_title": "Upload data",
-                "step1_desc": "Upload your sales or operations data in CSV or Excel format.",
-                "step2_title": "Ask questions",
-                "step2_desc": "Ask questions in plain English, or request a forecast.",
-                "step3_title": "Inspect code",
-                "step3_desc": "See the chart and the exact code calculation behind it.",
-                "expected_outcome": "Questions answered in minutes, not days; a forecast with its error stated.",
-                "metrics": "time to answer a question, forecast error compared with a simple baseline",
+                "title": "NLP and machine learning models",
+                "slug": "nlp-machine-learning-models",
+                "headline": "Turn your messy text and spreadsheets into predictions",
+                "problem": "You have text, tickets or sales history, and nobody has time to read it or predict from it.",
+                "cost_today": "Messages are sorted by hand. Stock and demand are ordered by gut feeling and last year's numbers.",
+                "step1_title": "Share your data",
+                "step1_desc": "Share your data as CSV, Excel or text.",
+                "step2_title": "Baseline first",
+                "step2_desc": "We clean it, build a simple baseline first, then a stronger model, and compare them.",
+                "step3_title": "Honest results",
+                "step3_desc": "You get the model, a results report with its error stated, and an API if you want one.",
+                "expected_outcome": "A prediction or classifier whose accuracy is stated next to a simple baseline, including when it does not beat it.",
+                "metrics": "model error compared with a simple baseline",
                 "order": 3
             },
             {
-                "title": "Remove repetitive work",
-                "slug": "remove-repetitive-work",
+                "title": "Custom Python programs and workflow automation",
+                "slug": "python-programs-automation",
                 "headline": "Stop the copy-paste. Let a tool do the repeat work.",
-                "problem": "Staff spend hours copying numbers, renaming files and summarizing pages.",
+                "problem": "Staff spend hours copying numbers, renaming files, building the same report and summarizing pages.",
                 "cost_today": "The same steps repeat every week. Small copy errors slip in, and nobody enjoys the task.",
                 "step1_title": "Name the task",
-                "step1_desc": "Identify and name the repeated task.",
+                "step1_desc": "Name the repeated task.",
                 "step2_title": "Safe automation",
-                "step2_desc": "We build a tool that does the steps and asks before anything risky.",
-                "step3_title": "Audited actions",
-                "step3_desc": "It keeps an audit log of what it did.",
-                "expected_outcome": "Hours saved on that named task; fewer copy-paste errors.",
+                "step2_desc": "We build a Python tool that does the steps and asks before anything risky.",
+                "step3_title": "Logged actions",
+                "step3_desc": "It keeps a log of what it did, and file moves can be undone.",
+                "expected_outcome": "Hours saved on the named task; fewer copy-paste errors.",
                 "metrics": "hours per week before and after, errors per month",
                 "order": 4
             },
             {
-                "title": "Turn an idea into a working product",
-                "slug": "turn-idea-into-working-product",
-                "headline": "Turn your idea into a working first version",
-                "problem": "You have an app or portal idea but no developer.",
-                "cost_today": "The idea stays in notes, or a large quote scares you off before you see anything working.",
-                "step1_title": "Core workflow",
-                "step1_desc": "Agree on one core workflow, for example a customer books a slot.",
-                "step2_title": "Weekly demo",
-                "step2_desc": "We build a first working version, with a working demo each week.",
-                "step3_title": "Clean handover",
-                "step3_desc": "Handover with plain-language documents and direct code walkthrough.",
-                "expected_outcome": "A first version real users can try; a clear list of what to build next.",
-                "metrics": "the core workflow works end to end, feedback from first test users",
+                "title": "AI integration, orchestration and production support",
+                "slug": "ai-integration-support",
+                "headline": "Add AI to what you already have, and keep it running",
+                "problem": "You already have a website or app. Adding AI breaks things, one model provider goes down, or something works on a laptop but fails live.",
+                "cost_today": "A single AI provider, no fallback, no tests, and bugs found by customers.",
+                "step1_title": "Review your app",
+                "step1_desc": "We review your existing app and the one place AI should go.",
+                "step2_title": "Add AI safely",
+                "step2_desc": "We add it with a fallback between AI models, rate limits and automated tests around it.",
+                "step3_title": "Keep it running",
+                "step3_desc": "We debug what fails in production and hand over notes.",
+                "expected_outcome": "An AI feature that keeps answering when one provider fails; fewer live errors.",
+                "metrics": "share of AI requests answered when one provider fails, live errors per week",
                 "order": 5
             }
         ]
@@ -152,7 +153,7 @@ class Command(BaseCommand):
                 "inside_text": "Django, document search with embeddings, model fallback, upload limits, files deleted after 24 hours.",
                 "fiverr_gig_slug": "documind",
                 "order": 1,
-                "solutions": ["answer-customers-staff-faster"]
+                "solutions": ["ai-chatbots-rag-assistants"]
             },
             {
                 "title": "InsightDesk",
@@ -174,7 +175,7 @@ class Command(BaseCommand):
                 "inside_text": "Pandas, safe code execution, model fallback, charts.",
                 "fiverr_gig_slug": "insightdesk",
                 "order": 2,
-                "solutions": ["turn-numbers-into-decisions"]
+                "solutions": ["ai-chatbots-rag-assistants"]
             },
             {
                 "title": "ShopAssist",
@@ -196,7 +197,7 @@ class Command(BaseCommand):
                 "inside_text": "Django, an AI model that can call a product search, a catalog API.",
                 "fiverr_gig_slug": "shopassist",
                 "order": 3,
-                "solutions": ["help-visitors-buy-or-book", "turn-idea-into-working-product"]
+                "solutions": ["ai-chatbots-rag-assistants"]
             },
             {
                 "title": "BookIt",
@@ -210,7 +211,7 @@ class Command(BaseCommand):
                 "step2_title": "Automatic block",
                 "step2_desc": "The system blocks double bookings and confirms by email.",
                 "step3_title": "Unified schedule",
-                "step3_desc": "You see the day on a dashboard and check people in with a QR code.",
+                "step3_desc": "You see the day on a dashboard.",
                 "demo_url": "",
                 "demo_note": "A fictional venue, Demo Turf. Bookings reset daily.",
                 "measured_text": "",
@@ -218,7 +219,29 @@ class Command(BaseCommand):
                 "inside_text": "Django, user roles, mobile-first pages.",
                 "fiverr_gig_slug": "bookit",
                 "order": 4,
-                "solutions": ["help-visitors-buy-or-book", "turn-idea-into-working-product"]
+                "solutions": ["saas-mvps-ai-web-apps"]
+            },
+            {
+                "title": "MVPStarter",
+                "slug": "mvpstarter",
+                "headline": "Your idea as a working first version",
+                "status": "Concept",
+                "problem": "You have an app idea but no developer, and a large quote scares you off.",
+                "cost_today": "The idea stays in notes, or a long project starts before anyone has tested it.",
+                "step1_title": "Core workflow",
+                "step1_desc": "Agree one core workflow.",
+                "step2_title": "Weekly demo",
+                "step2_desc": "We build it, with a working demo every week.",
+                "step3_title": "Code and documents",
+                "step3_desc": "You get the code and plain-language documents.",
+                "demo_url": "",
+                "demo_note": "FixRight Home Services, a sample company. Your requests are private to you.",
+                "measured_text": "",
+                "expected_text": "A first version real users can try.",
+                "inside_text": "Django or FastAPI, PostgreSQL, user roles, a status workflow with rules, a dashboard, a REST API.",
+                "fiverr_gig_slug": "mvpstarter",
+                "order": 5,
+                "solutions": ["saas-mvps-ai-web-apps"]
             },
             {
                 "title": "SupportFlow",
@@ -239,8 +262,8 @@ class Command(BaseCommand):
                 "expected_text": "Faster first reply; urgent messages found first.",
                 "inside_text": "An intent classifier with model fallback, Django, charts.",
                 "fiverr_gig_slug": "supportflow",
-                "order": 5,
-                "solutions": ["answer-customers-staff-faster"]
+                "order": 6,
+                "solutions": ["nlp-machine-learning-models"]
             },
             {
                 "title": "ForecastBoard",
@@ -261,30 +284,8 @@ class Command(BaseCommand):
                 "expected_text": "A forecast whose accuracy is stated.",
                 "inside_text": "scikit-learn, XGBoost, pandas.",
                 "fiverr_gig_slug": "forecastboard",
-                "order": 6,
-                "solutions": ["turn-numbers-into-decisions"]
-            },
-            {
-                "title": "VoiceDesk",
-                "slug": "voicedesk",
-                "headline": "Let visitors ask by voice, at any hour",
-                "status": "Concept",
-                "problem": "Your site cannot answer questions after hours.",
-                "cost_today": "Visitors fill in a form and wait.",
-                "step1_title": "Visitor speaks",
-                "step1_desc": "The visitor speaks their question.",
-                "step2_title": "Spoken reply",
-                "step2_desc": "The assistant answers from your FAQ, out loud, and can be interrupted.",
-                "step3_title": "Message fallback",
-                "step3_desc": "If unsure, it takes a clear message.",
-                "demo_url": "",
-                "demo_note": "A fictional clinic. Explains why microphone access is needed.",
-                "measured_text": "",
-                "expected_text": "More questions answered after hours. Track: share answered without staff.",
-                "inside_text": "Browser speech tools, model routing. This is not a phone-call bot.",
-                "fiverr_gig_slug": "voicedesk",
                 "order": 7,
-                "solutions": ["answer-customers-staff-faster"]
+                "solutions": ["nlp-machine-learning-models"]
             },
             {
                 "title": "PageMind",
@@ -305,8 +306,8 @@ class Command(BaseCommand):
                 "expected_text": "Less copy-paste. Track: time per research task.",
                 "inside_text": "A Chrome and Edge extension, a Django backend, a privacy page.",
                 "fiverr_gig_slug": "pagemind",
-                "order": 8,
-                "solutions": ["remove-repetitive-work"]
+                "order": 10,
+                "solutions": ["ai-integration-support"]
             },
             {
                 "title": "DeskPilot",
@@ -328,7 +329,7 @@ class Command(BaseCommand):
                 "inside_text": "Python, a desktop window toolkit, a tool list the AI can call.",
                 "fiverr_gig_slug": "deskpilot",
                 "order": 9,
-                "solutions": ["remove-repetitive-work"]
+                "solutions": ["python-programs-automation"]
             },
             {
                 "title": "ReportBot",
@@ -349,8 +350,8 @@ class Command(BaseCommand):
                 "expected_text": "Hours saved every week.",
                 "inside_text": "Pandas, charts, read-only Google Sheets access, a scheduler.",
                 "fiverr_gig_slug": "reportbot",
-                "order": 10,
-                "solutions": ["remove-repetitive-work"]
+                "order": 8,
+                "solutions": ["python-programs-automation"]
             }
         ]
 
@@ -368,7 +369,7 @@ class Command(BaseCommand):
             ("Who owns the code?", "You own the finished project deliverables after final payment.", "home", 4),
             ("What if the AI gives a wrong answer?", "It can. We test with questions written for your case, show where it fails, and add I don't know answers and a human check for sensitive items. No AI tool is right every time.", "home", 5),
             ("What happens to my data?", "See Security and data. The demos run on built-in sample data and do not accept file uploads.", "faq", 8),
-            ("What do you not build?", "Mobile apps, phone-call bots, online payment systems, and WordPress or Shopify work.", "faq", 9),
+            ("What do you not build?", "Mobile apps, phone-call bots, online payment systems, WordPress or Shopify work, and Ruby on Rails.", "faq", 9),
         ]
 
         for q, a, page, order in faqs_data:
@@ -404,15 +405,21 @@ class Command(BaseCommand):
 
         # Fiverr gigs. Each one is added once, when no gig with that link exists yet; after that it is edited
         # in the admin (Content > Fiverr gigs). To hide a gig, untick Active rather than deleting it.
+        # One gig per service (Gigs A to D in Hagglab_services_projects_gigs.md). AI integration and support
+        # has no gig of its own: PageMind is sold as an add-on on the AI assistant gig.
         KNOWN_GIGS = [
-            ('AI assistants and support tools', 'https://www.fiverr.com/s/2ppPDx8',
-             ['documind', 'supportflow', 'voicedesk'], ['answer-customers-staff-faster']),
-            ('Data analysis and automated reports', 'https://www.fiverr.com/s/Vrrqdwd',
-             ['insightdesk', 'reportbot', 'forecastboard'], ['turn-numbers-into-decisions']),
-            ('Booking systems and reservation engines', 'https://www.fiverr.com/s/xrrxmQB',
-             ['bookit'], ['help-visitors-buy-or-book']),
-            ('Custom Django web application or MVP', 'https://www.fiverr.com/s/P44BjG0',
-             [], ['turn-idea-into-working-product']),
+            ('AI chatbots and RAG assistants',
+             'https://www.fiverr.com/hudson_mathew_j/build-a-custom-ai-document-assistant-with-rag-for-your-data',
+             ['documind', 'insightdesk', 'shopassist', 'pagemind'], ['ai-chatbots-rag-assistants']),
+            ('SaaS MVPs and AI web apps',
+             'https://www.fiverr.com/hudson_mathew_j/build-a-custom-python-django-web-app-and-mvp-for-your-idea',
+             ['bookit', 'mvpstarter'], ['saas-mvps-ai-web-apps']),
+            ('NLP and machine learning models',
+             'https://www.fiverr.com/hudson_mathew_j/build-nlp-and-machine-learning-models-for-your-business-data',
+             ['supportflow', 'forecastboard'], ['nlp-machine-learning-models']),
+            ('Python programs and automation',
+             'https://www.fiverr.com/hudson_mathew_j/build-custom-python-programs-scripts-and-desktop-applications',
+             ['reportbot', 'deskpilot'], ['python-programs-automation']),
         ]
         for order, (title, url, slugs, service_slugs) in enumerate(KNOWN_GIGS, 1):
             gig = FiverrGig.objects.filter(url__in=[url, url.replace('https://', 'http://')]).first()
@@ -421,6 +428,9 @@ class Command(BaseCommand):
                 gig.projects.set(Project.objects.filter(slug__in=slugs))
             if not gig.services.exists():  # fill the service page once; admin edits are kept
                 gig.services.set(Solution.objects.filter(slug__in=service_slugs))
+        # Packages, extras, order questions and FAQs shown on the service pages (apps/content/gig_details.py)
+        gig_details.apply(FiverrGig, FAQ, only_empty=True)  # admin edits are kept
+        gig_details.apply_services(Solution, FAQ, only_empty=True)
         # The old default was "off"; switch it to "auto" so Fiverr follows the gig links
         SiteSetting.objects.filter(key='fiverr_enabled', value='off').update(value='auto')
 

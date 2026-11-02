@@ -1,0 +1,52 @@
+{% comment %}
+  Haggi, the HaggLab Assistant: the chat button and window (static/js/assistant.js, apps/assistant).
+  Shown on every public page unless the assistant_enabled setting is off.
+{% endcomment %}
+<div class="haggi" data-haggi data-api="{% url 'assistant_api' %}" data-fiverr="{{ IS_FIVERR|yesno:'1,0' }}" hidden>
+  <button type="button" class="haggi__launch" data-haggi-open aria-expanded="false" aria-controls="haggi-panel">
+    <span class="haggi__avatar" aria-hidden="true">
+      <svg viewBox="0 0 32 32" focusable="false"><path d="M3 7h5v7.5h9V1.5h5.5v29H17v-11H8V28H3z"/><path class="haggi__dot" d="M22.5 25.2H29v5.3h-6.5z"/></svg>
+    </span>
+    <span class="haggi__launch-text">Ask Haggi</span>
+  </button>
+
+  <section class="haggi__panel" id="haggi-panel" role="dialog" aria-modal="false" aria-labelledby="haggi-title" hidden>
+    <header class="haggi__head">
+      <span class="haggi__avatar haggi__avatar--light" aria-hidden="true">
+        <svg viewBox="0 0 32 32" focusable="false"><path d="M3 7h5v7.5h9V1.5h5.5v29H17v-11H8V28H3z"/><path class="haggi__dot" d="M22.5 25.2H29v5.3h-6.5z"/></svg>
+      </span>
+      <div class="haggi__who">
+        <h2 id="haggi-title">Haggi</h2>
+        <p><span class="haggi__status" aria-hidden="true"></span>{{ STUDIO_NAME }} Assistant</p>
+      </div>
+      <button type="button" class="haggi__icon-btn" data-haggi-reset aria-label="Start a new chat" title="New chat">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+      </button>
+      <button type="button" class="haggi__icon-btn" data-haggi-close aria-label="Close chat" title="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </header>
+
+    <div class="haggi__body" data-haggi-log role="log" aria-live="polite" aria-relevant="additions">
+      <div class="haggi__msg haggi__msg--bot haggi__welcome">
+        <p>Hi, I'm Haggi. Ask me anything about {{ STUDIO_NAME }}: our services, projects, prices and how we work.</p>
+      </div>
+      <div class="haggi__chips" data-haggi-chips>
+        <button type="button" class="haggi__chip">What can you build for me?</button>
+        <button type="button" class="haggi__chip">How much does an AI chatbot cost?</button>
+        <button type="button" class="haggi__chip">How does a project work?</button>
+        <button type="button" class="haggi__chip">Can I try a demo first?</button>
+      </div>
+    </div>
+
+    <form class="haggi__form" data-haggi-form>
+      {% csrf_token %}
+      <label class="visually-hidden" for="haggi-input">Your question</label>
+      <textarea id="haggi-input" class="haggi__input" rows="1" maxlength="500" placeholder="Ask about services, prices, projects…" data-haggi-input></textarea>
+      <button type="submit" class="haggi__send" aria-label="Send" data-haggi-send>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </form>
+    <p class="haggi__note">AI can be wrong. Scope and price are confirmed before any work starts.</p>
+  </section>
+</div>

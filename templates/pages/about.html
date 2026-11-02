@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}About {{ STUDIO_NAME }}{% endblock %}
 {% block meta_description %}A software and AI studio that shows its work. Working tools for small businesses and startups, one problem at a time.{% endblock %}
@@ -14,9 +15,12 @@
       <h1>A small studio that shows its work</h1>
       <p class="lead">{{ STUDIO_NAME }} builds working AI and data tools for small businesses and startups. We fix one business problem at a time, show a working demo before you hire, and hand over a tool you can run.</p>
     </div>
-    <div class="page-head__aside">
+    <div class="page-head__side">
+      <img class="art art--head" src="{% static 'img/hagglab/about-studio.svg' %}" alt="" width="480" height="300" decoding="async">
+      <div class="page-head__aside">
       <strong>No middlemen</strong>
       You deal directly with the studio that builds your project, from the first message to handover.
+    </div>
     </div>
   </div>
 </header>
@@ -27,9 +31,9 @@
     <div class="section-head section-head--row">
       <div>
         <p class="eyebrow">What we do</p>
-        <h2 id="do-title">Five business problems we fix</h2>
+        <h2 id="do-title">Our five services</h2>
       </div>
-      <a href="{% url 'solutions_hub' %}" class="link-arrow">All solutions {% include "components/icon.html" with name="arrow" %}</a>
+      <a href="{% url 'solutions_hub' %}" class="link-arrow">All services {% include "components/icon.html" with name="arrow" %}</a>
     </div>
     <div class="index-list">
       {% for s in NAV_SOLUTIONS %}
@@ -66,18 +70,30 @@
 <section class="section" aria-labelledby="built-title">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">Facts only</p>
+      <p class="eyebrow">Our product</p>
       <h2 id="built-title">Already built and deployed</h2>
     </div>
-    <div class="grid-2">
-      {% for item in built %}
-        {% if item.link %}<a class="card" href="{{ item.link }}" target="_blank" rel="noopener noreferrer">{% else %}<div class="card">{% endif %}
-          <span class="proof__kind">{{ item.kind }}</span>
-          <h3 class="proof__name">{{ item.name }}{% if item.link %} {% include "components/icon.html" with name="external" %}{% endif %}</h3>
-          <p>{{ item.desc }}</p>
-        {% if item.link %}</a>{% else %}</div>{% endif %}
-      {% endfor %}
+    {% for product in products %}
+    <div class="product-block{% if not forloop.first %} mt-8{% endif %}">
+      {% if product.link %}<a class="card card--panel product-card" href="{{ product.link }}" target="_blank" rel="noopener noreferrer">{% else %}<div class="card card--panel product-card">{% endif %}
+        <span class="proof__kind">{{ product.kind }}</span>
+        <h3 class="proof__name">{{ product.name }}{% if product.link %} {% include "components/icon.html" with name="external" %}{% endif %}</h3>
+        <p>{{ product.desc }}</p>
+      {% if product.link %}</a>{% else %}</div>{% endif %}
+      {% if product.features %}
+        <p class="mt-6 muted">The features and apps inside {{ product.name }}:</p>
+        <div class="grid-3 mt-4">
+          {% for item in product.features %}
+            {% if item.link %}<a class="card" href="{{ item.link }}" target="_blank" rel="noopener noreferrer">{% else %}<div class="card">{% endif %}
+              <span class="proof__kind">{{ item.kind }}</span>
+              <h3 class="proof__name">{{ item.name }}{% if item.link %} {% include "components/icon.html" with name="external" %}{% endif %}</h3>
+              <p>{{ item.desc }}</p>
+            {% if item.link %}</a>{% else %}</div>{% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
+    {% endfor %}
     {% if SITE.github_url %}
       <p class="mt-6"><a class="link-arrow" href="{{ SITE.github_url }}" target="_blank" rel="noopener noreferrer">See our code on GitHub {% include "components/icon.html" with name="external" %}</a></p>
     {% endif %}

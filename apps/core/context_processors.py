@@ -33,6 +33,8 @@ def studio_context(request):
         # Only expose owner email if NOT a Fiverr visitor
         'OWNER_EMAIL': '' if is_fiverr else getattr(settings, 'OWNER_EMAIL', ''),
         'SITE': site,
+        # Haggi chat (apps/assistant): shown unless the assistant_enabled setting is off
+        'ASSISTANT_ON': site.get('assistant_enabled', 'on').lower() not in ('off', 'no', 'false', '0'),
         # Fiverr profile link from the admin; falls back to Fiverr's home page until it is set
         'FIVERR_URL': fiverr_contact_url() if fiverr_on else FIVERR_FALLBACK_URL,
         # Navigation and footer lists come from the content models, never hard-coded

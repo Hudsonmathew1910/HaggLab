@@ -1,6 +1,7 @@
 import json
 import logging
 
+from apps.leads.offers import lead_service_for_project
 from django.conf import settings
 from django.http import Http404, JsonResponse
 from django.shortcuts import get_object_or_404, render
@@ -30,6 +31,7 @@ def try_view(request, slug):
         raise Http404
     return render(request, 'pages/try.html', {
         'project': project,
+        'lead_service': lead_service_for_project(project),
         'spec': spec,
         'tools': [p for p in Project.objects.public().order_by('order') if p.slug in SPECS],
         'gig': gig_for(project),
@@ -54,7 +56,7 @@ def try_api(request, slug):
         return JsonResponse({'ok': False, 'error': 'Please check your input and try again.'}, status=400)
     started = trace.start(slug, payload)
     try:
-        reply = engines.run(slug, payload)
+        reply = engines.run(slug, payload, request.session)
     except engines.UserError as exc:
         trace.end(started, f'refused: {exc}')
         return JsonResponse({'ok': False, 'error': str(exc)}, status=400)
@@ -63,7 +65,7 @@ def try_api(request, slug):
         return JsonResponse({'ok': False, 'error': 'Our AI tools have reached their limit for today. '
                              'Please try again tomorrow, or send us your project details.'}, status=429)
     except hero_client.NotConnected as exc:
-        trace.end(started, f"busy (Hero's AI unavailable: {exc})")
+        trace.end(started, f"busy (Heros unavailable: {exc})")
         return JsonResponse(
             {'ok': False, 'error': 'This tool is busy right now. Please try again in a few minutes.'}, status=503)
     except MemoryError:

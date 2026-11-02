@@ -53,7 +53,7 @@ STUDIO_NAME = 'HaggLab'
 TURNSTILE_SITE_KEY = env('TURNSTILE_SITE_KEY')
 TURNSTILE_SECRET_KEY = env('TURNSTILE_SECRET_KEY')
 
-# Hero's AI API: powers every project's Try it page. Called from the server only; the key never reaches the browser.
+# Heros API: powers every project's Try it page. Called from the server only; the key never reaches the browser.
 HEROS_API_URL = env('HEROS_API_URL')
 HEROS_API_KEYS = [k for k in (env('HEROS_API_KEY_1'), env('HEROS_API_KEY_2'), env('HEROS_API_KEY_3')) if k]
 HEROS_MODEL = env('HEROS_MODEL')
@@ -65,7 +65,7 @@ GEMINI_API_TIMEOUT = 30
 
 # Fallback order: the providers take turns, key by key, until one answers:
 # Gemini 1 -> Hero 1 -> Gemini 2 -> Hero 2 -> Hero 3 (Gemini first: it answers in seconds) (see apps/tryit/hero_client.py, provider_chain)
-HEROS_API_TIMEOUT = 60  # Hero's AI usually needs 25-40 s; it is the backup after Gemini
+HEROS_API_TIMEOUT = 60  # Heros usually needs 25-40 s; it is the backup after Gemini
 
 # Show projects whose Try it page is not ready yet (local development only)
 PREVIEW_UNFINISHED_PROJECTS = env('PREVIEW_UNFINISHED_PROJECTS')
@@ -74,7 +74,7 @@ PREVIEW_UNFINISHED_PROJECTS = env('PREVIEW_UNFINISHED_PROJECTS')
 PINECONE_API_KEY = env('PINECONE_API_KEY')
 PINECONE_INDEX = env('PINECONE_INDEX')
 # How many chunks to send to the AI per question, per project
-RAG_TOP_K = {'documind': 5, 'shopassist': 10, 'supportflow': 4, 'supportflow-tickets': 8, 'voicedesk': 5,
+RAG_TOP_K = {'documind': 5, 'shopassist': 10, 'supportflow': 4, 'supportflow-tickets': 8,
              'deskpilot': 4}
 
 # Email: new-inquiry alerts go to OWNER_EMAIL, sent through this SMTP account (e.g. Gmail with an app password)
@@ -99,6 +99,13 @@ AI_DAILY_CAP = env.int('AI_DAILY_CAP', default=300)
 
 # Try it pages: tries per visitor (IP) per hour
 TRY_RATE = '10/h'
+ASSISTANT_RATE = '30/h'  # Haggi chat messages per visitor IP
+# Admin login: two-factor code required for accounts with an authenticator device (apps/security/admin_site.py);
+# set ADMIN_REQUIRE_OTP=True to require it for every staff account.
+ADMIN_REQUIRE_OTP = env.bool('ADMIN_REQUIRE_OTP', default=False)
+ADMIN_LOGIN_RATE = '10/m'  # admin login attempts per IP
+OTP_TOTP_ISSUER = 'HaggLab'  # the name shown in the authenticator app
+
 ADMIN_URL_PATH = (env('ADMIN_URL_PATH', default='manage-studio/') or 'manage-studio/').strip('/') + '/'
 SITE_URL = env('SITE_URL', default='http://localhost:8000') or 'http://localhost:8000'
 
@@ -106,7 +113,7 @@ SITE_URL = env('SITE_URL', default='http://localhost:8000') or 'http://localhost
 INSTALLED_APPS = [
     # Admin theme (must precede django.contrib.admin)
     'jazzmin',
-    'django.contrib.admin',
+    'apps.security.admin_config.StudioAdminConfig',  # django.contrib.admin with two-factor login
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -125,6 +132,7 @@ INSTALLED_APPS = [
     'apps.security',
     'apps.analytics',
     'apps.tryit',
+    'apps.assistant',
 ]
 
 MIDDLEWARE = [
@@ -140,6 +148,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'apps.leads.middleware.FiverrVisitorMiddleware',
     'apps.security.middleware.RowLevelSecurityMiddleware',
+    # Turns a blocked rate limit into the friendly 429 page (RATELIMIT_VIEW) instead of a bare 403
+    'django_ratelimit.middleware.RatelimitMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -193,9 +203,15 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "apps.core.storage.StaticStorage",  # WhiteNoise, tolerant of folder paths (see the file)
     },
 }
+
+# Tests render pages without running collectstatic first (CI starts from a clean copy), so they use plain
+# static storage. The site itself keeps the compressed, hashed files above.
+import sys as _sys  # noqa: E402
+if len(_sys.argv) > 1 and _sys.argv[1] == 'test':
+    STORAGES['staticfiles'] = {'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage'}
 
 # Private upload storage outside static
 PRIVATE_STORAGE_ROOT = BASE_DIR / 'private_uploads'

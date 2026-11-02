@@ -23,6 +23,9 @@ class FiverrVisitorMiddleware:
         
         if ref == 'fiverr' or utm_source == 'fiverr':
             request.session['is_fiverr'] = True
+        elif ref == 'site':
+            # "Not from Fiverr? See the full site" in the Fiverr bar
+            request.session.pop('is_fiverr', None)
 
         request.is_fiverr = request.session.get('is_fiverr', False)
         

@@ -44,6 +44,15 @@ class Solution(models.Model):
     order = models.PositiveIntegerField(default=0)
     published = models.BooleanField(default=True)
 
+    # Packages for a service with no Fiverr gig (AI integration and support). A service whose active gig has
+    # packages uses the gig's instead, so Fiverr and the site stay the same.
+    package_summary = models.TextField(blank=True, help_text="What the packages deliver, in a few sentences.")
+    packages = models.JSONField(default=list, blank=True, help_text=(
+        "List of packages: tier, title, desc, price (USD), days, revisions, included (list of lines)."))
+    extras = models.JSONField(default=list, blank=True, help_text="List of extras: name, price (USD), days, desc.")
+    requirements = models.JSONField(default=list, blank=True, help_text=(
+        "Questions asked after ordering: question, kind (Free text, Multiple choice, Attachment), options."))
+
     class Meta:
         ordering = ['order', 'title']
         verbose_name = 'Solution'
@@ -184,6 +193,14 @@ class FiverrGig(models.Model):
     order = models.PositiveIntegerField(default=0)
     active = models.BooleanField(default=True, help_text="Untick to hide this gig without deleting it.")
 
+    # Shown on the service page under "Packages and prices". Keep them the same as the gig on Fiverr.
+    summary = models.TextField(blank=True, help_text="What the gig delivers, in a few sentences (company voice: 'we').")
+    packages = models.JSONField(default=list, blank=True, help_text=(
+        "List of packages: tier, title, desc, price (USD), days, revisions, included (list of lines)."))
+    extras = models.JSONField(default=list, blank=True, help_text="List of gig extras: name, price (USD), days, desc.")
+    requirements = models.JSONField(default=list, blank=True, help_text=(
+        "Questions asked after ordering: question, kind (Free text, Multiple choice, Attachment), options."))
+
     class Meta:
         ordering = ['order', 'title']
         verbose_name = 'Fiverr gig'
@@ -191,3 +208,29 @@ class FiverrGig(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Product(models.Model):
+    """
+    A product the studio built and runs itself (not client work), e.g. Heros.
+    Shown on the home page (one line), the About page (card + features) and known by Haggi, the chat assistant.
+    Add a new product here and it appears everywhere; untick Published to hide it.
+    """
+    name = models.CharField(max_length=80)
+    slug = models.SlugField(unique=True)
+    kind = models.CharField(max_length=80, help_text="Short label, e.g. 'AI assistant platform'.")
+    pitch = models.CharField(max_length=200, help_text="One line for the home page, after the name.")
+    description = models.TextField(help_text="A few sentences for the About page and Haggi. Facts, no guarantees.")
+    url = models.URLField(blank=True, help_text="Live link (shows a Visit button).")
+    features = models.JSONField(default=list, blank=True, help_text=(
+        "Features or apps inside it: a list of {name, kind, desc, url}. url is optional."))
+    order = models.PositiveIntegerField(default=0)
+    published = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
+
+    def __str__(self):
+        return self.name

@@ -64,6 +64,26 @@ class PagesViewTest(TestCase):
         SiteSetting.objects.create(key='fiverr_enabled', label='Fiverr switch', value='on')
         self.assertEqual(self.client.get(reverse('hire_fiverr')).status_code, 200)
 
+    def test_service_page_shows_gig_packages(self):
+        from apps.content.models import SiteSetting, FiverrGig
+        from apps.content import gig_details
+        gig = FiverrGig.objects.create(title='Gig A', url=gig_details.GIG_A)
+        gig.services.add(self.solution)
+        gig_details.apply(FiverrGig, FAQ)
+        url = reverse('solution_detail', kwargs={'slug': self.solution.slug})
+        response = self.client.get(url)  # Fiverr switched off: prices still show, Fiverr buttons do not
+        self.assertContains(response, 'Packages and prices')
+        self.assertContains(response, '≈ ₹14,300')  # inr_rate 95 from migration 0012
+        self.assertNotContains(response, 'Order on Fiverr')
+        SiteSetting.objects.create(key='fiverr_enabled', label='Fiverr switch', value='on')
+        response = self.client.get(url)
+        self.assertContains(response, 'Packages and prices')
+        self.assertContains(response, '$150')
+        self.assertContains(response, 'RAG on your files')
+        self.assertContains(response, 'Can the chatbot make things up?')
+        # Service FAQs stay on their service page, not the FAQ page
+        self.assertNotContains(self.client.get(reverse('faq')), 'Can the chatbot make things up?')
+
     def test_robots_content(self):
         response = self.client.get(reverse('robots'))
         self.assertEqual(response.status_code, 200)
@@ -98,3 +118,10 @@ class NotFoundPageTest(TestCase):
     @override_settings(DEBUG=True)
     def test_missing_project_shows_the_hagglab_404_page_locally(self):
         self.assertContains(self.client.get('/projects/no-such-project/'), 'Error 404', status_code=404)
+
+
+class GoogleVerificationTest(TestCase):
+    def test_search_console_file_is_served_at_the_root(self):
+        r = self.client.get('/google848a3ada06e16e93.html')
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.content.decode(), 'google-site-verification: google848a3ada06e16e93.html')

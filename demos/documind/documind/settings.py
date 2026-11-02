@@ -3,10 +3,13 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'documind-demo-local-secret-key-1234567890')
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-
-ALLOWED_HOSTS = ['*']
+# Safe by default: debug is OFF unless DEBUG=True is set, and without debug a real SECRET_KEY and
+# ALLOWED_HOSTS must be set, or the app refuses to start. Run locally with:  DEBUG=True python manage.py runserver
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'documind-local-dev-only-key' if DEBUG else '')
+if not SECRET_KEY:
+    raise RuntimeError('Set SECRET_KEY (and ALLOWED_HOSTS) in the environment, or DEBUG=True for local use.')
+ALLOWED_HOSTS = ['*'] if DEBUG else [h.strip() for h in os.environ.get('ALLOWED_HOSTS', '').split(',') if h.strip()]
 
 INSTALLED_APPS = [
     'django.contrib.auth',

@@ -51,7 +51,7 @@
           <a href="{{ g.url|utm:'hire-page' }}" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">View gig</a>
         </div>
       {% endfor %}
-      <p class="muted small mt-4">Need something else? <a href="{% url 'start_project' %}">Send us the details</a> and we will tell you how we can help.</p>
+      <p class="muted small mt-4">Need something else? <a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}">Send us the details</a> and we will tell you how we can help.</p>
     </div>
   </div>
 </section>

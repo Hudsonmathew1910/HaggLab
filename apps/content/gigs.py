@@ -9,10 +9,10 @@ GIGS = {
     'insightdesk': ('A data dashboard', 'Get a data dashboard built'),
     'shopassist': ('An AI shopping assistant', 'Add an AI shopping assistant'),
     'bookit': ('A booking website', 'Get a booking website built'),
+    'mvpstarter': ('An MVP', 'Get an MVP built'),
     'supportflow': ('A support triage tool', 'Get a support triage tool built'),
     'forecastboard': ('A prediction model', 'Get a prediction model built'),
-    'voicedesk': ('A voice assistant', 'Get a voice assistant built'),
-    'pagemind': ('A Chrome extension', 'Get a browser extension built'),
+    'pagemind': ('AI integration', 'Add AI to my site or browser workflow'),
     'deskpilot': ('A desktop or automation tool', 'Get a desktop tool built'),
     'reportbot': ('Automated reports', 'Automate my reports'),
 }

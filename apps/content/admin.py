@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Solution, Project, FAQ, SiteSetting, FiverrGig
+from .models import Solution, Project, FAQ, SiteSetting, FiverrGig, Product
 from apps.security.models import AuditEvent
 
 class AuditedModelAdmin(admin.ModelAdmin):
@@ -40,6 +40,15 @@ class SolutionAdmin(AuditedModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     list_editable = ('order', 'published')
     search_fields = ('title', 'headline', 'problem')
+    fieldsets = (
+        (None, {'fields': ('title', 'slug', 'headline', 'problem', 'cost_today', 'order', 'published')}),
+        ('The fix in 3 steps', {'fields': ('step1_title', 'step1_desc', 'step2_title', 'step2_desc',
+                                           'step3_title', 'step3_desc')}),
+        ('What to expect', {'fields': ('expected_outcome', 'metrics')}),
+        ('Packages (only for a service with no Fiverr gig)', {
+            'fields': ('package_summary', 'packages', 'extras', 'requirements'),
+            'description': "A service whose Fiverr gig has packages shows the gig's packages, not these."}),
+    )
 
 
 @admin.register(Project)
@@ -63,12 +72,25 @@ class FAQAdmin(AuditedModelAdmin):
     search_fields = ('question', 'answer')
 
 
+@admin.register(Product)
+class ProductAdmin(AuditedModelAdmin):
+    list_display = ('name', 'kind', 'url', 'order', 'published')
+    list_editable = ('order', 'published')
+    prepopulated_fields = {'slug': ('name',)}
+    search_fields = ('name', 'pitch', 'description')
+
+
 @admin.register(FiverrGig)
 class FiverrGigAdmin(AuditedModelAdmin):
     list_display = ('title', 'url', 'covers', 'service_pages', 'order', 'active')
     list_editable = ('order', 'active')
     filter_horizontal = ('projects', 'services')
     search_fields = ('title', 'url')
+    fieldsets = (
+        (None, {'fields': ('title', 'url', 'projects', 'services', 'order', 'active')}),
+        ('Shown on the service page', {'fields': ('summary', 'packages', 'extras', 'requirements'),
+                                       'description': 'Keep prices and delivery days the same as the gig on Fiverr.'}),
+    )
 
     @admin.display(description='Service pages')
     def service_pages(self, obj):

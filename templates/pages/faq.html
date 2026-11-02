@@ -25,7 +25,7 @@
           <a href="{% url 'hire_fiverr' %}" class="link-arrow">Message us on Fiverr {% include "components/icon.html" with name="arrow" %}</a>
         {% else %}
           <p>Send it with your project details and we will answer it.</p>
-          <a href="{% url 'start_project' %}" class="link-arrow">Start a project {% include "components/icon.html" with name="arrow" %}</a>
+          <a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}" class="link-arrow">Start a project {% include "components/icon.html" with name="arrow" %}</a>
         {% endif %}
       </div>
       <p class="muted small mt-5">About data and uploads, see <a href="{% url 'security_data' %}">Security and data</a>.</p>

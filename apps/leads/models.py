@@ -7,12 +7,12 @@ class Inquiry(models.Model):
     Uses UUID for public-safe id references.
     """
     SERVICE_CHOICES = [
-        ('answer_faster', 'Answer customers and staff faster'),
-        ('buy_or_book', 'Help visitors buy or book'),
-        ('numbers_to_decisions', 'Turn numbers into decisions'),
-        ('remove_repetitive_work', 'Remove repetitive work'),
-        ('idea_to_product', 'Turn an idea into a product'),
-        ('not_sure', 'Not sure yet'),
+        ('ai_chatbots', 'AI chatbots and RAG assistants'),
+        ('saas_mvp', 'SaaS MVPs and AI web apps'),
+        ('nlp_ml', 'NLP and machine learning models'),
+        ('python_automation', 'Python programs and automation'),
+        ('ai_integration', 'AI integration and support'),
+        ('not_sure', 'Not sure yet, or something custom'),
     ]
 
     DATA_CHOICES = [
@@ -21,6 +21,7 @@ class Inquiry(models.Model):
         ('documents', 'PDFs or documents'),
         ('database', 'A database'),
         ('other', 'Other'),
+        ('see_answers', 'See the order answers'),  # set by the form for a service with order questions
     ]
 
     TIMELINE_CHOICES = [
@@ -28,6 +29,7 @@ class Inquiry(models.Model):
         ('month', 'Within a month'),
         ('quarter', 'Within 3 months'),
         ('exploring', 'Just exploring'),
+        ('package', 'Package delivery time'),  # set by the form when a package is picked
     ]
 
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
@@ -44,6 +46,9 @@ class Inquiry(models.Model):
 
     # Optional fields
     budget_band = models.CharField(max_length=100, blank=True)
+    package = models.CharField(max_length=200, blank=True, help_text="Package picked on the form, with its price.")
+    extras = models.TextField(blank=True, help_text="Extras picked on the form, one per line.")
+    answers = models.JSONField(default=list, blank=True, help_text="Answers to the service's order questions.")
     business = models.CharField(max_length=200, blank=True)
     source = models.CharField(max_length=200, blank=True)
     ip_address = models.CharField(max_length=45, blank=True)
@@ -55,3 +60,30 @@ class Inquiry(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.get_service_display()} ({self.created_at.strftime('%Y-%m-%d')})"
+
+
+class InquiryFile(models.Model):
+    """A file attached on /start. Stored privately (apps/leads/uploads.py); only staff can download it."""
+    inquiry = models.ForeignKey(Inquiry, on_delete=models.CASCADE, related_name='files')
+    question = models.CharField(max_length=300, blank=True)
+    path = models.CharField(max_length=300, help_text="Location inside private_uploads/inquiries (random name).")
+    original_name = models.CharField(max_length=150)
+    content_type = models.CharField(max_length=120)
+    size = models.PositiveIntegerField()
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['uploaded_at']
+        verbose_name = 'Attached file'
+        verbose_name_plural = 'Attached files'
+
+    def __str__(self):
+        return self.original_name
+
+    def size_label(self):
+        return f'{self.size / 1024:.0f} KB' if self.size < 1024 * 1024 else f'{self.size / 1024 / 1024:.1f} MB'
+
+    def delete(self, *args, **kwargs):
+        from .uploads import private_storage
+        private_storage().delete(self.path)
+        return super().delete(*args, **kwargs)

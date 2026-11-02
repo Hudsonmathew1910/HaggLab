@@ -47,6 +47,8 @@ SILENCED_SYSTEM_CHECKS = ['security.W005', 'security.W021']
 
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# Forms (contact form, admin login) are posted from the site's own https address
+CSRF_TRUSTED_ORIGINS = [SITE_URL.rstrip('/')] if SITE_URL.startswith('https://') else []
 
 # The contact form's spam check must be on in production
 if not (TURNSTILE_SITE_KEY and TURNSTILE_SECRET_KEY):

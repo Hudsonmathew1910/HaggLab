@@ -10,13 +10,17 @@ django-environ>=0.12.0
 
 # Security, 2FA & Rate Limiting
 django-ratelimit>=4.1.0
-django-otp>=1.5.4
+django-otp>=1.7.5
 
 # HTTP & Utilities
 httpx>=0.28.1
+certifi>=2026.10.18  # trusted certificates for every AI/API request (older versions have known issues)
 
 # Try it calculations (InsightDesk, ReportBot, ForecastBoard); openpyxl reads the sample .xlsx
-pandas>=2.2.3
+pandas>=3.1.0
 numpy>=2.2.3
 openpyxl>=3.1.5
 asteval>=1.0.6
+
+# Shows the QR code when adding an authenticator device for two-factor admin login
+qrcode>=7.4.2

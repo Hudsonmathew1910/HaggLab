@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('apps.analytics.urls')),
     path('', include('apps.leads.urls')),
     path('', include('apps.tryit.urls')),
+    path('', include('apps.assistant.urls')),
     path('', include('apps.core.urls')),
 ]
 

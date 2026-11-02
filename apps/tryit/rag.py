@@ -78,18 +78,12 @@ def ticket_text(r):
             f"Agent reply: {r['agent_reply']}")
 
 
-def service_text(r):
-    return ' | '.join(f'{k}: {v}' for k, v in r.items() if v)
-
-
 SOURCES = {
     'documind': lambda: markdown_chunks('documind/staff_handbook.md'),
     'shopassist': lambda: csv_chunks('shopassist/products.csv', product_text, lambda r: r['name']),
     'supportflow': lambda: markdown_chunks('supportflow/support_policy.md'),
     'supportflow-tickets': lambda: csv_chunks('supportflow/tickets.csv', ticket_text,
                                               lambda r: f"Example ticket {r['ticket_id']}"),
-    'voicedesk': lambda: markdown_chunks('voicedesk/clinic_faq.md')
-    + csv_chunks('voicedesk/services.csv', service_text, lambda r: 'Services and fees'),
     'deskpilot': lambda: markdown_chunks('deskpilot/office_sops.md'),
 }
 

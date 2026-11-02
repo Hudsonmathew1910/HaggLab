@@ -52,6 +52,14 @@
       <div class="ui-row"><div><div class="ui-row__t">08:00 is held for you</div><div class="ui-row__s">Confirmation and QR code sent by email</div></div><span class="ui-pill ui-pill--ok">Held</span></div>
     </div>
 
+  {% elif p.slug == "mvpstarter" %}
+    <div class="ui__body">
+      <div class="ui-h">Sample company &middot; client requests &middot; staff view</div>
+      <div class="ui-row"><div><div class="ui-row__t">#101 Plumbing</div><div class="ui-row__s">Kitchen tap leaks under the sink</div></div><span class="ui-pill">Quoted</span></div>
+      <div class="ui-row"><div><div class="ui-row__t">#102 Deep cleaning</div><div class="ui-row__s">End-of-lease clean, two-bedroom flat</div></div><span class="ui-pill ui-pill--ok">Scheduled</span></div>
+      <div class="ui-row"><div><div class="ui-row__t">#104 Painting</div><div class="ui-row__s">Your request</div></div><span class="ui-pill ui-pill--warn">New</span></div>
+    </div>
+
   {% elif p.slug == "supportflow" %}
     <div class="ui__body">
       <div class="ui-row"><div><div class="ui-row__t">“My order arrived broken”</div><div class="ui-row__s">Topic: Returns &middot; Draft reply ready</div></div><span class="ui-pill ui-pill--urgent">Urgent</span></div>
@@ -73,15 +81,6 @@
         </svg>
       </div>
       <div class="ui-legend"><span><i></i>Past sales</span><span><i class="is-accent"></i>Forecast</span><span><i class="is-band"></i>Error range</span><span><i class="is-dash"></i>Simple baseline</span></div>
-    </div>
-
-  {% elif p.slug == "voicedesk" %}
-    <div class="ui__body">
-      <div class="ui-h">Sample clinic &middot; after-hours assistant</div>
-      <div class="ui-mic" aria-hidden="true">{% include "components/icon.html" with name="mic" %}</div>
-      <div class="ui-wave" aria-hidden="true"><span class="h-30"></span><span class="h-60"></span><span class="h-90"></span><span class="h-50"></span><span class="h-75"></span><span class="h-40"></span><span class="h-65"></span><span class="h-35"></span><span class="h-55"></span><span class="h-30"></span></div>
-      <div class="ui-msg ui-msg--me">Are you open on Sunday?</div>
-      <div class="ui-msg ui-msg--ai">We’re closed on Sundays. I can take a message for Monday morning.</div>
     </div>
 
   {% elif p.slug == "pagemind" %}

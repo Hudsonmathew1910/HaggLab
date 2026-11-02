@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load site_tags %}
+{% load site_tags static %}
 
 {% block title %}Business problems we fix | {{ STUDIO_NAME }}{% endblock %}
 {% block meta_description %}Faster answers, clearer numbers, less manual work. Pick the problem that sounds like yours.{% endblock %}
@@ -22,7 +22,7 @@
         {% if IS_FIVERR %}
           <a href="{% url 'hire_fiverr' %}" class="link-arrow">Message us on Fiverr {% include "components/icon.html" with name="arrow" %}</a>
         {% else %}
-          <a href="{% url 'start_project' %}" class="link-arrow">Start a project {% include "components/icon.html" with name="arrow" %}</a>
+          <a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}" class="link-arrow">Start a project {% include "components/icon.html" with name="arrow" %}</a>
         {% endif %}
       </div>
     </div>
@@ -34,7 +34,7 @@
     {% for s in solutions %}
       {% with m=s|service %}
       <article class="s-row" id="{{ s.slug }}">
-        <span class="s-row__num"><span class="mega__icon">{% include "components/icon.html" with name=m.icon %}</span></span>
+        <a class="s-row__art" href="{% url 'solution_detail' s.slug %}" tabindex="-1" aria-hidden="true">{% if m.art %}<img class="art" src="{% static 'img/hagglab/' %}{{ m.art }}.svg" alt="" width="480" height="300" loading="lazy" decoding="async">{% endif %}</a>
         <div>
           <p class="label">0{{ forloop.counter }} &middot; {{ m.name }}</p>
           <h2 class="mt-2"><a class="text-link" href="{% url 'solution_detail' s.slug %}">{{ s.headline }}</a></h2>

@@ -72,8 +72,10 @@ class RowLevelSecurityMiddleware:
         if connection.vendor == 'postgresql':
             with connection.cursor() as cursor:
                 is_staff = 'true' if (request.user.is_authenticated and request.user.is_staff) else 'false'
+                # SECURITY: the session key comes from the visitor's cookie, so it must never be pasted into SQL.
+                # set_config(name, value, true) is SET LOCAL with the value passed as a query parameter.
                 session_key = request.session.session_key or 'anonymous'
-                cursor.execute(f"SET LOCAL app.is_staff = '{is_staff}';")
-                cursor.execute(f"SET LOCAL app.session_key = '{session_key}';")
+                cursor.execute("SELECT set_config('app.is_staff', %s, true), set_config('app.session_key', %s, true)",
+                               [is_staff, session_key])
                 
         return self.get_response(request)

@@ -5,7 +5,7 @@ Two methods are tested on the last 12 known weeks (a "backtest"):
 - Recent average: the mean of the last 8 weeks (the simple baseline).
 - Seasonal: the same week last year, scaled by this year's growth.
 The method with the lower backtest error is used. The range shown is the forecast plus or minus
-that error. Hero's AI explains the result in plain words; if it is unavailable the numbers still show.
+that error. Heros explains the result in plain words; if it is unavailable the numbers still show.
 """
 import json
 

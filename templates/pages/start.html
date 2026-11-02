@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Start a project | {{ STUDIO_NAME }}{% endblock %}
 {% block meta_description %}Tell us the problem. We’ll say whether we can fix it.{% endblock %}
@@ -14,7 +15,8 @@
       <h1>Tell us the problem</h1>
       <p class="lead mt-4">It takes two minutes. We read every message{% if SITE.reply_time %} and reply {{ SITE.reply_time }}{% endif %}.</p>
 
-      <div class="aside-card mt-8">
+      <img class="art art--side mt-6" src="{% static 'img/hagglab/start-project.svg' %}" alt="" width="480" height="300" decoding="async">
+      <div class="aside-card mt-6">
         <h2>What happens next</h2>
         <ol class="next-steps">
           <li><div><strong>We read your message</strong><span>and reply with what is possible and what is not.</span></div></li>
@@ -33,7 +35,7 @@
     </aside>
 
     <div class="form-card">
-      <form method="post" action="{% url 'start_project' %}" novalidate>
+      <form method="post" action="{% url 'start_project' %}" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
         <div class="hidden-field" aria-hidden="true">
           <label for="{{ form.website_url.id_for_label }}">Leave this field empty</label>
@@ -76,26 +78,88 @@
               {{ form.service }}
               {% if form.service.errors %}<span class="err">{{ form.service.errors.0 }}</span>{% endif %}
             </div>
-            <div class="field{% if form.problem.errors %} has-error{% endif %}">
+            {% if offers %}
+            <p class="pkg-empty" data-pkg-empty
+               data-none="Choose what you want built above to see its packages, prices and extras."
+               data-custom="A custom project: tell us below what you need, when you need it and your budget, and we will suggest a plan and a price.">Choose what you want built above to see its packages, prices and extras.</p>
+            <div class="field" data-pkg-field>
+              <label for="id_package_choice">Package</label>
+              <span class="hint" id="package-hint">Choose the package that fits best. We confirm the scope with you before any work starts.</span>
+              <select name="package_choice" id="id_package_choice" class="form-control" aria-describedby="package-hint">
+                <option value="">Choose a package</option>
+                {% for o in offers %}
+                  <optgroup label="{{ o.name }}" data-service="{{ o.code }}">
+                    {% for p in o.packages %}<option value="{{ p.value }}" data-price="{{ p.price }}"{% if p.value == form.package_choice.value %} selected{% endif %}>{{ p.label }}</option>{% endfor %}
+                  </optgroup>
+                {% endfor %}
+              </select>
+              {% if form.package_choice.errors %}<span class="err">{{ form.package_choice.errors.0 }}</span>{% endif %}
+              {% for o in offers %}{% for p in o.packages %}
+                <div class="pkg-pick" data-pkg="{{ p.value }}" hidden>
+                  <p><strong>{{ p.tier }}: {{ p.title }}</strong> <span class="pkg-pick__price">${{ p.price }}{% if p.inr %} <span class="inr">{{ p.inr }}</span>{% endif %}</span></p>
+                  <p class="small">{{ p.days }} day{{ p.days|pluralize }} delivery &middot; {{ p.revisions }} revision{{ p.revisions|pluralize }}. {{ p.desc }}</p>
+                  {% if p.included %}<ul>{% for line in p.included %}<li>{{ line }}</li>{% endfor %}</ul>{% endif %}
+                </div>
+              {% endfor %}{% endfor %}
+            </div>
+            <fieldset class="field pkg-extras-pick" data-extras-field>
+              <legend>Extras <span class="opt">(optional)</span></legend>
+              {% for o in offers %}
+                <div data-service="{{ o.code }}">
+                  {% for e in o.extras %}
+                    <label class="check"><input type="checkbox" name="extra_choices" value="{{ e.value }}" data-price="{{ e.price }}"{% if e.value in form.extra_choices.value %} checked{% endif %}> {{ e.label }}</label>
+                  {% endfor %}
+                </div>
+              {% endfor %}
+            </fieldset>
+            <p class="pkg-total" data-pkg-total data-rate="{{ inr_rate }}" hidden></p>
+            {% if form.questions %}
+            <fieldset class="field pkg-asks-pick" data-asks-field>
+              <legend>What we ask when you order</legend>
+              {% for group in form.questions %}
+                <div data-service="{{ group.code }}">
+                  {% for q in group.items %}
+                    <div class="field{% if q.error %} has-error{% endif %}">
+                      <label for="id_{{ q.name }}">{{ q.question }}{% if q.kind == "Attachment" %} <span class="opt">(optional)</span>{% endif %}</label>
+                      {% if q.kind == "Multiple choice" %}
+                        <select name="{{ q.name }}" id="id_{{ q.name }}" class="form-control">
+                          <option value="">Choose one</option>
+                          {% for opt in q.options %}<option{% if opt == q.value %} selected{% endif %}>{{ opt }}</option>{% endfor %}
+                        </select>
+                      {% elif q.kind == "Attachment" %}
+                        <span class="hint">{{ upload_types }}, up to {{ upload_max }}. Only our team can open it.{% if form.errors %} If the form showed an error, please choose the file again.{% endif %}</span>
+                        <input type="file" name="{{ q.name }}" id="id_{{ q.name }}" class="form-control form-file" accept="{{ upload_accept }}">
+                      {% else %}
+                        <textarea name="{{ q.name }}" id="id_{{ q.name }}" class="form-control" rows="2" maxlength="1000">{{ q.value }}</textarea>
+                      {% endif %}
+                      {% if q.error %}<span class="err">{{ q.error }}</span>{% endif %}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endfor %}
+            </fieldset>
+            {% endif %}
+            {% endif %}
+            <div class="field{% if form.problem.errors %} has-error{% endif %}" data-custom-only>
               <label for="{{ form.problem.id_for_label }}">Describe the problem</label>
               <span class="hint" id="problem-hint">Describe the problem in 2 or 3 sentences. Add one starting number, for example “we spend about 6 hours a week on this”.</span>
               {{ form.problem }}
               {% if form.problem.errors %}<span class="err">{{ form.problem.errors.0 }}</span>{% endif %}
             </div>
             <div class="field-grid field-grid--2">
-              <div class="field{% if form.data_available.errors %} has-error{% endif %}">
+              <div class="field{% if form.data_available.errors %} has-error{% endif %}" data-custom-only>
                 <label for="{{ form.data_available.id_for_label }}">Do you have documents or data for it?</label>
                 {{ form.data_available }}
                 {% if form.data_available.errors %}<span class="err">{{ form.data_available.errors.0 }}</span>{% endif %}
               </div>
-              <div class="field{% if form.timeline.errors %} has-error{% endif %}">
+              <div class="field{% if form.timeline.errors %} has-error{% endif %}" data-custom-only>
                 <label for="{{ form.timeline.id_for_label }}">When do you need it?</label>
                 {{ form.timeline }}
                 {% if form.timeline.errors %}<span class="err">{{ form.timeline.errors.0 }}</span>{% endif %}
               </div>
             </div>
             <div class="field-grid field-grid--2">
-              <div class="field">
+              <div class="field" data-custom-only>
                 <label for="{{ form.budget_band.id_for_label }}">Budget <span class="opt">(optional)</span></label>
                 {{ form.budget_band }}
               </div>
@@ -130,4 +194,4 @@
 </section>
 {% endblock %}
 
-{% block extra_js %}{% if TURNSTILE_SITE_KEY %}<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>{% endif %}{% endblock %}
+{% block extra_js %}{% load static %}<script src="{% static 'js/start.js' %}" defer></script>{% if TURNSTILE_SITE_KEY %}<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>{% endif %}{% endblock %}

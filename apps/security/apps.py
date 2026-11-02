@@ -7,4 +7,3 @@ class SecurityConfig(AppConfig):
 
     def ready(self):
         import apps.security.signals
-
