@@ -30,11 +30,16 @@ env/
 
 # Environment Secrets & Local Config
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
 
 # Databases
 *.sqlite3
+*.sqlite3-*
 *.db
 
 # Static & Media
@@ -49,11 +54,20 @@ private_uploads/
 *.swo
 *~
 .DS_Store
+Thumbs.db
+desktop.ini
+*.bak
+*.orig
+*.tmp
+*.log
 
 # Test & Coverage
 .coverage
 htmlcov/
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
 
 # Internal notes: kept on this computer, not pushed to GitHub
 HANDOFF.md

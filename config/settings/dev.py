@@ -12,7 +12,7 @@ PREVIEW_UNFINISHED_PROJECTS = True
 RATELIMIT_ENABLE = False
 AI_DAILY_CAP = 0  # no daily AI limit while testing locally
 
-# Print how each Try it question flows to Hero's AI and back (see apps/tryit/trace.py)
+# Print how each Try it question flows to Heros and back (see apps/tryit/trace.py)
 AI_TRACE = True
 # Set to True to also see the prompts, AI replies and results under each step
 AI_TRACE_DETAIL = False

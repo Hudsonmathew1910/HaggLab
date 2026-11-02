@@ -1,6 +1,6 @@
 """
 What each project's Try it page accepts. The API refuses any field not listed here,
-and trims text to its max length, before anything is sent to Hero's AI.
+and trims text to its max length, before anything is sent to Heros.
 
 kind:   which interface to use (templates/tryit/<kind>.html)
 fields: name -> (type, max length, allowed choices, or (min, max))
@@ -23,6 +23,11 @@ SAMPLE_PAGES = [
     ('small_business_ai_guide', 'Blog: five places a small business can use AI'),
     ('product_launch_announcement', 'Press release: same-day delivery launch'),
 ]
+ROLES = [('customer', 'Customer'), ('staff', 'Office staff')]
+WORKFLOW_ACTIONS = [('view', 'Show the requests'), ('submit', 'Submit a new request'),
+                    ('advance', 'Move a request to its next step'), ('reset', 'Start over')]
+JOB_TYPES = [('plumbing', 'Plumbing'), ('electrical', 'Electrical'), ('cleaning', 'Deep cleaning'),
+             ('painting', 'Painting')]
 PERIODS = [('last-week', 'Last week'), ('last-month', 'Last month'), ('last-quarter', 'Last quarter')]
 
 SPECS = {
@@ -54,6 +59,13 @@ SPECS = {
         'fields': {'action': (CHOICE, [('slots', ''), ('book', '')]), 'resource': (CHOICE, COURTS), 'date': (DATE, None),
                    'slot': (TEXT, 20), 'name': (TEXT, 80)},
     },
+    'mvpstarter': {
+        'kind': 'workflow',
+        'intro': 'A small client request portal for FixRight Home Services, a sample company. Submit a job as a '
+                 'customer, then switch to office staff and move it through the steps. Your copy is private to you.',
+        'fields': {'role': (CHOICE, ROLES), 'action': (CHOICE, WORKFLOW_ACTIONS), 'job': (CHOICE, JOB_TYPES),
+                   'details': (TEXT, 300), 'request_id': (INT, (1, 9999))},
+    },
     'supportflow': {
         'examples': ['My order arrived broken and I need it before Friday.', 'You charged my card twice for order 55012!', 'How do I change the email on my account?'],
         'kind': 'triage',
@@ -65,13 +77,6 @@ SPECS = {
         'kind': 'forecast',
         'intro': 'Pick a product category and how many weeks ahead to forecast. The forecast is tested on recent weeks and shows its error.',
         'fields': {'category': (CHOICE, CATEGORIES), 'weeks': (INT, (1, 12))},
-    },
-    'voicedesk': {
-        'examples': ['Are you open on Saturday morning?', 'How much is a cholesterol test?', 'How do I book a vaccination?'],
-        'kind': 'chat',
-        'intro': 'Ask the sample clinic assistant a question, as a visitor would after hours.',
-        'placeholder': 'Are you open on Saturday morning?',
-        'fields': {'message': (TEXT, 400)},
     },
     'pagemind': {
         'examples': ['Summarise this page in 3 points', 'What does it cost?', 'When does it start?'],

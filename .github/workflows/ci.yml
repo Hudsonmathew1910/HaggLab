@@ -41,5 +41,7 @@ jobs:
       run: python manage.py check --deploy --settings=config.settings.prod
     - name: Run Design Rule Check
       run: python scripts/check_design_rules.py
-    - name: Run Pip Audit
-      run: pip-audit
+    - name: Check packages for known vulnerabilities
+      run: |
+        pip install pip-audit
+        pip-audit -r requirements.txt --strict --progress-spinner off

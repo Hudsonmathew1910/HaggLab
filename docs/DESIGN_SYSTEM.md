@@ -37,7 +37,7 @@ Radius 8px (cards 12px). Shadows only on product previews. Motion 150 to 220ms, 
 ## Content from Site Settings (admin)
 Blocks stay hidden until the value is set: `reply_time`, `support_window`, `code_ownership_terms`,
 `revisions_per_tier`, `nda_policy`, `deletion_contact`, `fiverr_profile_url`,
-`fiverr_<project>_gig`, `github_url`, `link_heros_ai`, `link_epicoutlet`, `link_zenos`, `link_zeno`.
+`fiverr_<project>_gig`, `github_url`, `link_heros_ai`, `link_zeno`.
 
 ## Style guide
 `/styleguide/` shows the type, buttons, badges and all ten previews (noindex).

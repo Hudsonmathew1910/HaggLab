@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="You get the code, the keys and a handover guide">
+<title>You get the code, the keys and a handover guide</title>
+<defs>
+  <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#DCE1DD"/></pattern>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0E1A1C" flood-opacity="0.09"/></filter>
+</defs>
+<rect width="320" height="200" fill="#F4F5F2"/>
+<rect width="320" height="200" fill="url(#dots)"/>
+<rect x="70" y="56" width="140" height="110" rx="12" fill="#FFFFFF" stroke="#E2E5E1" filter="url(#sh)"/><path d="M70 80h140" stroke="#E2E5E1"/><path d="M70 68a12 12 0 0 1 12-12h40l12 12" fill="#F4F5F2" stroke="#E2E5E1"/><path d="M116 104l-14 12 14 12m40-24l14 12-14 12" fill="none" stroke="#0E7568" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="236" cy="128" r="22" fill="#0E7568" filter="url(#sh)"/><circle cx="230" cy="128" r="7" fill="none" stroke="#fff" stroke-width="3"/><path d="M237 128h12m-4 0v6" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</svg>

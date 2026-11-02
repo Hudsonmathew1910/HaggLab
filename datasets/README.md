@@ -3,8 +3,8 @@
 One default knowledge source per project. These are loaded into Pinecone (one namespace per project) and,
 for tables, into pandas for calculations. Visitors never upload files; the Try it pages use these.
 
-**Everything here is made up**: companies (Northwind Supplies, Brightcart, Green Field Sports Arena,
-CareFirst Family Clinic), products, customers and numbers. No personal data. Customer references are codes like `C1234`.
+**Everything here is made up**: companies (Northwind Supplies, Brightcart, Green Field Sports Arena),
+products, customers and numbers. No personal data. Customer references are codes like `C1234`.
 
 Recreate the CSV/Excel files exactly with: `python datasets/generate.py` (fixed random seed).
 The `.md` documents are written by hand.
@@ -17,7 +17,6 @@ The `.md` documents are written by hand.
 | BookIt | `bookit/venue_rules.md`, `bookit/bookings.csv` | Venue rules and prices; bookings for the last 120 days and next 14 | ~4,900 rows |
 | SupportFlow | `supportflow/support_policy.md`, `supportflow/tickets.csv` | Support policy; labelled customer messages with agent replies | 800 tickets |
 | ForecastBoard | `forecastboard/weekly_sales.csv` | Weekly units by category, Jan 2024 – Sep 2026, promo and holiday flags | 864 rows |
-| VoiceDesk | `voicedesk/clinic_faq.md`, `voicedesk/services.csv` | Clinic FAQ (practical questions only, no medical advice); services and fees | 22 services |
 | PageMind | `pagemind/*.md` | Three sample web pages (news article, blog post, press release) | 3 pages |
 | DeskPilot | `deskpilot/office_sops.md` | Office procedures with file-naming rules and safety rules | 7 SOPs |
 | ReportBot | `reportbot/cafe_sales.xlsx` | Sheets: Transactions (daily, 3 outlets, Oct 2025 – Sep 2026), Targets, Expenses | ~15,300 rows |
@@ -35,6 +34,5 @@ Built-in patterns: November–December peak, quiet February, busier weekends, ab
 
 **forecastboard/weekly_sales.csv**: `week_start, category, units_sold, avg_price, promotion, holiday_week, revenue`.
 
-**voicedesk/services.csv**: `service, category, duration_minutes, fee, preparation, how_to_book`.
 
 **reportbot/cafe_sales.xlsx**: Transactions `date, outlet, item, category, quantity, unit_price, revenue, payment_method, order_type`; Targets `month, outlet, revenue_target`; Expenses `month, outlet, expense_type, amount`.

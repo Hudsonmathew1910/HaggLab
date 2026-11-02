@@ -1,5 +1,5 @@
 """
-What Hero's AI is told for each project: its role, its sample data (context) and the reply format.
+What Heros is told for each project: its role, its sample data (context) and the reply format.
 
 Context comes from Pinecone (RAG): only the chunks most relevant to the question are sent to the AI.
 The chunks are uploaded from datasets/<project>/ with `python manage.py rag_ingest` (see apps/tryit/rag.py).
@@ -80,13 +80,6 @@ def supportflow(p):
     return sp.SUPPORTFLOW, wrap(context, message), 0.3
 
 
-def voicedesk(p):
-    message = p.get('message', '')
-    context = rag.context('voicedesk', message,
-                          lambda: f'{load("voicedesk/clinic_faq.md")}\n\n# Services and fees (CSV)\n{load("voicedesk/services.csv")}')
-    return sp.VOICEDESK, wrap(context, message), 0.2
-
-
 def pagemind(p):
     question = p.get('message') or 'Summarise this page.'
     page = p.get('page_text') or (load(f"pagemind/{p['sample']}.md") if p.get('sample') else '')
@@ -105,7 +98,6 @@ BUILDERS = {
     'documind': documind,
     'shopassist': shopassist,
     'supportflow': supportflow,
-    'voicedesk': voicedesk,
     'pagemind': pagemind,
     'deskpilot': deskpilot,
 }

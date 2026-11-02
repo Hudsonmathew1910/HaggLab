@@ -4,7 +4,7 @@ The website of HaggLab, a software and AI studio. It presents 5 services and 10 
 Try it page where visitors use the working tool on sample data.
 
 Stack: Python 3.12+, Django 6.1, PostgreSQL (Neon), plain HTML/CSS/JS, Gunicorn + WhiteNoise.
-AI: Google Gemini and Hero's AI (fallback chain), Pinecone for document search (RAG).
+AI: Google Gemini and Heros (fallback chain), Pinecone for document search (RAG).
 
 ---
 
@@ -76,13 +76,13 @@ python manage.py check --deploy --settings=config.settings.prod
 
 ## 4. Deploying
 
-- Set `DJANGO_SETTINGS_MODULE=config.settings.prod` on the server (`config/wsgi.py` defaults to dev).
+- Set `DJANGO_SETTINGS_MODULE=config.settings.prod` on the server (`config/wsgi.py` now defaults to prod, so a missing setting fails safe).
 - Production refuses to start without `SECRET_KEY`, `ALLOWED_HOSTS`, the Neon values, Turnstile keys,
   `OWNER_EMAIL` and the `EMAIL_*` SMTP values.
 - After each upload: `pip install -r requirements.txt`, `python manage.py migrate`,
   `python manage.py collectstatic --noinput`.
 - Start command (see `Procfile`): `gunicorn config.wsgi:application --timeout 120 --workers 1 --threads 4`.
-  The long timeout is needed because Hero's AI can take 25–40 seconds.
+  The long timeout is needed because Heros can take 25–40 seconds.
 - Size: the installed packages need about 160 MB of disk. Memory is about 100 MB for the site plus about 70 MB
   while InsightDesk runs a calculation, so one worker with threads fits in 256 MB; a second worker does not.
 - Step-by-step for AlwaysData: `docs/DEPLOY_ALWAYSDATA.md`.

@@ -6,7 +6,7 @@ RAM at its busiest, so it fits, with **one** Gunicorn worker (4 threads). Do not
 Below, replace `ACCOUNT` with your AlwaysData account name. Your site address will be
 `https://ACCOUNT.alwaysdata.net`.
 
-> If Hero's AI already runs on the same AlwaysData account, both apps share the same 256 MB of RAM.
+> If Heros already runs on the same AlwaysData account, both apps share the same 256 MB of RAM.
 > Use a separate free account for HaggLab.
 
 ---

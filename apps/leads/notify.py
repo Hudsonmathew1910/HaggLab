@@ -25,6 +25,8 @@ def notify_owner(inquiry):
         f'Email: {inquiry.email}',
         f'Business: {inquiry.business or "-"}',
         f'Service: {inquiry.get_service_display()}',
+        f'Package: {inquiry.package or "-"}',
+        f'Extras: {inquiry.extras.replace(chr(10), "; ") if inquiry.extras else "-"}',
         f'Data available: {inquiry.get_data_available_display()}',
         f'Timeline: {inquiry.get_timeline_display()}',
         f'Budget: {inquiry.budget_band or "-"}',
@@ -32,6 +34,9 @@ def notify_owner(inquiry):
         '',
         'Problem:',
         inquiry.problem,
+        *([''] + [f'{a["question"]}\n  {a["answer"] or "-"}' for a in inquiry.answers] if inquiry.answers else []),
+        *(['', f'Attached files ({inquiry.files.count()}): open the inquiry in the admin to download them.']
+          if inquiry.files.exists() else []),
         '',
         f'Reply to this email to answer {inquiry.name} directly.',
         f'All inquiries: {settings.SITE_URL.rstrip("/")}/{settings.ADMIN_URL_PATH}leads/inquiry/',

@@ -8,7 +8,7 @@ from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
 from apps.content.models import Project, Solution
-from apps.tryit import hero_client
+from apps.tryit import engines, hero_client
 from apps.tryit.specs import InvalidInput, clean_payload
 
 
@@ -485,3 +485,60 @@ class DailyCapTest(TestCase):
             for _ in range(5):
                 hero_client.chat([{'role': 'user', 'content': 'x'}])
         self.assertEqual(usage.calls_today(), 0)
+
+
+class WorkflowTest(TestCase):
+    """MVPStarter: roles, status steps and a private copy per visitor."""
+
+    def run_step(self, session, **payload):
+        return engines.run('mvpstarter', payload, session)
+
+    def test_customer_submits_and_sees_only_own_requests(self):
+        session = {}
+        reply = self.run_step(session, role='customer', action='submit', job='painting', details='Paint the hall')
+        self.assertIn('#104', reply['text'])
+        self.assertEqual([row[0] for row in reply['table']['rows']], [104])
+        staff = self.run_step(session, role='staff', action='view')
+        self.assertEqual(len(staff['table']['rows']), 4)
+
+    def test_roles_are_enforced(self):
+        session = {}
+        with self.assertRaises(engines.UserError):
+            self.run_step(session, role='customer', action='advance', request_id=103)
+        with self.assertRaises(engines.UserError):
+            self.run_step(session, role='staff', action='submit', job='plumbing', details='x')
+
+    def test_staff_moves_a_request_until_done(self):
+        session = {}
+        for step in ('Quoted', 'Scheduled', 'Done'):
+            reply = self.run_step(session, role='staff', action='advance', request_id=103)
+            self.assertIn(step, reply['text'])
+        with self.assertRaises(engines.UserError):
+            self.run_step(session, role='staff', action='advance', request_id=103)
+
+    def test_reset_restores_the_sample_requests(self):
+        session = {}
+        self.run_step(session, role='customer', action='submit', job='plumbing', details='Leak')
+        reply = self.run_step(session, role='staff', action='reset')
+        self.assertEqual(len(reply['table']['rows']), 3)
+
+
+@override_settings(PREVIEW_UNFINISHED_PROJECTS=False, HEROS_API_KEYS=[])
+class WorkflowApiTest(TestCase):
+    def setUp(self):
+        cache.clear()
+        make_project('mvpstarter', True)
+        self.url = reverse('try_api', args=['mvpstarter'])
+
+    def post(self, client, data):
+        return client.post(self.url, data=json.dumps(data), content_type='application/json')
+
+    def test_requests_are_kept_per_visitor(self):
+        alice, bob = Client(), Client()
+        self.post(alice, {'role': 'customer', 'action': 'submit', 'job': 'plumbing', 'details': 'Leaking tap'})
+        self.assertEqual(len(self.post(alice, {'role': 'staff', 'action': 'view'}).json()['table']['rows']), 4)
+        self.assertEqual(len(self.post(bob, {'role': 'staff', 'action': 'view'}).json()['table']['rows']), 3)
+
+    def test_try_page_renders(self):
+        response = self.client.get(reverse('try_project', args=['mvpstarter']))
+        self.assertContains(response, 'data-kind="workflow"')

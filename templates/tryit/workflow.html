@@ -1,0 +1,25 @@
+<div class="field-grid field-grid--try">
+  <div class="field">
+    <label for="try-role">Signed in as</label>
+    <select id="try-role" name="role">{% for key, name in spec.fields.role.1 %}<option value="{{ key }}">{{ name }}</option>{% endfor %}</select>
+  </div>
+  <div class="field">
+    <label for="try-action">What to do</label>
+    <select id="try-action" name="action">{% for key, name in spec.fields.action.1 %}<option value="{{ key }}">{{ name }}</option>{% endfor %}</select>
+  </div>
+</div>
+<div class="field-grid field-grid--try mt-4" data-for="submit">
+  <div class="field">
+    <label for="try-job">Job</label>
+    <select id="try-job" name="job">{% for key, name in spec.fields.job.1 %}<option value="{{ key }}">{{ name }}</option>{% endfor %}</select>
+  </div>
+  <div class="field">
+    <label for="try-details">Details</label>
+    <input id="try-details" name="details" type="text" maxlength="300" placeholder="The bathroom tap drips all night">
+  </div>
+</div>
+<div class="field mt-4" data-for="advance">
+  <label for="try-request">Request number</label>
+  <input id="try-request" name="request_id" type="number" min="1" max="9999" inputmode="numeric" placeholder="103">
+</div>
+<div class="try-actions"><button type="submit" class="btn btn-primary">Go {% include "components/icon.html" with name="arrow" %}</button></div>

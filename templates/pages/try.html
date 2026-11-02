@@ -65,11 +65,11 @@
         <p>We build it on your own data and hand it over to you.</p>
         {% if FIVERR_ON and gig.url %}
           <a href="{{ gig.url|utm:project.slug }}" class="btn btn-primary btn-block mt-4" target="_blank" rel="noopener noreferrer">{{ gig.button }} on Fiverr</a>
-          <a href="{% url 'start_project' %}" class="link-arrow mt-3">Or send us the details directly {% include "components/icon.html" with name="arrow" %}</a>
+          <a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}" class="link-arrow mt-3">Or send us the details directly {% include "components/icon.html" with name="arrow" %}</a>
         {% elif IS_FIVERR %}
           <a href="{{ FIVERR_URL|utm:project.slug }}" class="btn btn-primary btn-block mt-4" target="_blank" rel="noopener noreferrer">Message us on Fiverr</a>
         {% else %}
-          <a href="{% url 'start_project' %}" class="btn btn-primary btn-block mt-4">Get your project plan</a>
+          <a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}" class="btn btn-primary btn-block mt-4">Get your project plan</a>
         {% endif %}
       </div>
       <a href="{% url 'project_detail' project.slug %}" class="link-arrow">How {{ project.title }} works {% include "components/icon.html" with name="arrow" %}</a>

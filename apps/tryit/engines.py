@@ -1,15 +1,16 @@
 """
 Which engine answers each project's Try it page.
 
-- AI projects (DocuMind, ShopAssist, SupportFlow, VoiceDesk, PageMind, DeskPilot): Hero's AI with the project's data.
+- AI projects (DocuMind, ShopAssist, SupportFlow, PageMind, DeskPilot): Heros with the project's data.
 - InsightDesk: AI writes pandas code, the sandbox runs it, AI explains the result.
 - ReportBot, ForecastBoard: numbers calculated in Python, AI writes the explanation.
 - BookIt: booking logic only, no AI.
+- MVPStarter: a request workflow kept in the visitor's session, no AI.
 
 Every engine returns a dict using the keys the page can show (see REPLY_KEYS in views.py).
 Visitor-facing problems raise UserError; an unavailable AI raises hero_client.NotConnected.
 """
-from . import booking, hero_client
+from . import booking, hero_client, workflow
 from .analysis import forecast, insight, report
 from .prompts import MissingInput
 
@@ -34,17 +35,28 @@ def _bookit(p):
         raise UserError(str(exc))
 
 
+def _mvpstarter(p, session):
+    try:
+        return workflow.run(p, session)
+    except workflow.WorkflowError as exc:
+        raise UserError(str(exc))
+
+
 ENGINES = {
     'insightdesk': _insightdesk,
     'reportbot': lambda p: report.build(p.get('dataset', 'cafe-orders'), p.get('period', 'last-month')),
     'forecastboard': lambda p: forecast.build(p.get('category', 'all'), p.get('weeks', 4)),
     'bookit': _bookit,
 }
+# Engines that keep per-visitor state also get the visitor's session
+STATEFUL = {'mvpstarter': _mvpstarter}
 
 
-def run(slug, payload):
+def run(slug, payload, session=None):
     engine = ENGINES.get(slug)
     try:
+        if slug in STATEFUL:
+            return STATEFUL[slug](payload, {} if session is None else session)
         return engine(payload) if engine else hero_client.run(slug, payload)
     except MissingInput as exc:
         raise UserError(str(exc))

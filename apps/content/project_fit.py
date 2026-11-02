@@ -37,6 +37,14 @@ PROJECT_FIT = {
             'A tutor shares one link for students to book sessions.',
         ],
     ),
+    'mvpstarter': (
+        'Startups · Small businesses · Founders with an app idea',
+        [
+            'A startup tests its booking idea with real users before a full build.',
+            'A small business turns a spreadsheet process into a web portal with logins.',
+            'A team sees a working demo every week and decides what to build next.',
+        ],
+    ),
     'supportflow': (
         'Online stores · Service businesses · Small support teams',
         [
@@ -51,14 +59,6 @@ PROJECT_FIT = {
             'A cafe estimates next week’s demand before ordering stock.',
             'A shop plans seasonal stock using past sales.',
             'A wholesaler sees the expected range, not just one number.',
-        ],
-    ),
-    'voicedesk': (
-        'Clinics · Hotels · Service businesses',
-        [
-            'A clinic answers opening-hours and booking questions after hours.',
-            'A hotel answers common guest questions instantly.',
-            'A service business takes a message when the answer needs a person.',
         ],
     ),
     'pagemind': (

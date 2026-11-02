@@ -221,6 +221,7 @@
       form.querySelector('[data-slot]').value = '';
       submitBtn.firstChild.textContent = 'Show free slots ';
     }
+    if (kind === 'workflow' && data.action === 'submit') form.querySelector('[name="details"]').value = '';
     out.replaceChildren(renderReply(reply));
     out.hidden = false;
     out.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -262,6 +263,16 @@
       else messageField.focus();
     });
   });
+
+  /* Workflow: show only the fields the chosen action needs */
+  if (kind === 'workflow') {
+    const actionField = form.querySelector('[name="action"]');
+    const sync = () => form.querySelectorAll('[data-for]').forEach((group) => {
+      group.hidden = group.getAttribute('data-for') !== actionField.value;
+    });
+    actionField.addEventListener('change', sync);
+    sync();
+  }
 
   /* Booking: picking a slot switches the form from "show slots" to "book" */
   if (kind === 'booking') {

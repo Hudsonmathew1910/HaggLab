@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load site_tags %}
+{% load site_tags static %}
 
 {% block title %}{{ STUDIO_NAME }}: AI and data tools for small businesses{% endblock %}
 {% block meta_description %}We build working tools that fix one business problem at a time. Try them before you hire.{% endblock %}
@@ -11,22 +11,16 @@
   <div class="wrap hero__grid">
     <div>
       <p class="hero__kicker"><b>Software &amp; AI</b> Working tools for small businesses and startups</p>
-      <h1 id="hero-title" class="display">Answer customers faster. Understand your numbers. <span class="soft">Stop the copy-paste.</span></h1>
-      <p class="lead">{{ STUDIO_NAME }} builds working AI and data tools that fix one business problem at a time. Try our tools before you hire.</p>
+      <h1 id="hero-title" class="display">AI assistants, MVPs and machine learning models. <span class="soft">Built around one business problem.</span></h1>
+      <p class="lead">Chatbots, web apps, ML models and Python tools. Try them before you hire.</p>
       <div class="hero__cta">
         {% if IS_FIVERR %}
           <a href="{{ FIVERR_URL|utm:'home-hero' }}" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">Message us on Fiverr {% include "components/icon.html" with name="arrow" %}</a>
         {% else %}
-          <a href="{% url 'start_project' %}" class="btn btn-primary btn-lg">Get your project plan {% include "components/icon.html" with name="arrow" %}</a>
+          <a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}" class="btn btn-primary btn-lg">Get your project plan {% include "components/icon.html" with name="arrow" %}</a>
         {% endif %}
         <a href="{% url 'projects_hub' %}" class="link-arrow">Try our tools {% include "components/icon.html" with name="arrow" %}</a>
       </div>
-      <p class="hero__promise">One short message is enough. We reply with what is possible and a one-page scope{% if SITE.reply_time %} within {{ SITE.reply_time }}{% endif %}.</p>
-      <ul class="hero__checks" aria-label="How it works">
-        <li>{% include "components/icon.html" with name="check" %}Free to ask</li>
-        <li>{% include "components/icon.html" with name="check" %}Scope agreed before you pay</li>
-        <li>{% include "components/icon.html" with name="check" %}A working demo every week</li>
-      </ul>
     </div>
 
     {% if hero_project %}
@@ -35,24 +29,29 @@
       </div>
     {% endif %}
   </div>
+  <div class="wrap">
+    <ul class="hero__checks" aria-label="How it works">
+      <li>{% include "components/icon.html" with name="check" %}Free to ask</li>
+      <li>{% include "components/icon.html" with name="check" %}Scope agreed before you pay</li>
+      <li>{% include "components/icon.html" with name="check" %}A working demo every week</li>
+    </ul>
+  </div>
 </section>
 
-<!-- 2. Proof: products already built and shipped (facts only) -->
-<section class="proof" aria-label="Already built and deployed">
-  <div class="wrap proof__inner">
-    <div class="proof__intro">
-      <span class="label">Already built and deployed</span>
-      <p class="mt-2">Facts only. Built and shipped by us.</p>
-    </div>
-    {% for item in built %}
-      {% if item.link %}<a class="proof__item" href="{{ item.link }}" target="_blank" rel="noopener noreferrer">{% else %}<div class="proof__item">{% endif %}
-        <span class="proof__kind">{{ item.kind }}</span>
-        <span class="proof__name">{{ item.name }}{% if item.link %} {% include "components/icon.html" with name="external" %}{% endif %}</span>
-        <p class="proof__desc">{{ item.desc }}</p>
-      {% if item.link %}</a>{% else %}</div>{% endif %}
+<!-- 2. Proof: our current product, Heros, and the features inside it (facts only) -->
+{% if products %}
+<section class="proof" aria-label="Our products, already built and deployed">
+  <div class="wrap proof-line">
+    <span class="label">Our product{{ products|length|pluralize }}</span>
+    {% for p in products %}
+      <div class="proof-line__item">
+        <p class="proof-line__text"><strong>{{ p.name }}</strong>: {{ p.pitch }}</p>
+        {% if p.link %}<a href="{{ p.link }}" class="btn btn-secondary btn-sm proof-line__more" target="_blank" rel="noopener noreferrer">Visit {{ p.name }} {% include "components/icon.html" with name="external" %}</a>{% endif %}
+      </div>
     {% endfor %}
   </div>
 </section>
+{% endif %}
 
 <!-- 3. Services: the problems we fix -->
 <section class="section" aria-labelledby="problems-title">
@@ -69,10 +68,7 @@
     <div class="svc-grid">
       {% for s in solutions %}{% with m=s|service %}
         <a class="svc" href="{% url 'solution_detail' s.slug %}">
-          <div class="svc__top">
-            <span class="mega__icon">{% include "components/icon.html" with name=m.icon %}</span>
-            <span class="svc__num">0{{ forloop.counter }}</span>
-          </div>
+          <div class="svc__art">{% if m.art %}<img class="art" src="{% static 'img/hagglab/' %}{{ m.art }}.svg" alt="" width="480" height="300" loading="lazy" decoding="async">{% endif %}<span class="svc__num">0{{ forloop.counter }}</span></div>
           <h3 class="svc__name">{{ m.name }}</h3>
           <p class="svc__desc">{{ m.desc }}</p>
           <p class="svc__problem">{{ s.headline }}</p>
@@ -95,7 +91,7 @@
         <h2 id="try-title">Try it before you hire</h2>
         <p class="lead mt-4">Each project solves one business problem. Click one and try it right now.</p>
       </div>
-      <a href="{% url 'projects_hub' %}" class="link-arrow">All 10 projects {% include "components/icon.html" with name="arrow" %}</a>
+      <a href="{% url 'projects_hub' %}" class="link-arrow">All projects {% include "components/icon.html" with name="arrow" %}</a>
     </div>
     <div class="grid-3">
       {% for p in featured_projects %}{% include "components/project_card.html" with p=p %}{% endfor %}

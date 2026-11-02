@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}How a project works | {{ STUDIO_NAME }}{% endblock %}
 {% block meta_description %}Four steps: tell us the problem, agree the scope, see it grow, take it over.{% endblock %}
@@ -29,6 +30,7 @@
         <h2>Tell us the problem</h2>
         <p class="muted">Send one short message and one starting number. We reply with what is possible and what is not.</p>
       </div>
+      <img class="art art--step" src="{% static 'img/hagglab/step-1-tell.svg' %}" alt="" width="320" height="200" loading="lazy" decoding="async">
     </article>
     <article class="phase">
       <span class="phase__n">02</span>
@@ -36,6 +38,7 @@
         <h2>Agree the scope</h2>
         <p class="muted">You get a one-page scope: what is included, what is not, and what we need from you.</p>
       </div>
+      <img class="art art--step" src="{% static 'img/hagglab/step-2-scope.svg' %}" alt="" width="320" height="200" loading="lazy" decoding="async">
     </article>
     <article class="phase">
       <span class="phase__n">03</span>
@@ -43,6 +46,7 @@
         <h2>See it grow</h2>
         <p class="muted">A working demo every week, so you can correct course early.</p>
       </div>
+      <img class="art art--step" src="{% static 'img/hagglab/step-3-grow.svg' %}" alt="" width="320" height="200" loading="lazy" decoding="async">
     </article>
     <article class="phase">
       <span class="phase__n">04</span>
@@ -50,6 +54,7 @@
         <h2>Take it over</h2>
         <p class="muted">You get the working tool, plain-language documents and a short walkthrough.{% if SITE.support_window %} Support after handover: {{ SITE.support_window }}{% endif %}</p>
       </div>
+      <img class="art art--step" src="{% static 'img/hagglab/step-4-handover.svg' %}" alt="" width="320" height="200" loading="lazy" decoding="async">
     </article>
   </div>
 </section>

@@ -8,7 +8,7 @@
         {% if IS_FIVERR %}
           <a href="{{ FIVERR_URL|utm:'final-cta' }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Message us on Fiverr</a>
         {% else %}
-          <a href="{% url 'start_project' %}" class="btn btn-primary">Start a project</a>
+          <a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}" class="btn btn-primary">Start a project</a>
           {% if FIVERR_ON %}<a href="{% url 'hire_fiverr' %}" class="btn btn-secondary">Hire on Fiverr</a>{% endif %}
         {% endif %}
       </div>

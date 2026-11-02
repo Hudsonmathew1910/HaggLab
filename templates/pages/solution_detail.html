@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load site_tags %}
+{% load site_tags static %}
 
 {% block title %}{{ solution.title }} | {{ STUDIO_NAME }}{% endblock %}
 {% block meta_description %}{{ solution.problem|truncatechars:158 }}{% endblock %}
@@ -17,7 +17,9 @@
       <h1>{{ solution.headline }}</h1>
       <p class="lead">{{ solution.problem }}</p>
     </div>
-    <div class="btn-row">
+    <div class="page-head__side">
+    {% with m=solution|service %}{% if m.art %}<img class="art art--head" src="{% static 'img/hagglab/' %}{{ m.art }}.svg" alt="" width="480" height="300" decoding="async">{% endif %}{% endwith %}
+    <div class="btn-row btn-stack">
       {% with first=matching_projects.0 %}
         {% if first %}
           <a href="{% url 'try_project' first.slug %}" class="btn btn-primary">Try {{ first.title }} {% include "components/icon.html" with name="arrow" %}</a>
@@ -26,9 +28,10 @@
       {% if IS_FIVERR %}
         <a href="{{ FIVERR_URL|utm:solution.slug }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Order on Fiverr</a>
       {% else %}
-        <a href="{% url 'start_project' %}" class="btn btn-primary">Start a project</a>
+        <a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}" class="btn {% if matching_projects %}btn-secondary{% else %}btn-primary{% endif %}">Start a project</a>
         {% if FIVERR_ON and solution_gig %}<a href="{{ solution_gig|utm:solution.slug }}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Order on Fiverr</a>{% endif %}
       {% endif %}
+    </div>
     </div>
   </div>
 </header>
@@ -84,9 +87,6 @@
         {% include "components/project_card.html" with p=p %}
       {% endfor %}
     </div>
-    {% if solution.slug == "turn-idea-into-working-product" and SITE.link_epicoutlet %}
-      <p class="mt-6 muted">Also see <a href="{{ SITE.link_epicoutlet }}" target="_blank" rel="noopener noreferrer">EpicOutlet</a>, a real store we built earlier.</p>
-    {% endif %}
   </div>
 </section>
 {% endif %}
@@ -107,6 +107,71 @@
     </div>
   </div>
 </section>
+
+<!-- 5b. Gig packages, extras and order questions, from this service's Fiverr gig (admin: Fiverr gigs) -->
+{% if offer %}
+<section class="section" aria-labelledby="pkg-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Packages</p>
+      <h2 id="pkg-title">Packages and prices</h2>
+      {% if offer.summary %}<p class="lead">{{ offer.summary }}</p>{% endif %}
+    </div>
+    <div class="grid-3">
+      {% for p in offer.packages %}
+        <article class="pkg">
+          <span class="label">{{ p.tier }}</span>
+          <h3>{{ p.title }}</h3>
+          <p class="pkg__price">${{ p.price }}{% with r=p.price|inr:SITE.inr_rate %}{% if r %} <span class="inr">{{ r }}</span>{% endif %}{% endwith %}</p>
+          <p class="pkg__meta">{{ p.days }} day{{ p.days|pluralize }} delivery &middot; {{ p.revisions }} revision{{ p.revisions|pluralize }}</p>
+          <p>{{ p.desc }}</p>
+          {% if p.included %}
+            <ul class="pkg__list">{% for line in p.included %}<li>{{ line }}</li>{% endfor %}</ul>
+          {% endif %}
+          <div class="pkg__actions btn-stack">
+            {% if not IS_FIVERR and lead_service %}<a href="{% url 'start_project' %}?service={{ lead_service }}&amp;package_choice={{ lead_service|urlencode }}%7C{{ p.tier|urlencode }}" class="btn btn-primary">Choose {{ p.tier }}</a>{% endif %}
+            {% if FIVERR_ON and offer.gig %}<a href="{{ offer.gig.url|utm:solution.slug }}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Order on Fiverr</a>{% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+    <p class="mt-6 muted">Prices are in US dollars{% if FIVERR_ON and offer.gig %} and are the same as on Fiverr{% endif %}.{% if SITE.inr_rate %} Rupee amounts are rough estimates.{% endif %} We agree the scope with you before any work starts.</p>
+
+    <div class="grid-2 mt-6">
+      {% if offer.extras %}
+      <div>
+        <h3>Extras</h3>
+        <table class="pkg-extras">
+          <thead><tr><th scope="col">Extra</th><th scope="col">Price</th><th scope="col">Time</th></tr></thead>
+          <tbody>
+            {% for e in offer.extras %}
+              <tr>
+                <td>{{ e.name }}{% if e.desc %}<span>{{ e.desc }}</span>{% endif %}</td>
+                <td>+${{ e.price }}{% with r=e.price|inr:SITE.inr_rate %}{% if r %}<span>{{ r }}</span>{% endif %}{% endwith %}</td>
+                <td>{% if e.name == "Faster delivery" %}{{ e.days }} day{{ e.days|pluralize }}{% elif e.days %}+{{ e.days }} day{{ e.days|pluralize }}{% else %}No extra time{% endif %}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+      {% if offer.requirements %}
+      <div>
+        <h3>What we ask when you order</h3>
+        <ol class="pkg-asks">
+          {% for r in offer.requirements %}
+            <li>
+              {{ r.question }}
+              <span>{{ r.kind }}{% if r.options %}: {{ r.options|join:", " }}{% endif %}</span>
+            </li>
+          {% endfor %}
+        </ol>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
 
 <!-- 6. FAQs for this solution -->
 {% if faqs %}

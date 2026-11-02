@@ -5,7 +5,9 @@ from django.template.loader import render_to_string
 from apps.content.models import Solution, Project, FAQ, SiteSetting, FiverrGig
 from apps.core.fiverr import faqs_for_site, fiverr_enabled
 from apps.content.gigs import gig_for
-from apps.core.built import built_products
+from apps.content.services import OLD_SLUGS
+from apps.core.built import all_products, built_products
+from apps.leads.offers import SLUG_SERVICES, offer_for, lead_service_for_project
 
 def home_view(request):
     solutions = Solution.objects.filter(published=True).order_by('order')[:5]
@@ -25,6 +27,7 @@ def home_view(request):
         'featured_projects': featured_projects,
         'hero_project': hero_project,
         'built': built_products(),
+        'products': all_products(),
         'faqs': faqs,
         'live_demos': stats['live_demos'],
         'stats': stats,
@@ -37,6 +40,8 @@ def solutions_hub_view(request):
     })
 
 def solution_detail_view(request, slug):
+    if slug in OLD_SLUGS:  # the services were renamed on 2026-10-31
+        return redirect('solution_detail', OLD_SLUGS[slug], permanent=True)
     solution = get_object_or_404(Solution, slug=slug, published=True)
     matching_projects = solution.projects.public().order_by('order')
     faqs = faqs_for_site(FAQ.objects.filter(published=True, solution_slug=slug).order_by('order'))
@@ -46,6 +51,9 @@ def solution_detail_view(request, slug):
     return render(request, 'pages/solution_detail.html', {
         'solution': solution,
         'solution_gig': solution_gig,
+        'gig': gig,
+        'offer': offer_for(solution),
+        'lead_service': SLUG_SERVICES.get(slug, ''),  # the /start form's code for this service
         'matching_projects': matching_projects,
         'faqs': faqs,
     })
@@ -72,6 +80,7 @@ def project_detail_view(request, slug):
         related_projects += list(others.exclude(id__in=taken).order_by('order')[:3 - len(related_projects)])
     return render(request, 'pages/project_detail.html', {
         'project': project,
+        'lead_service': lead_service_for_project(project),
         'related_projects': related_projects,
         'gig': gig_for(project),
     })
@@ -85,10 +94,11 @@ def security_view(request):
 def about_view(request):
     return render(request, 'pages/about.html', {
         'built': built_products(),
+        'products': all_products(),
     })
 
 def faq_view(request):
-    faqs = faqs_for_site(FAQ.objects.filter(published=True).order_by('order'))
+    faqs = faqs_for_site(FAQ.objects.filter(published=True).exclude(page='solution').order_by('order'))
     return render(request, 'pages/faq.html', {
         'faqs': faqs,
     })

@@ -1,7 +1,7 @@
 """
 ReportBot: the weekly / monthly / quarterly report.
 
-All numbers are calculated here with pandas. Hero's AI only writes the short summary, from those
+All numbers are calculated here with pandas. Heros only writes the short summary, from those
 numbers, and the summary is shown separately from the table. If the AI is unavailable, the report
 is still returned with the numbers.
 """

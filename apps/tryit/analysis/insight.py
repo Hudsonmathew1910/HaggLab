@@ -1,9 +1,9 @@
 """
 InsightDesk: ask a table a question in plain English.
 
-1. Hero's AI writes pandas code for the question, from the table's schema (it never sees the rows).
+1. Heros writes pandas code for the question, from the table's schema (it never sees the rows).
 2. The code runs in the sandbox on the real table. If it fails, the AI gets one retry with the error.
-3. Hero's AI explains the result in plain words, using only the calculated numbers.
+3. Heros explains the result in plain words, using only the calculated numbers.
 The visitor sees the explanation, the result table and the code.
 """
 import json

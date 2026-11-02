@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="A working demo every week">
+<title>A working demo every week</title>
+<defs>
+  <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#DCE1DD"/></pattern>
+  <filter id="sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0E1A1C" flood-opacity="0.09"/></filter>
+</defs>
+<rect width="320" height="200" fill="#F4F5F2"/>
+<rect width="320" height="200" fill="url(#dots)"/>
+<rect x="56" y="30" width="208" height="140" rx="12" fill="#FFFFFF" stroke="#E2E5E1" filter="url(#sh)"/><path d="M56 42a12 12 0 0 1 12-12h184a12 12 0 0 1 12 12v14h-208z" fill="#F4F5F2"/><line x1="56" y1="56" x2="264" y2="56" stroke="#E2E5E1"/><circle cx="72" cy="43" r="3.5" fill="#C9CFCB"/><circle cx="84" cy="43" r="3.5" fill="#C9CFCB"/><circle cx="96" cy="43" r="3.5" fill="#C9CFCB"/><circle cx="160" cy="98" r="28" fill="#E5F1EE" stroke="#0E7568" stroke-width="2"/><path d="M152 84l22 14-22 14z" fill="#0E7568"/><rect x="80" y="146" width="32" height="8" rx="4" fill="#0E7568"/><rect x="122" y="146" width="32" height="8" rx="4" fill="#0E7568"/><rect x="164" y="146" width="32" height="8" rx="4" fill="#0E7568"/><rect x="206" y="146" width="32" height="8" rx="4" fill="#E2E5E1"/>
+</svg>

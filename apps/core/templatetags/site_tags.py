@@ -37,3 +37,14 @@ def service_name(solution):
     """Short service name for a Solution, e.g. "AI assistants and support tools"."""
     from apps.content.services import service_for
     return service_for(solution)['name']
+
+
+@register.filter
+def inr(usd, rate):
+    """A rupee estimate next to a dollar price: {{ p.price|inr:SITE.inr_rate }} gives '≈ ₹5,700', or '' with no rate."""
+    from apps.leads.offers import inr_text
+    try:
+        rate = float(str(rate).replace(',', ''))
+    except (TypeError, ValueError):
+        return ''
+    return inr_text(usd, rate) if rate > 0 else ''

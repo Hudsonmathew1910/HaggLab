@@ -1,16 +1,16 @@
 """
-The single connection between the website and the AI providers: Hero's AI and Google Gemini.
+The single connection between the website and the AI providers: Heros and Google Gemini.
 
 Every Try it page posts to /api/try/<slug>/, which calls run(). Nothing else calls an AI,
 so this is the only file to change if an API's address, keys or format change.
 
 Fallback order (provider_chain): the providers take turns, key by key, until one answers:
-    Gemini key 1 -> Hero's AI key 1 -> Gemini key 2 -> Hero's AI key 2 -> Hero's AI key 3
-Gemini goes first because it answers in a few seconds; Hero's AI needs 25-40 seconds.
+    Gemini key 1 -> Heros key 1 -> Gemini key 2 -> Heros key 2 -> Heros key 3
+Gemini goes first because it answers in a few seconds; Heros needs 25-40 seconds.
 A key that is over its limit (HTTP 429), down (5xx) or too slow rests for REST_SECONDS: it moves to the end
 of the chain, so the next questions don't wait for it first.
 
-Hero's AI:  POST {HEROS_API_URL}/chat/completions   (OpenAI-style)
+Heros:  POST {HEROS_API_URL}/chat/completions   (OpenAI-style)
             Authorization: Bearer <key>
             {"model": HEROS_MODEL, "messages": [...], "temperature": ..., "type": "text", "search": false}
             reply: choices[0].message.content
@@ -105,7 +105,7 @@ def call_gemini(key, messages, temperature):
 
 
 PROVIDERS = {
-    'hero': ("Hero's AI", call_hero),
+    'hero': ("Heros", call_hero),
     'gemini': ('Gemini', call_gemini),
 }
 

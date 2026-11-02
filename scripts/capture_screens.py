@@ -15,7 +15,7 @@ VIEWPORTS = {
 KEY_PAGES = [
     ('home', '/'),
     ('solutions_hub', '/solutions/'),
-    ('solution_doc_assistant', '/solutions/answer-customers-staff-faster/'),
+    ('solution_doc_assistant', '/solutions/ai-chatbots-rag-assistants/'),
     ('projects_hub', '/projects/'),
     ('project_documind', '/projects/documind/'),
     ('process', '/process/'),

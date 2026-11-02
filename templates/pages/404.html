@@ -31,7 +31,7 @@
         <ul class="nf__plain">
           <li><a href="{% url 'process' %}">How we work</a></li>
           <li><a href="{% url 'faq' %}">FAQ</a></li>
-          {% if not IS_FIVERR %}<li><a href="{% url 'start_project' %}">Start a project</a></li>{% endif %}
+          {% if not IS_FIVERR %}<li><a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}">Start a project</a></li>{% endif %}
         </ul>
       </nav>
     </div>

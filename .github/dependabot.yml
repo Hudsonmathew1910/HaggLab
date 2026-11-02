@@ -1,0 +1,21 @@
+# Dependabot opens a pull request when a package has a new version. CI runs the tests on it first;
+# merge it when the tests are green. Small updates are grouped into one weekly pull request.
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+    ignore:
+      # Django is pinned to 6.1.x in requirements.txt; move to a new major/minor version on purpose, not automatically
+      - dependency-name: django
+        update-types: [version-update:semver-major, version-update:semver-minor]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

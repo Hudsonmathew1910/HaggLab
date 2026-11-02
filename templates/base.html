@@ -29,7 +29,7 @@
   <noscript><div class="noscript-note">This page works best with JavaScript on. You can still read everything and use the contact form.</div></noscript>
 
   {% if IS_FIVERR %}
-    <div class="fiverr-bar"><strong>You came from Fiverr.</strong> Chat, orders and payment stay on Fiverr, so your order stays protected.</div>
+    <div class="fiverr-bar"><strong>You came from Fiverr.</strong> Chat, orders and payment stay on Fiverr, so your order stays protected. <a href="{{ request.path }}?ref=site">Not from Fiverr? See the full site</a></div>
   {% endif %}
 
   {% with current=request.resolver_match.url_name %}
@@ -69,9 +69,9 @@
               {% if IS_FIVERR %}
                 <a href="{{ FIVERR_URL|utm:'mega-menu' }}" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">Message us on Fiverr</a>
               {% else %}
-                <a href="{% url 'start_project' %}" class="btn btn-primary btn-sm">Start a project</a>
+                <a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}" class="btn btn-primary btn-sm">Start a project</a>
               {% endif %}
-              <a href="{% url 'projects_hub' %}" class="mega__side-link">{% include "components/icon.html" with name="play" %} See all 10 projects</a>
+              <a href="{% url 'projects_hub' %}" class="mega__side-link">{% include "components/icon.html" with name="play" %} See all projects</a>
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@
           <a href="{{ FIVERR_URL|utm:'header' }}" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">Message us on Fiverr</a>
         {% else %}
           {% if FIVERR_ON %}<a href="{% url 'hire_fiverr' %}" class="nav__link"{% if current == 'hire_fiverr' %} aria-current="page"{% endif %}>Hire on Fiverr</a>{% endif %}
-          <a href="{% url 'start_project' %}" class="btn btn-primary btn-sm">Start a project {% include "components/icon.html" with name="arrow" %}</a>
+          <a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}" class="btn btn-primary btn-sm">Start a project {% include "components/icon.html" with name="arrow" %}</a>
         {% endif %}
       </div>
 
@@ -131,7 +131,7 @@
         {% if IS_FIVERR %}
           <a href="{{ FIVERR_URL|utm:'mobile-menu' }}" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer">Message us on Fiverr</a>
         {% else %}
-          <a href="{% url 'start_project' %}" class="btn btn-primary btn-block">Start a project</a>
+          <a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}" class="btn btn-primary btn-block">Start a project</a>
         {% endif %}
       </div>
     </div>
@@ -181,7 +181,7 @@
             <li><a href="{% url 'process' %}">How a project works</a></li>
             <li><a href="{% url 'security_data' %}">Security and data</a></li>
             <li><a href="{% url 'faq' %}">FAQ</a></li>
-            {% if not IS_FIVERR %}<li><a href="{% url 'start_project' %}">Start a project</a></li>{% endif %}
+            {% if not IS_FIVERR %}<li><a href="{% url 'start_project' %}{% if lead_service %}?service={{ lead_service }}{% endif %}">Start a project</a></li>{% endif %}
             {% if FIVERR_ON %}<li><a href="{% url 'hire_fiverr' %}">Hire on Fiverr</a></li>{% endif %}
             {% if FIVERR_ON and SITE.fiverr_profile_url %}<li><a href="{{ SITE.fiverr_profile_url|utm:'footer' }}" target="_blank" rel="noopener noreferrer">Fiverr profile</a></li>{% endif %}
             {% if SITE.github_url %}<li><a href="{{ SITE.github_url }}" target="_blank" rel="noopener noreferrer">GitHub</a></li>{% endif %}
@@ -196,6 +196,7 @@
     </div>
   </footer>
 
+  {% if ASSISTANT_ON %}{% include "components/assistant.html" %}<script src="/static/js/assistant.js" defer></script>{% endif %}
   <script src="/static/js/site.js" defer></script>
   <script src="/static/js/analytics.js" defer></script>
   {% block extra_js %}{% endblock %}
