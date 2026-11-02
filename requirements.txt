@@ -14,7 +14,7 @@ django-otp>=1.7.5
 
 # HTTP & Utilities
 httpx>=0.28.1
-certifi>=2026.10.18  # trusted certificates for every AI/API request (older versions have known issues)
+certifi>=2026.10.23  # trusted certificates for every AI/API request (older versions have known issues)
 
 # Try it calculations (InsightDesk, ReportBot, ForecastBoard); openpyxl reads the sample .xlsx
 pandas>=3.1.0
