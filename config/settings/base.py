@@ -207,6 +207,12 @@ STORAGES = {
     },
 }
 
+# Tests render pages without running collectstatic first (CI starts from a clean copy), so they use plain
+# static storage. The site itself keeps the compressed, hashed files above.
+import sys as _sys  # noqa: E402
+if len(_sys.argv) > 1 and _sys.argv[1] == 'test':
+    STORAGES['staticfiles'] = {'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage'}
+
 # Private upload storage outside static
 PRIVATE_STORAGE_ROOT = BASE_DIR / 'private_uploads'
 os.makedirs(PRIVATE_STORAGE_ROOT, exist_ok=True)
