@@ -125,3 +125,17 @@ class GoogleVerificationTest(TestCase):
         r = self.client.get('/google848a3ada06e16e93.html')
         self.assertEqual(r.status_code, 200)
         self.assertEqual(r.content.decode(), 'google-site-verification: google848a3ada06e16e93.html')
+
+
+class RobotsSitemapTest(TestCase):
+    @override_settings(SITE_URL='https://hagglab.alwaysdata.net')
+    def test_robots_gives_the_full_sitemap_address_and_hides_the_api(self):
+        body = self.client.get(reverse('robots')).content.decode()
+        self.assertIn('Sitemap: https://hagglab.alwaysdata.net/sitemap.xml', body)
+        self.assertIn('Disallow: /api/', body)
+
+    @override_settings(SITE_URL='https://hagglab.alwaysdata.net')
+    def test_sitemap_uses_full_addresses(self):
+        body = self.client.get(reverse('sitemap')).content.decode()
+        self.assertIn('<loc>https://hagglab.alwaysdata.net/</loc>', body)
+        self.assertNotIn('localhost', body)

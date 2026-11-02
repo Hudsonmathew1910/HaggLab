@@ -139,7 +139,11 @@ def health_check(request):
     return JsonResponse({'status': 'ok'})
 
 def robots_txt_view(request):
-    content = "User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /private_uploads/\nSitemap: /sitemap.xml\n"
+    # Google needs the sitemap's full address. /api/ holds the chat, Try it and analytics endpoints, not pages.
+    # (The real admin address is secret, so it is deliberately not listed here.)
+    site = settings.SITE_URL.rstrip('/')
+    content = ("User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin/\nDisallow: /private_uploads/\n"
+               f"Sitemap: {site}/sitemap.xml\n")
     return HttpResponse(content, content_type="text/plain")
 
 def sitemap_xml_view(request):
