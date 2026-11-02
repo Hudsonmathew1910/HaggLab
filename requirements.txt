@@ -1,7 +1,7 @@
 # Django & Server
 Django>=6.1.2,<6.2  # the version the site is built and tested on
 django-jazzmin>=3.0.5
-gunicorn>=23.0.0
+gunicorn>=26.2.0
 whitenoise>=6.8.2
 
 # Database
