@@ -6,7 +6,7 @@ whitenoise>=6.8.2
 
 # Database
 psycopg2-binary>=2.9.10
-django-environ>=0.12.0
+django-environ>=0.14.0
 
 # Security, 2FA & Rate Limiting
 django-ratelimit>=4.1.0
