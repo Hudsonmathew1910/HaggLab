@@ -150,3 +150,8 @@ def sitemap_xml_view(request):
         'solutions': solutions,
         'projects': projects,
     }, content_type="application/xml")
+
+
+def google_verification_view(request):
+    """Google Search Console's HTML-file verification: this exact one-line text at the site root."""
+    return HttpResponse('google-site-verification: google848a3ada06e16e93.html', content_type='text/html; charset=utf-8')

@@ -118,3 +118,10 @@ class NotFoundPageTest(TestCase):
     @override_settings(DEBUG=True)
     def test_missing_project_shows_the_hagglab_404_page_locally(self):
         self.assertContains(self.client.get('/projects/no-such-project/'), 'Error 404', status_code=404)
+
+
+class GoogleVerificationTest(TestCase):
+    def test_search_console_file_is_served_at_the_root(self):
+        r = self.client.get('/google848a3ada06e16e93.html')
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.content.decode(), 'google-site-verification: google848a3ada06e16e93.html')
