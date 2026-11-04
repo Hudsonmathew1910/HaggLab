@@ -159,3 +159,15 @@ def sitemap_xml_view(request):
 def google_verification_view(request):
     """Google Search Console's HTML-file verification: this exact one-line text at the site root."""
     return HttpResponse('google-site-verification: google848a3ada06e16e93.html', content_type='text/html; charset=utf-8')
+
+
+def favicon_view(request):
+    """The site icon at /favicon.ico, where browsers and Google look for it first."""
+    from django.contrib.staticfiles import finders
+    from django.http import FileResponse, Http404
+    path = finders.find('img/icons/favicon.ico')
+    if not path:
+        raise Http404
+    response = FileResponse(open(path, 'rb'), content_type='image/x-icon')
+    response['Cache-Control'] = 'public, max-age=604800'
+    return response

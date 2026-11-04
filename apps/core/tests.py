@@ -139,3 +139,23 @@ class RobotsSitemapTest(TestCase):
         body = self.client.get(reverse('sitemap')).content.decode()
         self.assertIn('<loc>https://hagglab.alwaysdata.net/</loc>', body)
         self.assertNotIn('localhost', body)
+
+
+class SiteNameAndIconTest(TestCase):
+    def test_favicon_is_served_at_the_root(self):
+        r = self.client.get('/favicon.ico')
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r['Content-Type'], 'image/x-icon')
+
+    @override_settings(SITE_URL='https://hagglab.alwaysdata.net')
+    def test_home_page_tells_google_the_site_name_and_logo(self):
+        import json, re
+        html = self.client.get(reverse('home')).content.decode()
+        block = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S).group(1)
+        data = json.loads(block)  # must be valid JSON for Google to read it
+        site = next(x for x in data['@graph'] if x['@type'] == 'WebSite')
+        org = next(x for x in data['@graph'] if x['@type'] == 'Organization')
+        self.assertEqual(site['name'], 'HaggLab')
+        self.assertEqual(site['url'], 'https://hagglab.alwaysdata.net/')
+        self.assertTrue(org['logo'].endswith('/static/img/icons/icon-512.png'))
+        self.assertIn('href="/favicon.ico"', html)
