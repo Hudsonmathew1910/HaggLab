@@ -17,6 +17,7 @@ urlpatterns = [
     path('styleguide/', views.styleguide_view, name='styleguide'),
     path('health/', views.health_check, name='health_check'),
     path('robots.txt', views.robots_txt_view, name='robots'),
+    path('favicon.ico', views.favicon_view, name='favicon'),
     # Google Search Console ownership check (keep it: removing it can un-verify the site)
     path('google848a3ada06e16e93.html', views.google_verification_view, name='google_verification'),
     path('sitemap.xml', views.sitemap_xml_view, name='sitemap'),
