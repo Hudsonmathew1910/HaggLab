@@ -16,7 +16,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 BANNED_HTML_PATTERNS = [
     (r'<[^>]+\bstyle\s*=\s*["\'][^"\']*["\']', 'Inline style attribute is banned (violates CSP and design system)'),
-    (r'<script(?![^>]*\bsrc\b)[^>]*>[\s\S]*?</script>', 'Inline <script> block is banned (violates strict CSP)'),
+    # Inline code is banned. Structured data (type="application/ld+json") is allowed: browsers never run it, so
+    # the strict CSP does not apply, and Google reads it for the site name and logo in search results.
+    (r'<script(?![^>]*\bsrc\b)(?![^>]*\btype\s*=\s*["\']application/ld\+json["\'])[^>]*>[\s\S]*?</script>',
+     'Inline <script> block is banned (violates strict CSP)'),
 ]
 
 BANNED_TEXT_PATTERNS = [
